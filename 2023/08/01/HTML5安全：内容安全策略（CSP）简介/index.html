@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>QWQ0QWQ&#39;s blog</title>
+        <title> | QWQ0QWQ&#39;s blog</title>
         <meta name="author" content="John Doe" />
         <meta name="description" content="" />
         <meta name="keywords" content="" />
@@ -33,7 +33,9 @@
 
 
 
-<script src="/js/lib/home.js"></script>
+
+
+
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -143,32 +145,11 @@
 </transition>
 
             <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-                <div id="home-head">
-    <div id="home-background" ref="homeBackground" data-images="/images/background.jpg"></div>
-    <div id="home-info" @click="homeClick">
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="info">
-            <div class="wrap">
-                <h1>QWQ0QWQ&#39;s blog</h1>
-                <h3></h3>
-                <h5></h5>
-            </div>
-        </span>
+                <div class="article">
+    <div>
+        <h1></h1>
     </div>
-</div>
-<div id="home-posts-wrap" true ref="homePostsWrap">
-    <div id="home-posts">
-        
-
-<div class="post">
-    <a href="/2023/08/01/HTML5%E5%AE%89%E5%85%A8%EF%BC%9A%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%EF%BC%88CSP%EF%BC%89%E7%AE%80%E4%BB%8B/">
-        <h2 class="post-title"></h2>
-    </a>
-    <div class="category-and-date">
-        
+    <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -178,10 +159,9 @@
         
         
     </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="HTML5安全：内容安全策略（CSP）简介"><a href="#HTML5安全：内容安全策略（CSP）简介" class="headerlink" title="HTML5安全：内容安全策略（CSP）简介"></a>HTML5安全：内容安全策略（CSP）简介</h1><p>前言：HTML5出现后，网络安全更加受到广泛的关注。Web对于网络安全有哪些改进？我们如何来面对越来越危险的网络欺诈和攻击？下面的文章谈到了W3C对于这个问题的最新解决方案。未来有机会的话，我会针对XSS、P3P、同源策略、CORS（跨域资源共享）和CSP进行关于HTML5内容安全的现场分享。</p>
+    
+    <div class="content" v-pre>
+        <h1 id="HTML5安全：内容安全策略（CSP）简介"><a href="#HTML5安全：内容安全策略（CSP）简介" class="headerlink" title="HTML5安全：内容安全策略（CSP）简介"></a>HTML5安全：内容安全策略（CSP）简介</h1><p>前言：HTML5出现后，网络安全更加受到广泛的关注。Web对于网络安全有哪些改进？我们如何来面对越来越危险的网络欺诈和攻击？下面的文章谈到了W3C对于这个问题的最新解决方案。未来有机会的话，我会针对XSS、P3P、同源策略、CORS（跨域资源共享）和CSP进行关于HTML5内容安全的现场分享。</p>
 <p>注意：本文所讨论的API还未最终确定，请在自己的项目中谨慎使用。</p>
 <p>万维网的安全策略植根于<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Same_origin_policy">同源策略</a>。例如<a target="_blank" rel="noopener" href="http://blog.csdn.net/hfahe%E7%9A%84%E4%BB%A3%E7%A0%81%E5%8F%AA%E8%83%BD%E8%AE%BF%E9%97%AE[http://blog.csdn.net](http://blog.csdn.net/)%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E8%80%8C%E6%B2%A1%E6%9C%89%E8%AE%BF%E9%97%AE[http://www.baidu.com](http://www.baidu.com/)%E7%9A%84%E6%9D%83%E9%99%90%E3%80%82%E6%AF%8F%E4%B8%AA%E6%9D%A5%E6%BA%90%E9%83%BD%E4%B8%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E5%85%B6%E5%AE%83%E9%83%A8%E5%88%86%E5%88%86%E9%9A%94%E5%BC%80%EF%BC%8C%E4%B8%BA%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E6%9E%84%E5%BB%BA%E4%BA%86%E4%B8%80%E4%B8%AA%E5%AE%89%E5%85%A8%E7%9A%84%E6%B2%99%E7%AE%B1%E3%80%82%E7%90%86%E8%AE%BA%E4%B8%8A%E8%BF%99%E6%98%AF%E5%AE%8C%E7%BE%8E%E7%9A%84%EF%BC%8C%E4%BD%86%E6%98%AF%E7%8E%B0%E5%9C%A8%E6%94%BB%E5%87%BB%E8%80%85%E5%B7%B2%E7%BB%8F%E6%89%BE%E5%88%B0%E4%BA%86%E8%81%AA%E6%98%8E%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9D%A5%E7%A0%B4%E5%9D%8F%E8%BF%99%E4%B8%AA%E7%B3%BB%E7%BB%9F%E3%80%82">http://blog.csdn.net/hfahe的代码只能访问[http://blog.csdn.net](http://blog.csdn.net/)的数据，而没有访问[http://www.baidu.com](http://www.baidu.com/)的权限。每个来源都与网络的其它部分分隔开，为开发人员构建了一个安全的沙箱。理论上这是完美的，但是现在攻击者已经找到了聪明的方式来破坏这个系统。</a></p>
 <p>这就是<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Cross-site_scripting">XSS跨站脚本攻击</a>，通过虚假内容和诱骗点击来绕过同源策略。这是一个很大的问题，如果攻击者成功注入代码，有相当多的用户数据会被泄漏。</p>
@@ -284,100 +264,13 @@
 <p><strong>DOM API：</strong>如果CSP的下一个迭代添加了这个特性，你可以通过Javascript来查询页面当前的安全策略，并根据不同的情况进行调整。例如在eval()是否可用的情况下，你的代码实现可能会有些许不同。这对JS框架的作者来说非常有用；并且API规范目前还非常不确定，你可以在<a target="_blank" rel="noopener" href="https://dvcs.w3.org/hg/content-security-policy/raw-file/tip/csp-specification.dev.html#script-interfaces">规范草案的脚本接口章节</a>找到最新的迭代版本。**</p>
 <p><strong>新的指令</strong>：许多新指令正在讨论中，包括<a target="_blank" rel="noopener" href="https://dvcs.w3.org/hg/content-security-policy/raw-file/tip/csp-specification.dev.html#script-nonce--experimental">script-nonce</a>：只有</p>
 
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/08/01/HTML5%E5%AE%89%E5%85%A8%EF%BC%9A%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%EF%BC%88CSP%EF%BC%89%E7%AE%80%E4%BB%8B/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/07/30/hello-world/">
-        <h2 class="post-title">Hello World</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/7/30
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-box"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-box"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-box"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-box"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/07/30/hello-world/" class="go-post">阅读全文</a>
-</div>
-
-
-        <div class="page-current">
-    <div class="prev">
-        
-    </div>
-    <div class="page-index">
-        
-        <span class="current">1</span>
-        
-    </div>
-    <div class="next">
-        
-    </div>
-</div>
-
     </div>
     
-    <div id="home-card">
-        <div id="card-style">
-    <div id="card-div">
-        <div class="avatar">
-            <img src="/images/profit.jpg" alt="avatar" />
-        </div>
-        <div class="name">John Doe</div>
-        <div class="description">
-            <p>Description<br>…</p>
-
-        </div>
-        
-        
-        <div class="friend-links">
-            
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
-            </div>
-            
-        </div>
-        
-    </div>
-</div>
-
-    </div>
+    
+    
+    
+    
+    
     
 </div>
 
@@ -409,6 +302,12 @@
             
         </div>
         <script src="/js/main.js"></script>
+        
+        
+
+
+
+
         
     </body>
 </html>
