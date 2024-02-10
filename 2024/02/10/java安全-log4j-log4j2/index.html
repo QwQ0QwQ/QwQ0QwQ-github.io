@@ -26,7 +26,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/icon.jpg">
 <meta property="article:published_time" content="2024-02-10T13:46:16.000Z">
-<meta property="article:modified_time" content="2024-02-10T14:15:07.269Z">
+<meta property="article:modified_time" content="2024-02-10T14:28:33.232Z">
 <meta property="article:author" content="QWQ0QWQ">
 <meta property="article:tag" content="java安全">
 <meta name="twitter:card" content="summary">
@@ -159,7 +159,7 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1707574507269"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1707575313232"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
@@ -194,12 +194,14 @@
 <h3 id="ObjectRenderer"><a href="#ObjectRenderer" class="headerlink" title="ObjectRenderer"></a>ObjectRenderer</h3><p>ObjectRenderer对象专门提供传递给日志记录框架的不同对象的String表示。 Layout对象使用此对象来准备最终的日志记录信息。</p>
 <h3 id="LogManager-LogManager"><a href="#LogManager-LogManager" class="headerlink" title="LogManager (LogManager)"></a>LogManager <strong>(LogManager)</strong></h3><p>LogManager对象管理日志记录框架。 它负责从系统范围的配置文件或配置类中读取初始配置参数。</p>
 <p>以下虚拟图显示了log4J框架的组件:</p>
-<p><img src="/.com//.%5Cjava%E5%AE%89%E5%85%A8-log4j-log4j2%5Cimage-20240210164359976.png" alt="image-20240210164359976"></p>
+<img src="/.com//02/10/java%E5%AE%89%E5%85%A8-log4j-log4j2/image-20240210164359976.png" class>
+
 <h2 id="什么是log4j2"><a href="#什么是log4j2" class="headerlink" title="什么是log4j2"></a>什么是log4j2</h2><p>Log4j2是一个Java日志组件，被各类Java框架广泛地使用。它的前身是Log4j，Log4j2重新构建和设计了框架，可以认为两者是完全独立的两个日志组件。</p>
 <p>因为存在前身Log4j，而且都是Apache下的项目，不管是jar包名称还是package名称，看起来都很相似，导致有些人分不清自己用的是Log4j还是Log4j2。这里给出几个辨别方法：</p>
 <p>Log4j2分为2个jar包，一个是接口log4j-api-${版本号}.jar，一个是具体实现log4j-core-${版本号}.jar。Log4j只有一个jar包log4j-${版本号}.jar。<br>Log4j2的版本号目前均为2.x。Log4j的版本号均为1.x。<br>Log4j2的package名称前缀为org.apache.logging.log4j。Log4j的package名称前缀为org.apache.log4j。</p>
 <h2 id="log4j2架构"><a href="#log4j2架构" class="headerlink" title="log4j2架构"></a>log4j2架构</h2><p>架构图如下</p>
-<p><img src="/.com//.%5Cjava%E5%AE%89%E5%85%A8-log4j-log4j2%5Cimage-20240210201727808.png" alt="image-20240210201727808"></p>
+<img src="/.com//02/10/java%E5%AE%89%E5%85%A8-log4j-log4j2/image-20240210201727808.png" class>
+
 <p>LogManager 通过 <code>getLogger(final Class&lt;?&gt; clazz)</code> 静态方法将定位到合适的 LoggerContext，然后从中得到一个 Logger 对象，要创建 Logger 需要关联一个 LoggerConfig，该 LoggerConfig 对象在 Configuration 中关联着传送 LogEvents 的 Appenders。</p>
 <h3 id="Logger-Hierarchy"><a href="#Logger-Hierarchy" class="headerlink" title="Logger Hierarchy"></a>Logger Hierarchy</h3><p>Log4j 1.x 中的 Logger 层级由各 Loggers 之间的关系来维护，而 Log4j 2 中的 Logger 层级由 LoggerConfig 对象负责维护。Logger 和 LoggerConfig 都是命名的实体。Logger 的名称是大小写敏感的，遵循以下层级命名规则：</p>
 <blockquote>
@@ -595,7 +597,7 @@ Log4J 是个开源软件库，提供开发人员可自由使用的预先编写�
                     <a class="tag-none-link" href="/tags/java%E5%AE%89%E5%85%A8/" rel="tag">java安全</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2024-02-10T14:15:07.269Z" itemprop="dateModified">最后编辑：2024-02-10</time>
+                    <time datetime="2024-02-10T14:28:33.232Z" itemprop="dateModified">最后编辑：2024-02-10</time>
                 </div>
             </div>
         </footer>
