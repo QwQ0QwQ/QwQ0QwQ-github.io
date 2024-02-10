@@ -26,7 +26,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/icon.jpg">
 <meta property="article:published_time" content="2024-02-10T13:45:55.000Z">
-<meta property="article:modified_time" content="2024-02-10T13:47:20.342Z">
+<meta property="article:modified_time" content="2024-02-10T14:13:55.352Z">
 <meta property="article:author" content="QWQ0QWQ">
 <meta property="article:tag" content="java安全">
 <meta name="twitter:card" content="summary">
@@ -159,7 +159,7 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1707572840342"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1707574435352"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
@@ -167,7 +167,7 @@
             <hr />
             <div itemprop="articleBody"><h1 id="java安全-redis"><a href="#java安全-redis" class="headerlink" title="java安全-redis"></a>java安全-redis</h1><h2 id="1-什么是redis"><a href="#1-什么是redis" class="headerlink" title="1.什么是redis"></a>1.什么是redis</h2><p>REmote DIctionary Server（Redis）是一个由 Salvatore Sanfilippo写的key-value存储系统。Redis是—个开源的使用ANSI C语言编写、遵守BSD协议、支持网络、可基于內存亦可持久化的日志型、Key-Value数据库，并提供多种语言的APl。它通常被称为数据结构服务器，因为值（value）可以是字符串（String），哈希（Map），列表（List），集合（sets）和有序集合（sorted sets）等类型</p>
 <p>redis的数据结构如下：</p>
-<p><img src="C:\Users\35093\AppData\Roaming\Typora\typora-user-images\image-20240209111257999.png" alt="image-20240209111257999"></p>
+<p><img src="/.com//.%5Cjava%E5%AE%89%E5%85%A8-redis%5Cimage-20240209111257999.png" alt="image-20240209111257999"></p>
 <h3 id="sql数据库和nosql数据库"><a href="#sql数据库和nosql数据库" class="headerlink" title="sql数据库和nosql数据库"></a>sql数据库和nosql数据库</h3><p>NoSQL 即 Not Only SQL，意即 “不仅仅是SQL”。SQL 数据库是关系型的，而 NoSQL 数据库是非关系型的。关系数据库管理系统 (RDBMS) 是结构化查询语言 (SQL) 的基础，可允许用户访问和操作高度结构化表中的数据。这是 MS SQL Server、IBM DB2、Oracle 和 MySQL 等数据库系统的基础模型。但是对于 NoSQL 数据库，数据访问语法可能因数据库而异。</p>
 <h3 id="key-value"><a href="#key-value" class="headerlink" title="key-value"></a>key-value</h3><p>redis遵守 BSD 协议，是一个高性能的 key-value 数据库。</p>
 <p>Redis 与其他 key - value 缓存产品有以下三个特点：</p>
@@ -186,14 +186,14 @@
 </ul>
 <p>Redis 支持<strong>单机</strong>、<strong>主从</strong>、<strong>哨兵</strong>、<strong>集群</strong>多种架构模式</p>
 <h3 id="单机模式"><a href="#单机模式" class="headerlink" title="单机模式"></a>单机模式</h3><p>　　单机模式顾名思义就是安装一个 Redis，启动起来，业务调用即可。例如一些简单的应用，并非必须保证高可用的情况下可以使用该模式。</p>
-<p><img src="C:\Users\35093\AppData\Roaming\Typora\typora-user-images\image-20240209112710448.png" alt="image-20240209112710448"></p>
+<p><img src="/.com//.%5Cjava%E5%AE%89%E5%85%A8-redis%5Cimage-20240209112710448.png" alt="image-20240209112710448"></p>
 <p>​		单机 Redis 能够承载的 QPS（每秒查询速率）大概在几万左右。取决于业务操作的复杂性，Lua 脚本复杂性就极高。假如是简单的 key value 查询那性能就会很高。</p>
 <p>　　假设上千万、上亿用户同时访问 Redis，QPS 达到 10 万+。这些请求过来，单机 Redis 直接就挂了。系统的瓶颈就出现在 Redis 单机问题上，此时我们可以通过<strong>主从复制</strong>解决该问题，实现系统的高并发。</p>
 <h3 id="主从模式"><a href="#主从模式" class="headerlink" title="主从模式"></a>主从模式</h3><p>​		Redis 的复制（Replication）功能允许用户根据一个 Redis 服务器来创建任意多个该服务器的复制品，其中被复制的服务器为主服务器（Master），而通过复制创建出来的复制品则为从服务器（Slave）。 只要主从服务器之间的网络连接正常，主服务器就会将写入自己的数据同步更新给从服务器，从而保证主从服务器的数据相同。</p>
 <p>　　数据的复制是单向的，只能由主节点到从节点，简单理解就是从节点只支持读操作，不允许写操作。主要是读高并发的场景下用主从架构。主从模式需要考虑的问题是：当 Master 节点宕机，需要选举产生一个新的 Master 节点，从而保证服务的高可用性。</p>
-<p><img src="C:\Users\35093\AppData\Roaming\Typora\typora-user-images\image-20240209113008481.png" alt="image-20240209113008481"></p>
+<p><img src="/.com//.%5Cjava%E5%AE%89%E5%85%A8-redis%5Cimage-20240209113008481.png" alt="image-20240209113008481"></p>
 <p>个人理解就是既然数据量太大，那我就加设备，由一台设备为主导，多台设备辅助。不过存在一个问题就是主节点出问题，读写就存在问题。并且选择主节点需要人工干预。</p>
-<h3 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h3><p>​		<img src="C:\Users\35093\AppData\Roaming\Typora\typora-user-images\image-20240209114311493.png" alt="image-20240209114311493"></p>
+<h3 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h3><p>​		<img src="/.com//.%5Cjava%E5%AE%89%E5%85%A8-redis%5Cimage-20240209114311493.png" alt="image-20240209114311493"></p>
 <p>​		主从模式中，当主节点宕机之后，从节点是可以作为主节点顶上来继续提供服务，但是需要修改应用方的主节点地址，还需要命令所有从节点去复制新的主节点，整个过程需要人工干预。</p>
 <p>　　于是，在 Redis 2.8 版本开始，引入了哨兵（Sentinel）这个概念，在<strong>主从复制的基础</strong>上，哨兵实现了<strong>自动化故障恢复</strong>。如上图所示，哨兵模式由两部分组成，哨兵节点和数据节点：</p>
 <ul>
@@ -237,13 +237,13 @@
 <h2 id="集群模式"><a href="#集群模式" class="headerlink" title="集群模式"></a>集群模式</h2><p>​		假设上千万、上亿用户同时访问 Redis，QPS 达到 10 万+。这些请求过来，单机 Redis 直接就挂了。系统的瓶颈就出现在 Redis 单机问题上，此时我们可以通过<strong>主从复制</strong>解决该问题，实现系统的高并发。</p>
 <p>　　主从模式中，当主节点宕机之后，从节点是可以作为主节点顶上来继续提供服务，但是需要修改应用方的主节点地址，还需要命令所有从节点去复制新的主节点，整个过程需要人工干预。于是，在 Redis 2.8 版本开始，引入了<strong>哨兵（Sentinel）</strong>这个概念，在<strong>主从复制的基础</strong>上，哨兵实现了<strong>自动化故障恢复</strong>。</p>
 <p>　　哨兵模式中，单个节点的写能力，存储能力受到单机的限制，动态扩容困难复杂。于是，Redis 3.0 版本正式推出 <strong>Redis Cluster 集群</strong>模式，有效地解决了 Redis 分布式方面的需求。Redis Cluster 集群模式具有<strong>高可用</strong>、<strong>可扩展性</strong>、<strong>分布式</strong>、<strong>容错</strong>等特性。</p>
-<p><img src="C:\Users\35093\AppData\Roaming\Typora\typora-user-images\image-20240209115043789.png" alt="image-20240209115043789"></p>
+<p><img src="/.com//.%5Cjava%E5%AE%89%E5%85%A8-redis%5Cimage-20240209115043789.png" alt="image-20240209115043789"></p>
 <p>Redis簇采用无中心结构，<strong>每个节点都可以保存数据</strong>和整个集群状态，每个节点都和其他所有节点连接。Cluster 一般由多个节点组成，节点数量至少为 6 个才能保证组成完整高可用的集群，其中三个为主节点，三个为从节点。三个主节点会分配槽，处理客户端的命令请求，而从节点可用在主节点故障后，顶替主节点。</p>
 <p>　　如上图所示，该集群中包含 6 个 Redis 节点，3 主 3 从，分别为 M1，M2，M3，S1，S2，S3。除了主从 Redis 节点之间进行数据复制外，所有 Redis 节点之间采用 Gossip 协议进行通信，交换维护节点元数据信息。</p>
 <p>　　总结下来就是：读请求分配给 Slave 节点，写请求分配给 Master，数据同步从 Master 到 Slave 节点。</p>
 <h4 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h4><p>　	单机、主从、哨兵的模式数据都是存储在一个节点上，其他节点进行数据的复制。而单个节点存储是存在上限的，集群模式就是把数据进行<strong>分片</strong>存储，当一个分片数据达到上限的时候，还可以分成多个分片。</p>
 <p>　　Redis Cluster 采用<strong>虚拟哈希槽分区</strong>，所有的键根据哈希函数映射到 0 ~ 16383 整数槽内，计算公式：<code>HASH_SLOT = CRC16(key) % 16384</code>。每一个节点负责维护一部分槽以及槽所映射的键值数据。</p>
-<p><img src="C:\Users\35093\AppData\Roaming\Typora\typora-user-images\image-20240209115305046.png" alt="image-20240209115305046"></p>
+<p><img src="/.com//.%5Cjava%E5%AE%89%E5%85%A8-redis%5Cimage-20240209115305046.png" alt="image-20240209115305046"></p>
 <p>​		Redis 簇 提供了灵活的节点扩容和缩容方案。在不影响集群对外服务的情况下，可以为集群添加节点进行扩容也可以下线部分节点进行缩容。可以说，槽是 Redis Cluster 管理数据的基本单位，集群伸缩就是槽和数据在节点之间的移动。</p>
 <p>　　简单的理解就是：扩容或缩容以后，槽需要重新分配，数据也需要重新迁移，但是服务不需要下线。</p>
 <p>　　假如，这里有 3 个节点的集群环境如下：</p>
@@ -446,7 +446,7 @@
                     <a class="tag-none-link" href="/tags/java%E5%AE%89%E5%85%A8/" rel="tag">java安全</a>
                 </div>
                 <div class="pull-date">
-                    <time datetime="2024-02-10T13:47:20.342Z" itemprop="dateModified">最后编辑：2024-02-10</time>
+                    <time datetime="2024-02-10T14:13:55.352Z" itemprop="dateModified">最后编辑：2024-02-10</time>
                 </div>
             </div>
         </footer>
