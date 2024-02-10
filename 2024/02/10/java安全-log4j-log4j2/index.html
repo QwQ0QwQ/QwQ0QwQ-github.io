@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/icon.jpg">
+  
+  <title>java安全-log4j_log4j2 | QWQ0QWQ&#39;s blog</title>
+  
+  <meta name="author" content="QWQ0QWQ" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="java安全" />
+  
+  <meta name="description" content="java安全-log4j,log4j2什么是log4jApache Log4j是一个基于Java的日志记录工具. 记录程序中的错误消息和用户输入等重要信息。 Log4J 是个开源软件库，提供开发人员可自由使用的预先编写的代码。开发人员可以将 Log4J 库插入自己的应用程序，无需专门编写记录器。这种便利性是 Log4J 应用广泛的原因  最新的log4j版本，包括其完整源代码，类文件和文档，可以在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java安全-log4j_log4j2">
+<meta property="og:url" content="http://example.com/2024/02/10/java%E5%AE%89%E5%85%A8-log4j-log4j2/index.html">
+<meta property="og:site_name" content="QWQ0QWQ&#39;s blog">
+<meta property="og:description" content="java安全-log4j,log4j2什么是log4jApache Log4j是一个基于Java的日志记录工具. 记录程序中的错误消息和用户输入等重要信息。 Log4J 是个开源软件库，提供开发人员可自由使用的预先编写的代码。开发人员可以将 Log4J 库插入自己的应用程序，无需专门编写记录器。这种便利性是 Log4J 应用广泛的原因  最新的log4j版本，包括其完整源代码，类文件和文档，可以在">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/icon.jpg">
+<meta property="article:published_time" content="2024-02-10T13:46:16.000Z">
+<meta property="article:modified_time" content="2024-02-10T13:47:54.074Z">
+<meta property="article:author" content="QWQ0QWQ">
+<meta property="article:tag" content="java安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/icon.jpg">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/cover1.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">QWQ0QWQ&#39;s blog</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>QWQ0QWQ&#39;s blog</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/10/java%E5%AE%89%E5%85%A8-log4j-log4j2/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">java安全-log4j_log4j2</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2024-02-10T13:46:16.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2024-02-10</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">QWQ0QWQ</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~11.71K
+                        
+                        字
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1707572874074"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="java安全-log4j-log4j2"><a href="#java安全-log4j-log4j2" class="headerlink" title="java安全-log4j,log4j2"></a>java安全-log4j,log4j2</h1><h2 id="什么是log4j"><a href="#什么是log4j" class="headerlink" title="什么是log4j"></a>什么是log4j</h2><p><strong>Apache Log4j</strong>是一个基于<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Java">Java</a>的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%97%A5%E5%BF%97%E5%B7%A5%E5%85%B7">日志记录工具.</a></p>
+<p>记录程序中的错误消息和用户输入等重要信息。</p>
+<p>Log4J 是个开源软件库，提供开发人员可自由使用的预先编写的代码。开发人员可以将 Log4J 库插入自己的应用程序，无需专门编写记录器。这种便利性是 Log4J 应用广泛的原因</p>
+<ul>
+<li>最新的log4j版本，包括其完整源代码，类文件和文档，可以在<a target="_blank" rel="noopener" href="http://logging.apache.org/log4j/%E6%89%BE%E5%88%B0%E3%80%82">http://logging.apache.org/log4j/找到。</a></li>
+</ul>
+<p>log4j有三个主要组件:</p>
+<ul>
+<li><strong>loggers</strong> :负责捕获日志记录信息。</li>
+<li><strong>appenders</strong> :负责将日志信息发布到各个首选目的地。</li>
+<li><strong>layouts</strong> :负责格式化不同样式的日志信息。</li>
+</ul>
+<h2 id="log4j架构"><a href="#log4j架构" class="headerlink" title="log4j架构"></a>log4j架构</h2><p>log4j API遵循分层体系结构，其中每个层提供不同的对象以执行不同的任务。 这种分层架构使设计灵活，并且将来可以轻松扩展。</p>
+<p>log4j框架有两种类型的对象。</p>
+<ul>
+<li>**Core Objects:**这些是框架的强制对象。 他们需要使用框架。</li>
+<li>**Support Objects:**这些是框架的可选对象。 它们支持核心对象以执行其他但重要的任务。</li>
+</ul>
+<h3 id="核心对象"><a href="#核心对象" class="headerlink" title="核心对象"></a>核心对象</h3><p>核心对象包括以下类型的对象 -</p>
+<h3 id="记录器对象"><a href="#记录器对象" class="headerlink" title="记录器对象"></a>记录器对象</h3><p>顶层是Logger，它提供Logger对象。 Logger对象负责捕获日志记录信息，它们存储在命名空间层次结构中。</p>
+<h3 id="布局对象"><a href="#布局对象" class="headerlink" title="布局对象"></a>布局对象</h3><p>布局图层提供用于格式化不同样式的日志记录信息的对象。 它在发布日志记录信息之前为appender对象提供支持。</p>
+<p>布局对象在以人类可读和可重用的方式发布日志记录信息方面发挥着重要作用。</p>
+<h3 id="Appender对象"><a href="#Appender对象" class="headerlink" title="Appender对象"></a>Appender对象</h3><p>这是一个提供Appender对象的低级层。 Appender对象负责将日志记录信息发布到各种首选目标，例如数据库，文件，控制台，UNIX Syslog等。</p>
+<h3 id="水平对象"><a href="#水平对象" class="headerlink" title="水平对象"></a>水平对象</h3><p>Level对象定义任何日志记录信息的粒度和优先级。 API中定义了七个级别的日志记录:OFF，DEBUG，INFO，ERROR，WARN，FATAL和ALL。</p>
+<h3 id="过滤对象"><a href="#过滤对象" class="headerlink" title="过滤对象"></a>过滤对象</h3><p>Filter对象用于分析日志记录信息，并进一步决定是否应记录该信息。</p>
+<p>Appender对象可以有多个与之关联的Filter对象。 如果将日志记录信息传递给特定的Appender对象，则与该Appender关联的所有Filter对象都需要批准日志记录信息，然后才能将其发布到附加目标。</p>
+<h3 id="ObjectRenderer"><a href="#ObjectRenderer" class="headerlink" title="ObjectRenderer"></a>ObjectRenderer</h3><p>ObjectRenderer对象专门提供传递给日志记录框架的不同对象的String表示。 Layout对象使用此对象来准备最终的日志记录信息。</p>
+<h3 id="LogManager-LogManager"><a href="#LogManager-LogManager" class="headerlink" title="LogManager (LogManager)"></a>LogManager <strong>(LogManager)</strong></h3><p>LogManager对象管理日志记录框架。 它负责从系统范围的配置文件或配置类中读取初始配置参数。</p>
+<p>以下虚拟图显示了log4J框架的组件:</p>
+<p><img src="C:\Users\35093\AppData\Roaming\Typora\typora-user-images\image-20240210164359976.png" alt="image-20240210164359976"></p>
+<h2 id="什么是log4j2"><a href="#什么是log4j2" class="headerlink" title="什么是log4j2"></a>什么是log4j2</h2><p>Log4j2是一个Java日志组件，被各类Java框架广泛地使用。它的前身是Log4j，Log4j2重新构建和设计了框架，可以认为两者是完全独立的两个日志组件。</p>
+<p>因为存在前身Log4j，而且都是Apache下的项目，不管是jar包名称还是package名称，看起来都很相似，导致有些人分不清自己用的是Log4j还是Log4j2。这里给出几个辨别方法：</p>
+<p>Log4j2分为2个jar包，一个是接口log4j-api-${版本号}.jar，一个是具体实现log4j-core-${版本号}.jar。Log4j只有一个jar包log4j-${版本号}.jar。<br>Log4j2的版本号目前均为2.x。Log4j的版本号均为1.x。<br>Log4j2的package名称前缀为org.apache.logging.log4j。Log4j的package名称前缀为org.apache.log4j。</p>
+<h2 id="log4j2架构"><a href="#log4j2架构" class="headerlink" title="log4j2架构"></a>log4j2架构</h2><p>架构图如下</p>
+<p><img src="C:\Users\35093\AppData\Roaming\Typora\typora-user-images\image-20240210201727808.png" alt="image-20240210201727808"></p>
+<p>LogManager 通过 <code>getLogger(final Class&lt;?&gt; clazz)</code> 静态方法将定位到合适的 LoggerContext，然后从中得到一个 Logger 对象，要创建 Logger 需要关联一个 LoggerConfig，该 LoggerConfig 对象在 Configuration 中关联着传送 LogEvents 的 Appenders。</p>
+<h3 id="Logger-Hierarchy"><a href="#Logger-Hierarchy" class="headerlink" title="Logger Hierarchy"></a>Logger Hierarchy</h3><p>Log4j 1.x 中的 Logger 层级由各 Loggers 之间的关系来维护，而 Log4j 2 中的 Logger 层级由 LoggerConfig 对象负责维护。Logger 和 LoggerConfig 都是命名的实体。Logger 的名称是大小写敏感的，遵循以下层级命名规则：</p>
+<blockquote>
+<p>如果 LoggerConfig A 的名称后跟一个点号作为后代  LoggerConfig A.<em>.B 的名称前缀（</em>表示任意中间前缀），那么 LoggerConfig  A 是 LoggerConfig A.*.B 的 ancestor（An ancestor is a parent or  the parent of an antecedent）；如果名称 A 和 B 之间没有其他内容，那么 LoggerConfig  A 是 LoggerConfig A.B 的 parent。</p>
+</blockquote>
+<p>类似的， <code>java</code> 包是 <code>java.util</code> 包的 parent，是 <code>java.util.Vector</code> 类的 ancestor。这种命名模式对大多数开发者来说都是熟悉的。下表显示了这种层级关系。</p>
+<table>
+<thead>
+<tr>
+<th>LoggerConfig</th>
+<th>ROOT</th>
+<th>com</th>
+<th>com.foo</th>
+<th>com.foo.Bar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Root</td>
+<td>X</td>
+<td>Child</td>
+<td>descendant</td>
+<td>descendant</td>
+</tr>
+<tr>
+<td>com</td>
+<td>Parent</td>
+<td>X</td>
+<td>Child</td>
+<td>descendant</td>
+</tr>
+<tr>
+<td>com.foo</td>
+<td>Ancestor</td>
+<td>Parent</td>
+<td>X</td>
+<td>Child</td>
+</tr>
+<tr>
+<td>com.foo.Bar</td>
+<td>Ancestor</td>
+<td>Ancestor</td>
+<td>Parent</td>
+<td>X</td>
+</tr>
+</tbody></table>
+<p>root LoggerConfig 位于 LoggerConfig 层级的最顶级，它存在于在每个层级中。直接链接到 root LoggerConfig 的 Logger 可以这样获得：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);</span><br></pre></td></tr></table></figure>
+
+<p>也可以更简单些：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Logger logger = LogManager.getRootLogger();</span><br></pre></td></tr></table></figure>
+
+<p>其他 Logger 可以通过调用 <code>LogManager.getLogger(final String name)</code> 静态方法并传入期望的 Logger 名来获取。更多获取 Logger 的内容请参考 <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://logging.apache.org/log4j/2.x/log4j-api/api.html">Log4j 2 API</a> 。</p>
+<h3 id="LoggerContext"><a href="#LoggerContext" class="headerlink" title="LoggerContext"></a>LoggerContext</h3><p><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=http://logging.apache.org/log4j/2.x/log4j-core/apidocs/org/apache/logging/log4j/core/LoggerContext.html">LoggerContext</a> 充当着日志系统的锚点。<strong>不同情况下一个应用可以有多个有效的 LoggerContext</strong>。</p>
+<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><p>每个 LoggerContext  都有一个有效的 <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=http://logging.apache.org/log4j/2.x/log4j-core/apidocs/org/apache/logging/log4j/core/config/Configuration.html">Configuration</a>，该 Configuration 包含了所有的 Appenders、上下文范围的 Filters，以及 LoggerConfig， 并包含了 StrSubstitutor 的引用。在重新配置时会存在两个 Configuration。一旦所有的 Logger 重定向到新的 Configuration，旧的 Configuration 就会被停止和禁用。</p>
+<h3 id="Logger"><a href="#Logger" class="headerlink" title="Logger"></a>Logger</h3><p><strong>Logger  本身执行无指向的动作，它仅含有一个与 LoggerConfig 关联的名称，继承了 AbstractLogger 并实现了其必需的方法，当配置被修改了，Loggers 可能转而关联不同的 LoggerConfig 从而会改变其自身的行为</strong>。<strong>如果调用 <code>LogManager.getLogger</code> 方法时使用相同的名称参数，则总会返回同一个 Logger 对象</strong>。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Logger</span> <span class="variable">x</span> <span class="operator">=</span> LogManager.getLogger(<span class="string">&quot;wombat&quot;</span>);</span><br><span class="line"><span class="type">Logger</span> <span class="variable">y</span> <span class="operator">=</span> LogManager.getLogger(<span class="string">&quot;wombat&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>x</code> 和<code>y</code> 参照的实际上是同一个 Logger 对象。<strong>通过将 Logger 命名为其所在类的全限定名可以使输出的日志更具可辨识性，这是目前最好的做法。这不是强制的，开发者可以为 Logger 起任意的期望名称。既然一般习惯使用所在类的全限定名命名 Logger，所以 <code>LogManager.getLogger()</code> 方法默认创建使用所在类全限定名命名的 Logger</strong>。</p>
+<h3 id="LoggerConfig"><a href="#LoggerConfig" class="headerlink" title="LoggerConfig"></a>LoggerConfig</h3><p><strong>当 Logger 在配置文件中声明时，就创建了 <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=http://logging.apache.org/log4j/2.x/log4j-core/apidocs/org/apache/logging/log4j/core/config/LoggerConfig.html">LoggerConfig</a> 对象。LoggerConfig 包含一些 Filter，这些 Filter 用于过滤传递给任意 Appender 的 LogEvent。它还包含了一些 Appender 的引用，这些 Appender 用来处理事件</strong>。</p>
+<h3 id="Log-Levels"><a href="#Log-Levels" class="headerlink" title="Log Levels"></a>Log Levels</h3><p>LoggerConfig 会被分配一个日志<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://logging.apache.org/log4j/2.x/log4j-api/apidocs/org/apache/logging/log4j/Level.html">级别</a>。内建的日志级别按优先级从高到低排序有：OFF &gt; FATAL &gt; ERROR &gt; WARN &gt; INFO &gt; DEBUG &gt; TRACE &gt; ALL。Log4j 2 也支持<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://logging.apache.org/log4j/2.x/manual/customloglevels.html">自定义日志级别</a>，另一种更细粒度化的机制是使用 <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://logging.apache.org/log4j/2.x/log4j-api/api.html%23Markers">Markers</a> 来替代。</p>
+<p>Log4j 1.x 和 Logback 都有一个日志级别继承的概念。Log4j 2 中，Logger 和 LoggerConfig 是两个不同的对象，所以这个概念也有所不同。<strong>每个 Logger 引用着一个合适的 LoggerConfig，该 LoggerConfig 又可以反过来继承该 Logger 的 parent LoggerConfig 的日志级别</strong>。</p>
+<p>下面列出几张表演示了日志级别的继承逻辑。注意，<strong>如果 root LoggerConfig 没有配置，则它会被分配一个默认的日志级别（默认为 ERROR）</strong>。</p>
+<p>在下面的示例中，只有 <code>root</code> Logger 通过与其名称匹配的 LoggerConfig 配置一个日志级别，所有其他 Logger 将引用 root LoggerConfig，并使用其日志级别。</p>
+<table>
+<thead>
+<tr>
+<th>Logger Name</th>
+<th>Assigned LoggerConfig</th>
+<th>LoggerConfig Level</th>
+<th>Logger Level</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>root</td>
+<td>root</td>
+<td>DEBUG</td>
+<td>DEBUG</td>
+</tr>
+<tr>
+<td>X</td>
+<td>root</td>
+<td>DEBUG</td>
+<td>DEBUG</td>
+</tr>
+<tr>
+<td>X.Y</td>
+<td>root</td>
+<td>DEBUG</td>
+<td>DEBUG</td>
+</tr>
+<tr>
+<td>X.Y.Z</td>
+<td>root</td>
+<td>DEBUG</td>
+<td>DEBUG</td>
+</tr>
+</tbody></table>
+<p>在下面的示例中，所有 Logger 都配置了与各自名称匹配的 LoggerConfig 并从中获取日志级别。</p>
+<table>
+<thead>
+<tr>
+<th>Logger Name</th>
+<th>Assigned LoggerConfig</th>
+<th>LoggerConfig Level</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>root</td>
+<td>root</td>
+<td>DEBUG</td>
+<td>DEBUG</td>
+</tr>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>ERROR</td>
+<td>ERROR</td>
+</tr>
+<tr>
+<td>X.Y</td>
+<td>X.Y</td>
+<td>INFO</td>
+<td>INFO</td>
+</tr>
+<tr>
+<td>X.Y.Z</td>
+<td>X.Y.Z</td>
+<td>WARN</td>
+<td>WARN</td>
+</tr>
+</tbody></table>
+<p>在下面的示例中，名为 <code>root</code>、<code>X</code> 和 <code>X.Y.Z</code> 的 Logger 都配置了各自的 LoggerConfig，但名为 <code>X.Y</code> 的 Logger 并没有配置名称匹配的 LoggerConfig，它将使用名为 <code>X</code> 的 LoggerConfig 。因为 <code>X</code> LoggerConfig 的名称是 <code>X.Y</code> Logger 的名称开头的最长匹配，如果还有名为 <code>W.X.Y</code> 的 LoggerConfig，<code>X.Y</code> Logger 将会使用 <code>W.X.Y</code> LoggerConfig。</p>
+<table>
+<thead>
+<tr>
+<th>Logger Name</th>
+<th>Assigned LoggerConfig</th>
+<th>LoggerConfig Level</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>root</td>
+<td>root</td>
+<td>DEBUG</td>
+<td>DEBUG</td>
+</tr>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>ERROR</td>
+<td>ERROR</td>
+</tr>
+<tr>
+<td>X.Y</td>
+<td>X</td>
+<td>ERROR</td>
+<td>ERROR</td>
+</tr>
+<tr>
+<td>X.Y.Z</td>
+<td>X.Y.Z</td>
+<td>WARN</td>
+<td>WARN</td>
+</tr>
+</tbody></table>
+<p>在下面的示例中，<code>root</code> 和 <code>X</code> Logger 都配置了与各自名称匹配的 LoggerConfig，<code>X.Y</code> 和 <code>X.Y.Z</code> Logger 没有匹配 LoggerConfig，所以从分配给它们的 <code>X</code> LoggerConfig  中获取其日志级别。</p>
+<table>
+<thead>
+<tr>
+<th>Logger Name</th>
+<th>Assigned LoggerConfig</th>
+<th>LoggerConfig Level</th>
+<th>level</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>root</td>
+<td>root</td>
+<td>DEBUG</td>
+<td>DEBUG</td>
+</tr>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>ERROR</td>
+<td>ERROR</td>
+</tr>
+<tr>
+<td>X.Y</td>
+<td>X</td>
+<td>ERROR</td>
+<td>ERROR</td>
+</tr>
+<tr>
+<td>X.Y.Z</td>
+<td>X</td>
+<td>ERROR</td>
+<td>ERROR</td>
+</tr>
+</tbody></table>
+<p>在下面的示例中，<code>root</code>，<code>X</code> 和 <code>X.Y</code> Logger 都配置了与其各自名称匹配的 LoggerConfig，但 <code>X.YZ</code> Logger 没有配置 LoggerConfig，所以从分配给它的 <code>X</code> LoggerConfig 中获取其日志级别。由此可见，<strong>如果一个 Logger 没有配置 LoggerConfig，那么它将会继承使用上一级 LoggerConfig</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>Logger Name</th>
+<th>Assigned LoggerConfig</th>
+<th>LoggerConfig Level</th>
+<th>level</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>root</td>
+<td>root</td>
+<td>DEBUG</td>
+<td>DEBUG</td>
+</tr>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>ERROR</td>
+<td>ERROR</td>
+</tr>
+<tr>
+<td>X.Y</td>
+<td>X.Y</td>
+<td>INFO</td>
+<td>INFO</td>
+</tr>
+<tr>
+<td>X.YZ</td>
+<td>X</td>
+<td>ERROR</td>
+<td>ERROR</td>
+</tr>
+</tbody></table>
+<p>在下面的示例中，<code>X.Y</code> Logger 配置了与其名称匹配的 <code>X.Y</code> LoggerConfig，但 <code>X.Y</code>  LoggerConfig 没有配置日志级别，所以，<code>X.Y</code> LoggerConfig 从 <code>X</code> LoggerConfig 获取其日志级别。<code>X.Y.Z</code> Logger 没有配置与其名称匹配的 LoggerConfig，所以，<code>X.Y.Z</code> Logger 将使用 <code>X.Y</code> LoggerConfig，从而其级别也从 <code>X</code> LoggerConfig 获得。<strong>如果一个 Logger 的 LoggerConfig 没有配置日志级别，那么该 LoggerConfig 将会继承使用上一级 LoggerConfig 的日志级别</strong> 。</p>
+<table>
+<thead>
+<tr>
+<th>Logger Name</th>
+<th>Assigned LoggerConfig</th>
+<th>LoggerConfig Level</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>root</td>
+<td>root</td>
+<td>DEBUG</td>
+<td>DEBUG</td>
+</tr>
+<tr>
+<td>X</td>
+<td>X</td>
+<td>ERROR</td>
+<td>ERROR</td>
+</tr>
+<tr>
+<td>X.Y</td>
+<td>X.Y</td>
+<td></td>
+<td>ERROR</td>
+</tr>
+<tr>
+<td>X.Y.Z</td>
+<td>X.Y</td>
+<td></td>
+<td>ERROR</td>
+</tr>
+</tbody></table>
+<h3 id="StrSubstitutor-和-StrLookup"><a href="#StrSubstitutor-和-StrLookup" class="headerlink" title="StrSubstitutor 和 StrLookup"></a>StrSubstitutor 和 StrLookup</h3><p><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=http://logging.apache.org/log4j/2.x/log4j-core/apidocs/org/apache/logging/log4j/core/lookup/StrSubstitutor.html">StrSubstitutor </a> 类和 <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=http://logging.apache.org/log4j/2.x/log4j-core/apidocs/org/apache/logging/log4j/core/lookup/StrLookup.html">StrLookup</a> 接口是从 <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://commons.apache.org/proper/commons-lang/">Apache Commons Lang</a> 借鉴修改而来用以处理 LogEvents 的。另外，<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=http://logging.apache.org/log4j/2.x/log4j-core/apidocs/org/apache/logging/log4j/core/lookup/Interpolator.html">Interpolator</a> 类是从 Apache Commons Configuration 借鉴修改而来从而使 StrSubstitutor 可以处理多个 StrLookups 中的变量，该类也经过修改可以支持处理 LogEvents。这些类一起让配置可以引用 System Properties、配置文件、ThreadContext Map 以及 LogEvent 的 StructuredData 中的变量。</p>
+<h2 id="log4j-log4j2安全"><a href="#log4j-log4j2安全" class="headerlink" title="log4j,log4j2安全"></a>log4j,log4j2安全</h2><h4 id="Log4j2的JNDI注入漏洞（CVE-2021-44228"><a href="#Log4j2的JNDI注入漏洞（CVE-2021-44228" class="headerlink" title="Log4j2的JNDI注入漏洞（CVE-2021-44228)"></a>Log4j2的JNDI注入漏洞（CVE-2021-44228)</h4><h4 id="Log4j2-Lookup"><a href="#Log4j2-Lookup" class="headerlink" title="Log4j2 Lookup"></a>Log4j2 Lookup</h4><p>Log4j2的Lookup主要功能是通过引用一些变量，往日志中添加动态的值。这些变量可以是外部环境变量，也可以是MDC中的变量，还可以是日志上下文数据等</p>
+<p>下面是一个简单的Java Lookup例子和输出：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.LogManager;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.ThreadContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Log4j2Lookup</span> &#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">static</span> <span class="keyword">final</span> Logger LOGGER = LogManager.<span class="built_in">getLogger</span>(Log4j2RCEPoc.<span class="keyword">class</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="type">static</span> <span class="type">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ThreadContext.<span class="built_in">put</span>(<span class="string">&quot;userId&quot;</span>, <span class="string">&quot;test&quot;</span>);</span><br><span class="line">    LOGGER.<span class="built_in">error</span>(<span class="string">&quot;userId: $&#123;ctx:userId&#125;&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>10:21:19.618 [main] ERROR Log4j2RCEPoc – userId: test<br>从上面的例子可以看到，通过在日志字符串中加入”${ctx:userId}”，Log4j2在输出日志时，会自动在Log4j2的ThreadContext中查找并引用userId变量。格式类似”${type:var}”，即可以实现对变量var的引用。type可以是如下值：</p>
+<p>ctx：允许程序将数据存储在 Log4j ThreadContext Map 中，然后在日志输出过程中，查找其中的值。<br>env：允许系统在全局文件（如 &#x2F;etc&#x2F;profile）或应用程序的启动脚本中配置环境变量，然后在日志输出过程中，查找这些变量。例如：${env:USER}。<br>java：允许查找Java环境配置信息。例如：${java:version}。<br>jndi：允许通过 JNDI 检索变量。<br>……<br>其中和本次漏洞相关的便是jndi，例如：${jndi:rmi&#x2F;&#x2F;127.0.0.1:1099&#x2F;a}，表示通过JNDI Lookup功能，获取rmi&#x2F;&#x2F;127.0.0.1:1099&#x2F;a上的变量内容。</p>
+<h4 id="JNDI"><a href="#JNDI" class="headerlink" title="JNDI"></a>JNDI</h4><p>JNDI（Java Naming and Directory Interface，Java命名和目录接口），是Java提供的一个目录服务应用程序接口（API），它提供一个目录系统，并将服务名称与对象关联起来，从而使得开发人员在开发过程中可以使用名称来访问对象 。</p>
+<p>例如使用数据库，需要在各个应用中配置各种数据库相关的参数后使用。通过JNDI，可以将数据库相关的配置在一个支持JNDI服务的容器（通常Tomat等Web容器均支持）中统一完成，并暴露一个简洁的名称，该名称背后绑定着一个DataSource对象。各个应用只需要通过该名称和JNDI接口，获取该名称背后的DataSource对象。当然，现在SpringBoot单体发布模式，极少会使用这种方式了。</p>
+<p>再举个更简单的例子，这有点类似DNS提供域名到IP地址的解析服务。域名简洁易懂，便于普通用户使用，背后真正对应的是一个复杂难记的IP，甚至还可能是多个IP。DNS即JNDI服务，域名即可用于绑定和查找的名称，IP即该名称绑定的真正对象。用现代可以类比的技术来说，JNDI就是一个对象注册中心。</p>
+<p>JNDI由三部分组成：JNDI API、Naming Manager、JNDI SPI。JNDI API是应用程序调用的接口，JNDI SPI是具体实现，应用程序需要指定具体实现的SPI。</p>
+<p>下面是一个简单的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Hello</span> <span class="keyword">extends</span> <span class="title class_">java</span>.rmi.Remote &#123;</span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">sayHello</span><span class="params">(String from)</span> <span class="keyword">throws</span> java.rmi.RemoteException;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> java.rmi.server.UnicastRemoteObject;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloImpl</span> <span class="keyword">extends</span> <span class="title class_">UnicastRemoteObject</span> <span class="keyword">implements</span> <span class="title class_">Hello</span> &#123;</span><br><span class="line"><span class="keyword">public</span> <span class="title function_">HelloImpl</span><span class="params">()</span> <span class="keyword">throws</span> java.rmi.RemoteException &#123;</span><br><span class="line"><span class="built_in">super</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">sayHello</span><span class="params">(String from)</span> <span class="keyword">throws</span> java.rmi.RemoteException &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Hello from &quot;</span> + from + <span class="string">&quot;!!&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;sayHello&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> javax.naming.Context;</span><br><span class="line"><span class="keyword">import</span> javax.naming.InitialContext;</span><br><span class="line"><span class="keyword">import</span> javax.naming.NamingException;</span><br><span class="line"><span class="keyword">import</span> java.rmi.RemoteException;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.LocateRegistry;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloServer</span> &#123;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> RemoteException, NamingException &#123;</span><br><span class="line">LocateRegistry.createRegistry(<span class="number">1099</span>);</span><br><span class="line">System.setProperty(Context.INITIAL_CONTEXT_FACTORY, “com.sun.jndi.rmi.registry.RegistryContextFactory”);</span><br><span class="line">System.setProperty(Context.PROVIDER_URL, “rmi:<span class="comment">//localhost:1099”);</span></span><br><span class="line"><span class="type">InitialContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InitialContext</span>();</span><br><span class="line">context.bind(“java:hello”, <span class="keyword">new</span> <span class="title class_">HelloImpl</span>());</span><br><span class="line">context.close();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> javax.naming.Context;</span><br><span class="line"><span class="keyword">import</span> javax.naming.InitialContext;</span><br><span class="line"><span class="keyword">import</span> javax.naming.NamingException;</span><br><span class="line"><span class="keyword">import</span> java.rmi.RemoteException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloClient</span> &#123;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NamingException, RemoteException &#123;</span><br><span class="line">System.setProperty(Context.INITIAL_CONTEXT_FACTORY, “com.sun.jndi.rmi.registry.RegistryContextFactory”);</span><br><span class="line">System.setProperty(Context.PROVIDER_URL, “rmi:<span class="comment">//localhost:1099”);</span></span><br><span class="line"><span class="type">InitialContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InitialContext</span>();</span><br><span class="line"><span class="type">Hello</span> <span class="variable">rmiObject</span> <span class="operator">=</span> (Hello) context.lookup(“java:hello”);</span><br><span class="line">System.out.println(rmiObject.sayHello(“world”));</span><br><span class="line">context.close();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先运行HelloServer，再运行HelloClient，即可看到运行输出的结果：sayHello。</p>
+<p>HelloServer将HelloImpl对象绑定到java:hello名称上。HelloClient使用java:hello名称，即可获取HelloImpl对象。</p>
+<h4 id="JNDI注入"><a href="#JNDI注入" class="headerlink" title="JNDI注入"></a>JNDI注入</h4><p>由前面的例子可以看到，JNDI服务管理着一堆的名称和这些名称上绑定着的对象。如果这些对象不是本地的对象，会如何处理？JNDI还支持从指定的远程服务器上下载class文件，加载到本地JVM中，并通过适当的方式创建对象。</p>
+<p>“class文件加载到本地JVM中，并通过适当的方式创建对象”，在这个过程中，static代码块以及创建对象过程中的某些特定回调方法即有机会被执行。JNDI注入正是基于这个思路实现的。</p>
+<p>本篇文章主要分析Log4j2的JNDI注入产生原因，并不会对JNDI注入自身太过关注，网上也有大量分析的文章可供参考，这里就不再详述了。</p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/264176">https://www.anquanke.com/post/id/264176</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/antLaddie/p/15904895.html">https://www.cnblogs.com/antLaddie/p/15904895.html</a></p>
+<h4 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h4><p>由于是JNDI注入，因此可以通过在InitialContext.lookup(String name)方法上设置端点，观察整个漏洞触发的调用堆栈，来了解原理。</p>
+<p>整个调用堆栈较深，这里把几个关键点提取整理如下：</p>
+<p>LOGGER.error<br>……<br>MessagePatternConverter.format<br>….<br>StrSubstitutor.resolveVariable<br>Interpolator.lookup<br>JndiLookup.lookup<br>JndiManager.lookup<br>InitialContext.lookup</p>
+<h5 id="MessagePatternConverter-format"><a href="#MessagePatternConverter-format" class="headerlink" title="MessagePatternConverter.format()"></a>MessagePatternConverter.format()</h5><p>poc代码中的LOGGER.error()方法最终会调用到MessagePatternConverter.format()方法，该方法对日志内容进行解析和格式化，并返回最终格式化后的日志内容。当碰到日志内容中包含${子串时，调用StrSubstitutor进行进一步解析。</p>
+<h5 id="StrSubstitutor-resolveVariable"><a href="#StrSubstitutor-resolveVariable" class="headerlink" title="StrSubstitutor.resolveVariable()"></a>StrSubstitutor.resolveVariable()</h5><p>StrSubstitutor将${和}之间的内容提取出来，调用并传递给Interpolator.lookup()方法，实现Lookup功能。</p>
+<h5 id="Interpolator-lookup"><a href="#Interpolator-lookup" class="headerlink" title="Interpolator.lookup()"></a>Interpolator.lookup()</h5><p>Interpolator实际是一个实现Lookup功能的代理类，该类在成员变量strLookupMap中保存着各类Lookup功能的真正实现类。Interpolator对 上一步提取出的内容解析后，从strLookupMap获得Lookup功能实现类，并调用实现类的lookup()方法。</p>
+<p>例如对poc例子中的jndi:rmi:&#x2F;&#x2F;127.0.0.1:1099&#x2F;exp解析后得到jndi的Lookup功能实现类为JndiLookup，并调用JndiLookup.lookup()方法。</p>
+<h5 id="JndiLookup-lookup"><a href="#JndiLookup-lookup" class="headerlink" title="JndiLookup.lookup()"></a>JndiLookup.lookup()</h5><p>JndiLookup.lookup()方法调用JndiManager.lookup()方法，获取JNDI对象后，调用该对象上的toString()方法，最终返回该字符串。</p>
+<h5 id="JndiManager-lookup"><a href="#JndiManager-lookup" class="headerlink" title="JndiManager.lookup()"></a>JndiManager.lookup()</h5><p>JndiManager.lookup()较为简单，直接委托给InitialContext.lookup()方法。这里单独提到该方法，是因为后续几个补丁中较为重要的变更即为该方法。</p>
+<h4 id="Apache-Log4j2-远程代码执行漏洞（CNVD-2021-95914）"><a href="#Apache-Log4j2-远程代码执行漏洞（CNVD-2021-95914）" class="headerlink" title="Apache Log4j2 远程代码执行漏洞（CNVD-2021-95914）"></a>Apache Log4j2 远程代码执行漏洞（CNVD-2021-95914）</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/angry_program/article/details/121994740">https://blog.csdn.net/angry_program/article/details/121994740</a></p>
+<p>CVE-2019-17571、CVE-2020-9488、CVE-2021-4104、CVE-2021-44228、CVE-2021-44832、CVE-2021-45046、CVE-2021-45105、CVE-2022-23302、CVE-2022-23305 和 CVE-2022-23307</p>
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2024/02/10/java%E5%AE%89%E5%85%A8-log4j-log4j2/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2024/02/10/java%E5%AE%89%E5%85%A8-log4j-log4j2/";
+            const title         = "「java安全-log4j_log4j2」";
+            const excerpt       = `java安全-log4j,log4j2什么是log4jApache Log4j是一个基于Java的日志记录工具.
+记录程序中的错误消息和用户输入等重要信息。
+Log4J 是个开源软件库，提供开发人员可自由使用的预先编写的代码。开发人员...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/java%E5%AE%89%E5%85%A8/" rel="tag">java安全</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2024-02-10T13:47:54.074Z" itemprop="dateModified">最后编辑：2024-02-10</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" java安全-redis" href="/2024/02/10/java安全-redis/">&lt; 上一篇</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/icon.jpg" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                11
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                0
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                1
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 0.6em;">java安全</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2024/02/10/java%E5%AE%89%E5%85%A8-log4j-log4j2/"><i class="fa  fa-book"></i> java安全-log4j_log4j2</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2024/02/10/java%E5%AE%89%E5%85%A8-redis/"><i class="fa  fa-book"></i> java安全-redis</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/10/11/Linux%E5%86%85%E6%A0%B8/"><i class="fa  fa-book"></i> Linux内核</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/10/10/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/"><i class="fa  fa-book"></i> 痕迹清理</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/10/10/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B/"><i class="fa  fa-book"></i> 守护进程</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2024 QWQ0QWQ's blog 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by QWQ0QWQ.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://QwQ0QwQ.github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="/vendors/meting@2.0.1/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="3204190542"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
