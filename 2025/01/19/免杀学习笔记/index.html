@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"qwq0qwq.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-
-    <meta name="description" content="逆向学习笔记Windwos架构windows操作系统有两种运行模式：用户模式和内核模式 应用程序运行在用户模式，操作系统运行在内核模式。 当应用程序想要执行一项任务，但是需要内核才能完成得操作，就会去调用特定的函数，调用函数的流程如下图所示。   User Processer ：用户程序-由用户执行的程序&#x2F;应用程序  Subsystem Dlls：子系统DLL-包含用户进程调用的API函">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>免杀学习笔记 | QWQ0QWQ&#39;s blog</title>
+  <link rel="canonical" href="https://qwq0qwq.github.io/2025/01/19/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+  <meta name="author" content="QWQ0QWQ" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="" />
+  
+  <meta name="description" content="逆向学习笔记Windwos架构windows操作系统有两种运行模式：用户模式和内核模式 应用程序运行在用户模式，操作系统运行在内核模式。 当应用程序想要执行一项任务，但是需要内核才能完成得操作，就会去调用特定的函数，调用函数的流程如下图所示。   User Processer ：用户程序-由用户执行的程序&#x2F;应用程序  Subsystem Dlls：子系统DLL-包含用户进程调用的API函">
 <meta property="og:type" content="article">
 <meta property="og:title" content="免杀学习笔记">
 <meta property="og:url" content="https://qwq0qwq.github.io/2025/01/19/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
@@ -44,167 +42,143 @@
 <meta property="article:author" content="QWQ0QWQ">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/QwQ0QwQ/QwQ0QwQ.github.io/refs/heads/main/images/arch-diagram.png">
-
-
-<link rel="canonical" href="https://qwq0qwq.github.io/2025/01/19/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://qwq0qwq.github.io/2025/01/19/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2025/01/19/免杀学习笔记/","title":"免杀学习笔记"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>免杀学习笔记 | QWQ0QWQ's blog</title>
   
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">QWQ0QWQ&#39;s blog</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>QWQ0QWQ&#39;s blog</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
 
 
-
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar" role="button">
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">QWQ0QWQ's blog</p>
-      <i class="logo-line"></i>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="Search" role="button">
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-</header>
         
-  
-  <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
+            
 
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%86%E5%90%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">逆向学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windwos%E6%9E%B6%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">Windwos架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">函数调用流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">函数调用流程示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E8%B0%83%E7%94%A8%E6%9C%AC%E5%9C%B0-API%EF%BC%88NTAPI%EF%BC%89"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">直接调用本地 API（NTAPI）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">Windows内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E5%88%86%E9%A1%B5"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">虚拟内存和分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E4%BF%9D%E6%8A%A4%E9%80%89%E9%A1%B9"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">页面保护选项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E4%BF%9D%E6%8A%A4"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">内存保护</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x86-vs-x64%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4"><span class="nav-number">1.2.0.4.</span> <span class="nav-text">x86 vs x64内存空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.2.0.5.</span> <span class="nav-text">内存分配示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%86%99%E5%85%A5%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.2.0.6.</span> <span class="nav-text">内存写入示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8A%E6%94%BE%E5%B7%B2%E5%88%86%E9%85%8D%E7%9A%84%E5%86%85%E5%AD%98"><span class="nav-number">1.2.0.7.</span> <span class="nav-text">释放已分配的内存</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WindowsAPI%E7%AE%80%E4%BB%8B"><span class="nav-number">1.3.</span> <span class="nav-text">WindowsAPI简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">Windows数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%8C%87%E9%92%88"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">数据类型和指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">输入和输出参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-API-%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.3.0.4.</span> <span class="nav-text">Windows API 示例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE-API-%E5%8F%82%E8%80%83"><span class="nav-number">1.3.0.4.1.</span> <span class="nav-text">查找 API 参考</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%8E%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.0.4.2.</span> <span class="nav-text">分析返回值与参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.0.4.3.</span> <span class="nav-text">使用函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows-API-%E8%B0%83%E8%AF%95%E9%94%99%E8%AF%AF"><span class="nav-number">1.3.0.5.</span> <span class="nav-text">Windows API 调试错误</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Windows-%E5%8E%9F%E7%94%9F-API-%E8%B0%83%E8%AF%95%E9%94%99%E8%AF%AF"><span class="nav-number">1.3.0.5.1.</span> <span class="nav-text">Windows 原生 API 调试错误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NT-SUCCESS-%E5%AE%8F"><span class="nav-number">1.3.0.5.2.</span> <span class="nav-text">NT_SUCCESS 宏</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%BF%E6%90%BA%E5%BC%8F%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%EF%BC%88%E6%B2%A1%E7%9C%8B%E6%87%82%EF%BC%8C%E5%90%8E%E9%9D%A2%E8%A1%A5%E8%A7%A3%E9%87%8A%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">便携式可执行文件格式（没看懂，后面补解释）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PE-%E7%BB%93%E6%9E%84q"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">PE 结构q</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOS-%E5%AD%98%E6%A0%B9%EF%BC%88DOS-stub%EF%BC%89"><span class="nav-number">1.4.0.3.</span> <span class="nav-text">DOS 存根（DOS stub）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NT-%E5%A4%B4-IMAGE-NT-HEADERS"><span class="nav-number">1.4.0.4.</span> <span class="nav-text">NT 头 (IMAGE_NT_HEADERS)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B4-IMAGE-FILE-HEADER"><span class="nav-number">1.4.0.5.</span> <span class="nav-text">文件头 (IMAGE_FILE_HEADER)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%80%89%E5%A4%B4%EF%BC%88IMAGE-OPTIONAL-HEADER%EF%BC%89"><span class="nav-number">1.4.0.6.</span> <span class="nav-text">可选头（IMAGE_OPTIONAL_HEADER）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%9B%AE%E5%BD%95"><span class="nav-number">1.4.0.6.1.</span> <span class="nav-text">数据目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E7%9B%AE%E5%BD%95"><span class="nav-number">1.4.0.6.2.</span> <span class="nav-text">导出目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%9C%B0%E5%9D%80%E8%A1%A8"><span class="nav-number">1.4.0.6.3.</span> <span class="nav-text">导入地址表</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PE-%E8%8A%82"><span class="nav-number">1.4.0.7.</span> <span class="nav-text">PE 节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.4.0.8.</span> <span class="nav-text">更多参考资料</span></a></li></ol></li></ol></li></ol></li></ol></div>
-        </div>
-        <!--/noindex-->
+            <section class="kr-main-col col-md-8">
 
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">QWQ0QWQ</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">20</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
+        
 
-        </div>
-      </div>
-    </div>
-
-    
-  </aside>
-
-
-    </div>
-
-    <div class="main-inner post posts-expand">
-
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+            <article itemscope itemtype="https://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://qwq0qwq.github.io/2025/01/19/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="QWQ0QWQ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QWQ0QWQ's blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="免杀学习笔记 | QWQ0QWQ's blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          免杀学习笔记
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2025-01-19 09:15:39 / Modified: 10:06:11" itemprop="dateCreated datePublished" datetime="2025-01-19T09:15:39+08:00">2025-01-19</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"><h1 id="逆向学习笔记"><a href="#逆向学习笔记" class="headerlink" title="逆向学习笔记"></a>逆向学习笔记</h1><h2 id="Windwos架构"><a href="#Windwos架构" class="headerlink" title="Windwos架构"></a>Windwos架构</h2><p>windows操作系统有两种运行模式：用户模式和内核模式</p>
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">免杀学习笔记</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="2025-01-19T01:15:39.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2025-01-19</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">QWQ0QWQ</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~19.20K
+                        
+                        字
+                    </li>
+                
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="逆向学习笔记"><a href="#逆向学习笔记" class="headerlink" title="逆向学习笔记"></a>逆向学习笔记</h1><h2 id="Windwos架构"><a href="#Windwos架构" class="headerlink" title="Windwos架构"></a>Windwos架构</h2><p>windows操作系统有两种运行模式：用户模式和内核模式</p>
 <p>应用程序运行在用户模式，操作系统运行在内核模式。</p>
 <p>当应用程序想要执行一项任务，但是需要内核才能完成得操作，就会去调用特定的函数，调用函数的流程如下图所示。</p>
 <p><img src="https://raw.githubusercontent.com/QwQ0QwQ/QwQ0QwQ.github.io/refs/heads/main/images/arch-diagram.png" alt="arch-diagram"></p>
@@ -472,88 +446,195 @@
 <li>数据目录、节头和节 - <a target="_blank" rel="noopener" href="https://0xrick.github.io/win-internals/pe5/">https://0xrick.github.io/win-internals/pe5/</a></li>
 <li></li>
 </ul>
-
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-01-19T02:06:11.836Z" itemprop="dateModified">最后编辑：2025-01-19</time>
+                </div>
+            </div>
+        </footer>
     </div>
-
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" EscapeTwo" href="/2025/01/19/EscapeTwo/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+        </nav>
     
     
-    
-
-    <footer class="post-footer">
+</article>
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2025/01/19/EscapeTwo/" rel="prev" title="EscapeTwo">
-                  <i class="fa fa-angle-left"></i> EscapeTwo
-                </a>
-            </div>
-            <div class="post-nav-item">
-            </div>
-          </div>
-    </footer>
-  </article>
-</div>
+            </section>
 
+            
+                
 
-
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="copyright">
-    &copy; 
-    <span itemprop="copyrightYear">2025</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">QWQ0QWQ</span>
-  </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
     </div>
-  </footer>
+</section>
+            
 
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="Back to top">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
+        
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 QWQ0QWQ's blog 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 QWQ0QWQ 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
 
 
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/js/kr-modal/donate.min.js"></script>
 
-  
 
 
 
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/js/kr-modal/share.min.js"></script>
 
 
 
-  
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+  <script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
 
 
 
+  <script defer src="/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
 
 
-</body>
+<script defer src="/js/kr-core.min.js"></script>
+
+
+  <script defer src="/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
 </html>

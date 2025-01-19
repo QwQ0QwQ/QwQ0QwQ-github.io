@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"qwq0qwq.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-
-    <meta name="description" content="Linux 入侵痕迹清理技巧在攻击结束后，如何不留痕迹的清除日志和操作记录，以掩盖入侵踪迹，这其实是一个细致的技术活。你所做的每一个操作，都要被抹掉；你所上传的工具，都应该被安全地删掉。 01、清除history历史命令记录 查看历史操作命令： 12查看历史操作命令：historyhistory记录文件：more  ~&#x2F;.bash_history  第一种方式： （1）编辑history记录文件，">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>痕迹清理 | QWQ0QWQ&#39;s blog</title>
+  <link rel="canonical" href="https://qwq0qwq.github.io/2023/10/10/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/">
+  <meta name="author" content="QWQ0QWQ" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="" />
+  
+  <meta name="description" content="Linux 入侵痕迹清理技巧在攻击结束后，如何不留痕迹的清除日志和操作记录，以掩盖入侵踪迹，这其实是一个细致的技术活。你所做的每一个操作，都要被抹掉；你所上传的工具，都应该被安全地删掉。 01、清除history历史命令记录 查看历史操作命令： 12查看历史操作命令：historyhistory记录文件：more  ~&#x2F;.bash_history  第一种方式： （1）编辑history记录文件，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="痕迹清理">
 <meta property="og:url" content="https://qwq0qwq.github.io/2023/10/10/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/index.html">
@@ -30,167 +28,143 @@
 <meta property="article:modified_time" content="2023-10-10T10:48:32.777Z">
 <meta property="article:author" content="QWQ0QWQ">
 <meta name="twitter:card" content="summary">
-
-
-<link rel="canonical" href="https://qwq0qwq.github.io/2023/10/10/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/">
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://qwq0qwq.github.io/2023/10/10/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/","path":"2023/10/10/痕迹清理/","title":"痕迹清理"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>痕迹清理 | QWQ0QWQ's blog</title>
   
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">QWQ0QWQ&#39;s blog</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>QWQ0QWQ&#39;s blog</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
 
 
-
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar" role="button">
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">QWQ0QWQ's blog</p>
-      <i class="logo-line"></i>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="Search" role="button">
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-</header>
         
-  
-  <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
+            
 
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-%E5%85%A5%E4%BE%B5%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86%E6%8A%80%E5%B7%A7"><span class="nav-number">1.</span> <span class="nav-text">Linux 入侵痕迹清理技巧</span></a></li></ol></div>
-        </div>
-        <!--/noindex-->
+            <section class="kr-main-col col-md-8">
 
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">QWQ0QWQ</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">20</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
+        
 
-        </div>
-      </div>
-    </div>
-
-    
-  </aside>
-
-
-    </div>
-
-    <div class="main-inner post posts-expand">
-
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+            <article itemscope itemtype="https://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://qwq0qwq.github.io/2023/10/10/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="QWQ0QWQ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QWQ0QWQ's blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="痕迹清理 | QWQ0QWQ's blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          痕迹清理
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2023-10-10 18:47:15 / Modified: 18:48:32" itemprop="dateCreated datePublished" datetime="2023-10-10T18:47:15+08:00">2023-10-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"><h1 id="Linux-入侵痕迹清理技巧"><a href="#Linux-入侵痕迹清理技巧" class="headerlink" title="Linux 入侵痕迹清理技巧"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaozi/p/13648156.html">Linux 入侵痕迹清理技巧</a></h1><p>在攻击结束后，如何不留痕迹的清除日志和操作记录，以掩盖入侵踪迹，这其实是一个细致的技术活。你所做的每一个操作，都要被抹掉；你所上传的工具，都应该被安全地删掉。</p>
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">痕迹清理</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="2023-10-10T10:47:15.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-10-10</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">QWQ0QWQ</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~3.03K
+                        
+                        字
+                    </li>
+                
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="Linux-入侵痕迹清理技巧"><a href="#Linux-入侵痕迹清理技巧" class="headerlink" title="Linux 入侵痕迹清理技巧"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaozi/p/13648156.html">Linux 入侵痕迹清理技巧</a></h1><p>在攻击结束后，如何不留痕迹的清除日志和操作记录，以掩盖入侵踪迹，这其实是一个细致的技术活。你所做的每一个操作，都要被抹掉；你所上传的工具，都应该被安全地删掉。</p>
 <p><strong>01、清除history历史命令记录</strong></p>
 <p>查看历史操作命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看历史操作命令：history</span><br><span class="line">history记录文件：more  ~/.bash_history</span><br></pre></td></tr></table></figure>
@@ -259,91 +233,199 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ssh -T root@192.168.0.1 /bin/bash -i</span><br></pre></td></tr></table></figure>
 
 <p>不记录ssh公钥在本地.ssh目录中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ssh -o UserKnownHostsFile=/dev/null -T user@host /bin/bash –i</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ssh -o UserKnownHostsFile=/dev/null -T user@host /bin/bash –i</span><br></pre></td></tr></table></figure></div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-10-10T10:48:32.777Z" itemprop="dateModified">最后编辑：2023-10-10</time>
+                </div>
+            </div>
+        </footer>
     </div>
-
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 守护进程" href="/2023/10/10/守护进程/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Linux内核" href="/2023/10/11/Linux内核/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
     
     
-    
-
-    <footer class="post-footer">
+</article>
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2023/10/10/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B/" rel="prev" title="守护进程">
-                  <i class="fa fa-angle-left"></i> 守护进程
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2023/10/11/Linux%E5%86%85%E6%A0%B8/" rel="next" title="Linux内核">
-                  Linux内核 <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
-</div>
+            </section>
 
+            
+                
 
-
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="copyright">
-    &copy; 
-    <span itemprop="copyrightYear">2025</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">QWQ0QWQ</span>
-  </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
     </div>
-  </footer>
+</section>
+            
 
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="Back to top">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
+        
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 QWQ0QWQ's blog 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 QWQ0QWQ 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
 
 
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/js/kr-modal/donate.min.js"></script>
 
-  
 
 
 
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/js/kr-modal/share.min.js"></script>
 
 
 
-  
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+  <script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
 
 
 
+  <script defer src="/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
 
 
-</body>
+<script defer src="/js/kr-core.min.js"></script>
+
+
+  <script defer src="/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
 </html>

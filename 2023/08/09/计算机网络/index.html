@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"qwq0qwq.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-
-    <meta name="description" content="计算机网络计算机网络的主要作用就是实现计算机之间的通信，这是主要的作用。  物理层物理层主要功能：为数据端设备提供传送数据通路、传输数据。 假设现在有两台计算机，我们需要实现这两台计算机之间的通信，最简单的方式是用一根线将他们连起来，使用高低电平来进行通信，但如果计算机的数量提升到五台，这时候就需要五台计算机之间两两连线才能通过这种方法进行计算机的通信。这种情况下，需要的线的数量就会有大幅提升，这">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>计算机网络 | QWQ0QWQ&#39;s blog</title>
+  <link rel="canonical" href="https://qwq0qwq.github.io/2023/08/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+  <meta name="author" content="QWQ0QWQ" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="" />
+  
+  <meta name="description" content="计算机网络计算机网络的主要作用就是实现计算机之间的通信，这是主要的作用。  物理层物理层主要功能：为数据端设备提供传送数据通路、传输数据。 假设现在有两台计算机，我们需要实现这两台计算机之间的通信，最简单的方式是用一根线将他们连起来，使用高低电平来进行通信，但如果计算机的数量提升到五台，这时候就需要五台计算机之间两两连线才能通过这种方法进行计算机的通信。这种情况下，需要的线的数量就会有大幅提升，这">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络">
 <meta property="og:url" content="https://qwq0qwq.github.io/2023/08/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
@@ -46,173 +44,143 @@
 <meta property="article:author" content="QWQ0QWQ">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://pic1.zhimg.com/80/v2-2d62ba265be486cb94ab531912aa3b9c_720w.webp">
-
-
-<link rel="canonical" href="https://qwq0qwq.github.io/2023/08/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://qwq0qwq.github.io/2023/08/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/","path":"2023/08/09/计算机网络/","title":"计算机网络"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>计算机网络 | QWQ0QWQ's blog</title>
   
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">QWQ0QWQ&#39;s blog</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>QWQ0QWQ&#39;s blog</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
 
 
-
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar" role="button">
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">QWQ0QWQ's blog</p>
-      <i class="logo-line"></i>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="Search" role="button">
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-</header>
         
-  
-  <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
+            
 
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="nav-number">1.</span> <span class="nav-text">计算机网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%B1%82"><span class="nav-number">1.1.</span> <span class="nav-text">物理层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%B1%82%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%EF%BC%9A%E4%B8%BA%E6%95%B0%E6%8D%AE%E7%AB%AF%E8%AE%BE%E5%A4%87%E6%8F%90%E4%BE%9B%E4%BC%A0%E9%80%81%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF%E3%80%81%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%E3%80%82"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">物理层主要功能：为数据端设备提供传送数据通路、传输数据。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-number">1.2.</span> <span class="nav-text">数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.1.</span> <span class="nav-text">数据链路层协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ethernet%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Ethernet以太网协议</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E6%95%B0%E6%8D%AE%E5%B8%A7%E7%9A%84%E5%B0%81%E8%A3%85"><span class="nav-number">1.2.1.1.1.</span> <span class="nav-text">以太网数据帧的封装</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IEEE802-3%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.2.</span> <span class="nav-text">IEEE802.3协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PPP%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.3.</span> <span class="nav-text">PPP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HDLC%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.4.</span> <span class="nav-text">HDLC协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">1.3.</span> <span class="nav-text">网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ospf%E5%8D%8F%E8%AE%AE%EF%BC%88%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">ospf协议（最短路径协议）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#https-www-bilibili-com-video-BV1YV41127U5-spm-id-from-333-880-my-history-page-click-vd-source-fa2b36660445eda170cf45a8fdf97a97"><span class="nav-number">1.3.2.</span> <span class="nav-text">https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1YV41127U5&#x2F;?spm_id_from&#x3D;333.880.my_history.page.click&amp;vd_source&#x3D;fa2b36660445eda170cf45a8fdf97a97</span></a></li></ol></li></ol></li></ol></div>
-        </div>
-        <!--/noindex-->
+            <section class="kr-main-col col-md-8">
 
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">QWQ0QWQ</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">20</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
+        
 
-        </div>
-      </div>
-    </div>
-
-    
-  </aside>
-
-
-    </div>
-
-    <div class="main-inner post posts-expand">
-
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+            <article itemscope itemtype="https://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://qwq0qwq.github.io/2023/08/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="QWQ0QWQ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="QWQ0QWQ's blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="计算机网络 | QWQ0QWQ's blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          计算机网络
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-08-09 20:52:29" itemprop="dateCreated datePublished" datetime="2023-08-09T20:52:29+08:00">2023-08-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-11-16 16:45:41" itemprop="dateModified" datetime="2023-11-16T16:45:41+08:00">2023-11-16</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"><h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><p>计算机网络的主要作用就是实现计算机之间的通信，这是主要的作用。</p>
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">计算机网络</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="2023-08-09T12:52:29.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-08-09</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">QWQ0QWQ</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~3.21K
+                        
+                        字
+                    </li>
+                
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><p>计算机网络的主要作用就是实现计算机之间的通信，这是主要的作用。</p>
 <p><img src="https://pic1.zhimg.com/80/v2-2d62ba265be486cb94ab531912aa3b9c_720w.webp" alt="img"></p>
 <h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><h4 id="物理层主要功能：为数据端设备提供传送数据通路、传输数据。"><a href="#物理层主要功能：为数据端设备提供传送数据通路、传输数据。" class="headerlink" title="物理层主要功能：为数据端设备提供传送数据通路、传输数据。"></a>物理层主要功能：为数据端设备提供传送数据通路、传输数据。</h4><p><img src="https://pic1.zhimg.com/v2-343093645638ea0839b71db5eba1f7c0_r.jpg" alt="img"></p>
 <p>假设现在有两台计算机，我们需要实现这两台计算机之间的通信，最简单的方式是用一根线将他们连起来，使用高低电平来进行通信，但如果计算机的数量提升到五台，这时候就需要五台计算机之间两两连线才能通过这种方法进行计算机的通信。这种情况下，需要的线的数量就会有大幅提升，这时，就提出两个重要的思想：1.转发，2.标识。这时候通过一个设备来统一进行转发。这种设备叫做hub（集线器），假设这五台计算机分别为A,B,C,D,E,集线器为F.这时，A,B,C,D,E全部接入F,网络拓扑图大概如下：</p>
@@ -246,91 +214,199 @@
 <p>当交换机表满的时候，如果再需要记录新的，就会顶掉已经记录的，而且当需要跨网络发送消息时，需要进行广播，效率很低，这时候设计了一个设备：路由器（又叫网关），实现不同网络之间的通信，引入了一个新的标识：ip，ip主要实现两个功能：1.标识网络，2.标识设备，ip是一个抽象的标识符。</p>
 <h3 id="ospf协议（最短路径协议）"><a href="#ospf协议（最短路径协议）" class="headerlink" title="ospf协议（最短路径协议）"></a>ospf协议（最短路径协议）</h3><h3 id="https-www-bilibili-com-video-BV1YV41127U5-spm-id-from-333-880-my-history-page-click-vd-source-fa2b36660445eda170cf45a8fdf97a97"><a href="#https-www-bilibili-com-video-BV1YV41127U5-spm-id-from-333-880-my-history-page-click-vd-source-fa2b36660445eda170cf45a8fdf97a97" class="headerlink" title="https://www.bilibili.com/video/BV1YV41127U5/?spm_id_from=333.880.my_history.page.click&amp;vd_source=fa2b36660445eda170cf45a8fdf97a97"></a><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YV41127U5/?spm_id_from=333.880.my_history.page.click&vd_source=fa2b36660445eda170cf45a8fdf97a97">https://www.bilibili.com/video/BV1YV41127U5/?spm_id_from=333.880.my_history.page.click&amp;vd_source=fa2b36660445eda170cf45a8fdf97a97</a></h3><p>出现主要是弥补rip协议以跳数寻找最短路径方法缺陷，</p>
 <p>在实际情况中，光凭跳数实际并不是最短路径，ospf改为消耗时间进行计算，</p>
-
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    
+                </div>
+                <div class="pull-date">
+                    <time datetime="2023-11-16T08:45:41.385Z" itemprop="dateModified">最后编辑：2023-11-16</time>
+                </div>
+            </div>
+        </footer>
     </div>
-
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" HTML5安全：内容安全策略(CSP)" href="/2023/08/01/HTML5安全：内容安全策略-CSP/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Flask（Jinja2） 服务端模板注入漏洞" href="/2023/08/09/Flask（Jinja2）-服务端模板注入漏洞/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
     
     
-    
-
-    <footer class="post-footer">
+</article>
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2023/08/01/HTML5%E5%AE%89%E5%85%A8%EF%BC%9A%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5-CSP/" rel="prev" title="HTML5安全：内容安全策略(CSP)">
-                  <i class="fa fa-angle-left"></i> HTML5安全：内容安全策略(CSP)
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2023/08/09/Flask%EF%BC%88Jinja2%EF%BC%89-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" rel="next" title="Flask（Jinja2） 服务端模板注入漏洞">
-                  Flask（Jinja2） 服务端模板注入漏洞 <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
-</div>
+            </section>
 
+            
+                
 
-
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="copyright">
-    &copy; 
-    <span itemprop="copyrightYear">2025</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">QWQ0QWQ</span>
-  </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
     </div>
-  </footer>
+</section>
+            
 
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="Back to top">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
+        
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 QWQ0QWQ's blog 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 QWQ0QWQ 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
 
 
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/js/kr-modal/donate.min.js"></script>
 
-  
 
 
 
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/js/kr-modal/share.min.js"></script>
 
 
 
-  
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+  <script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
 
 
 
+  <script defer src="/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
 
 
-</body>
+<script defer src="/js/kr-core.min.js"></script>
+
+
+  <script defer src="/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
 </html>
