@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  
+  
+  <title>java安全 | QWQ0QWQ&#39;s blog</title>
+  <link rel="canonical" href="https://qwq0qwq.github.io/2024/08/06/java%E5%AE%89%E5%85%A8/">
+  <meta name="author" content="QWQ0QWQ" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="" />
+  
+  <meta name="description" content="JAVA安全1.java基础1.1 classloader（类加载机制）java是依赖于jvm（java虚拟机）的开发语言，java程序运行前需要先编译成class文件，当需要执行该class文件时，jvm会使用classloader加载类字节码（java虚拟机执行的指令）。 jvm架构图：  1.1.1 java类java是编译型语言，java代码需要编译成class文件才能被jvm执行。 示例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java安全">
+<meta property="og:url" content="https://qwq0qwq.github.io/2024/08/06/java%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="QWQ0QWQ&#39;s blog">
+<meta property="og:description" content="JAVA安全1.java基础1.1 classloader（类加载机制）java是依赖于jvm（java虚拟机）的开发语言，java程序运行前需要先编译成class文件，当需要执行该class文件时，jvm会使用classloader加载类字节码（java虚拟机执行的指令）。 jvm架构图：  1.1.1 java类java是编译型语言，java代码需要编译成class文件才能被jvm执行。 示例">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://oss.javasec.org/images/JvmSpec7.png">
+<meta property="og:image" content="https://oss.javasec.org/images/image-20191217171821663.png">
+<meta property="og:image" content="https://oss.javasec.org/images/20230612144647.png">
+<meta property="article:published_time" content="2024-08-06T13:47:07.000Z">
+<meta property="article:modified_time" content="2024-08-06T13:47:37.429Z">
+<meta property="article:author" content="QWQ0QWQ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oss.javasec.org/images/JvmSpec7.png">
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kr-core.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/highlight.js/night-eighties.min.css" media="all"></link>
+  
+  <link rel="stylesheet" id="theme-light-css" href="/css/kr-theme/light.min.css" media="all"></link>
+  <link rel="stylesheet" id="theme-dark-css" href="/css/kr-theme/dark.min.css" media="(prefers-color-scheme: dark)"></link>
+  <script src="/js/kr-theme.min.js"></script>
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></link>
+  
+    <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></link>
+  
+  
+    <link rel="stylesheet" href="/vendors/viewerjs@1.11.6/dist/viewer.min.css"></link>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  
+    <script src="/vendors/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  
+  <!-- 自定义站点横幅和背景 -->
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+      html[data-theme="dark"] .kratos-cover.kratos-cover-2 {
+        background-image: url('');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('');
+        }
+        html[data-theme="dark"] body.custom-background {
+          background-image: url('');
+        }
+      }
+    
+    
+      .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+      html[data-theme="dark"] .widget-kratos-about .photo-background {
+        background-image: url('/images/default.webp');
+      }
+    
+  </style>
+
+  <!-- 额外的追加注入项 -->
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">QWQ0QWQ&#39;s blog</a></div>
+                    <div id="kratos-nav-toggle-wrapper" class="nav-toggle">
+                        <a id="kratos-nav-toggle" class="kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>QWQ0QWQ&#39;s blog</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+
+
+        
+
+            
+
+            <section class="kr-main-col col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://qwq0qwq.github.io/2024/08/06/java%E5%AE%89%E5%85%A8/">
+    <div class="kratos-hentry kratos-page-inner clearfix">
+        <header class="kratos-page-header">
+            
+                <h1 class="kratos-page-title text-center" itemprop="name headline">java安全</h1>
+            
+            <ul class="kratos-page-meta text-center">
+                <li><time datetime="2024-08-06T13:47:07.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2024-08-06</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">QWQ0QWQ</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~3.64K
+                        
+                        字
+                    </li>
+                
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-page-content kr-post">
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="JAVA安全"><a href="#JAVA安全" class="headerlink" title="JAVA安全"></a>JAVA安全</h1><h2 id="1-java基础"><a href="#1-java基础" class="headerlink" title="1.java基础"></a>1.java基础</h2><h3 id="1-1-classloader（类加载机制）"><a href="#1-1-classloader（类加载机制）" class="headerlink" title="1.1 classloader（类加载机制）"></a>1.1 classloader（类加载机制）</h3><p>java是依赖于<strong>jvm</strong>（java虚拟机）的开发语言，java程序运行前需要先编译成class文件，当需要执行该class文件时，jvm会使用<strong>classloader</strong>加载类<strong>字节码</strong>（java虚拟机执行的指令）。</p>
+<p>jvm架构图：</p>
+<p><img src="https://oss.javasec.org/images/JvmSpec7.png" alt="img"></p>
+<h4 id="1-1-1-java类"><a href="#1-1-1-java类" class="headerlink" title="1.1.1 java类"></a>1.1.1 java类</h4><p>java是编译型语言，java代码需要编译成class文件才能被jvm执行。</p>
+<p><strong>示例TestHelloWorld.java：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.anbai.sec.classloader;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Creator: yz</span></span><br><span class="line"><span class="comment"> * Date: 2019/12/17</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestHelloWorld</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello World~&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译java代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac TestHelloWorld.java</span><br></pre></td></tr></table></figure>
+
+<p>编译之后之后会生成一个TestHelloWorld.class</p>
+<p>jdk自带的反汇编程序<code>javap</code>可以查看java类的字节码以及<code>hexdump</code>命令查看<code>TestHelloWorld.class</code>文件二进制内容：</p>
+<p><img src="https://oss.javasec.org/images/image-20191217171821663.png" alt="img"></p>
+<p>JVM在执行<code>TestHelloWorld</code>之前会先解析class二进制内容，JVM执行的其实就是如上<code>javap</code>命令生成的字节码。</p>
+<h4 id="1-1-2-classloader"><a href="#1-1-2-classloader" class="headerlink" title="1.1.2 classloader"></a>1.1.2 classloader</h4><p>java类代码需要加载到jvm中才能运行，而classloader就是负责jvm的类加载。</p>
+<p>其中classloader分为几层：</p>
+<p>最顶层的是**<code>Bootstrap ClassLoader（引导类加载器）</code><strong>，之后依次是</strong><code>Extension ClassLoader（扩展类加载器）</code><strong>，</strong><code>App ClassLoader（系统类加载器）</code>**，</p>
+<p><strong><code>AppClassLoader</code>是默认的类加载器，如果类加载时我们不指定类加载器的情况下，默认会使用<code>AppClassLoader</code>加载类，<code>ClassLoader.getSystemClassLoader()</code>返回的系统类加载器也是<code>AppClassLoader</code>。</strong></p>
+<p>当类加载器加载类时可能会返回一个null值，例如加载的类已经被Bootstrap classloader加载了，再使用appclassloader加载就会返回一个null值</p>
+<p><strong><code>ClassLoader</code>类有如下核心方法：</strong></p>
+<ol>
+<li><strong><code>loadClass</code>（加载指定的Java类）</strong></li>
+<li><strong><code>findClass</code>（查找指定的Java类）</strong></li>
+<li><strong><code>findLoadedClass</code>（查找JVM已经加载过的类）</strong></li>
+<li><strong><code>defineClass</code>（定义一个Java类）</strong></li>
+<li><strong><code>resolveClass</code>（链接指定的Java类）</strong></li>
+</ol>
+<p>官方描述翻译：</p>
+<p>类加载器是一个负责加载类的对象。<code>ClassLoader</code> 是一个抽象类。给定类的二进制名称，类加载器应尝试定位或生成构成类定义的数据。典型的策略是将名称转换为文件名，然后从文件系统中读取该名称的“类文件”。</p>
+<p>每个 Java 类都有一个引用指向加载它的 <code>ClassLoader</code>。不过，数组类不是通过 <code>ClassLoader</code> 创建的，而是 JVM 在需要的时候自动创建的，数组类通过<code>getClassLoader()</code>方法获取 <code>ClassLoader</code> 的时候和该数组的元素类型的 <code>ClassLoader</code> 是一致的。</p>
+<h4 id="1-1-3-java类动态加载方式"><a href="#1-1-3-java类动态加载方式" class="headerlink" title="1.1.3 java类动态加载方式"></a>1.1.3 java类动态加载方式</h4><p>java类加载方式分为<strong>显式</strong>和<strong>隐式</strong></p>
+<p><strong>显示：java反射和classloader两种，动态加载一个对象即类动态加载</strong></p>
+<p><strong>隐式：指使用<code>类名.方法名()</code>或<code>new</code>类实例。</strong></p>
+<p><strong>常用的类动态加载方式：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 反射加载TestHelloWorld示例</span></span><br><span class="line">Class.forName(<span class="string">&quot;com.anbai.sec.classloader.TestHelloWorld&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ClassLoader加载TestHelloWorld示例</span></span><br><span class="line"><span class="built_in">this</span>.getClass().getClassLoader().loadClass(<span class="string">&quot;com.anbai.sec.classloader.TestHelloWorld&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>Class.forName(&quot;类名&quot;)</code>默认会初始化被加载类的静态属性和方法，如果不希望初始化类可以使用<code>Class.forName(&quot;类名&quot;, 是否初始化类, 类加载器)</code>，而<code>ClassLoader.loadClass</code>默认不会初始化类方法。</p>
+<h4 id="1-1-4-ClassLoader类加载流程"><a href="#1-1-4-ClassLoader类加载流程" class="headerlink" title="1.1.4 ClassLoader类加载流程"></a>1.1.4 ClassLoader类加载流程</h4><p>JVM 启动的时候，并不会一次性加载所有的类，而是根据需要去动态加载。</p>
+<p>大佬原话：</p>
+<p>理解Java类加载机制并非易事，这里我们以一个Java的HelloWorld来学习<code>ClassLoader</code>。</p>
+<p><code>ClassLoader</code>加载<code>com.anbai.sec.classloader.TestHelloWorld</code>类<code>loadClass</code>重要流程如下：</p>
+<ol>
+<li><code>ClassLoader</code>会调用<code>public Class&lt;?&gt; loadClass(String name)</code>方法加载<code>com.anbai.sec.classloader.TestHelloWorld</code>类。</li>
+<li>调用<code>findLoadedClass</code>方法检查<code>TestHelloWorld</code>类是否已经初始化，如果JVM已初始化过该类则直接返回类对象。</li>
+<li>如果创建当前<code>ClassLoader</code>时传入了父类加载器（<code>new ClassLoader(父类加载器)</code>）就使用父类加载器加载<code>TestHelloWorld</code>类，否则使用JVM的<code>Bootstrap ClassLoader</code>加载。</li>
+<li>如果上一步无法加载<code>TestHelloWorld</code>类，那么调用自身的<code>findClass</code>方法尝试加载<code>TestHelloWorld</code>类。</li>
+<li>如果当前的<code>ClassLoader</code>没有重写了<code>findClass</code>方法，那么直接返回类加载失败异常。如果当前类重写了<code>findClass</code>方法并通过传入的<code>com.anbai.sec.classloader.TestHelloWorld</code>类名找到了对应的类字节码，那么应该调用<code>defineClass</code>方法去JVM中注册该类。</li>
+<li>如果调用loadClass的时候传入的<code>resolve</code>参数为true，那么还需要调用<code>resolveClass</code>方法链接类，默认为false。</li>
+<li>返回一个被JVM加载后的<code>java.lang.Class</code>类对象</li>
+</ol>
+<p><strong>示例 - ClassLoader#loadClass：</strong></p>
+<p><img src="https://oss.javasec.org/images/20230612144647.png" alt="20230612144647"></p>
+<p>个人理解：</p>
+<p>classloader加载器加载类过程：</p>
+<p>classloader调用loadclass方法，loadclass方法会调用findloadedclass方法判断类是否已经加载，若未加载，则调用findclass方法尝试调用类,其中如果classloader在创建时指定了父类加载器（<code>new ClassLoader(父类加载器)</code>），则使用父类加载器加载，如果没有则使用<code>Bootstrap ClassLoader</code>加载。如果当前加载器没有重写findclass方法，则返回类加载失败，如果重写了方法并通过名称找到了类的字节码，则将字节码加载到jvm中，如果调用loadClass的时候传入的<code>resolve</code>参数为true，那么还需要调用<code>resolveClass</code>方法链接类，默认为false，接着返回一个jvm加载后的class对象。</p>
+<hr>
+<p>为什么要判断有没有重写findclass方法？</p>
+<p>个人理解：</p>
+<p>因为默认的方法直接返回一个错误，这是因为classloader是一个抽象类，需要根据需要重写。</p>
+<p>classloader 默认findclass方法定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException &#123;</span><br><span class="line">    throw new ClassNotFoundException(name);</span><br><span class="line">&#125;</span><br><span class="line">protected Class&lt;?&gt; findClass(String moduleName, String name) &#123;</span><br><span class="line">        if (moduleName == null) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                return findClass(name);</span><br><span class="line">            &#125; catch (ClassNotFoundException ignore) &#123; &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+</div>
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+            
+            
+                <div class="post-actions text-center clearfix" id="post-actions">
+                
+                    <a class="donate" href="javascript:;" onclick="krOpenDonateModal()"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;" onclick="krOpenShareModal()"><i class="fa fa-share-alt"></i> 分享</a>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    
+                </div>
+                <div class="pull-date">
+                    <time datetime="2024-08-06T13:47:37.429Z" itemprop="dateModified">最后编辑：2024-08-06</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 应急响应:安全事件响应的工具与资源列表" href="/2024/07/06/应急响应-安全事件响应的工具与资源列表/"><i class="fa fa-angle-left"></i> 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 安卓抓包" href="/2024/11/23/安卓抓包/">下一篇 <i class="fa fa-angle-right"></i></a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+            
+                
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+        <div class="sticky-area">
+    
+    
+    </div>
+</section>
+            
+
+        
+
+                </div>
+    </div>
+</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 QWQ0QWQ's blog 版权所有.</li>
+                            <li>本站已运行<span id="kr-since">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>自豪地使用 <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a> 主题</li>
+                            <li>站点由 QWQ0QWQ 用 <i class="fa fa-heart" style="color:#d43f57"></i> 搭建</li>
+                        </div>
+                        <!-- 额外的追加注入项 -->
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                <div class="box theme-box" id="theme-toggle">
+                    <span class="fa fa-adjust"></span>
+                </div>
+            </div>
+            <div id="gotop-box" class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+
+    <div id="kr-donate-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseDonateModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-bitcoin"></i>
+            </div>
+            <div class="kr-modal-title">打赏</div>
+            <button class="kr-modal-close" onclick="krCloseDonateModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-donate-message">打赏提示信息</div>
+            <div class="kr-donate-qr" id="kr-donate-qr">
+                
+            </div>
+            <div class="kr-donate-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/js/kr-modal/donate.min.js"></script>
+
+
+
+
+    <div id="kr-share-modal" class="kr-modal">
+    <div class="kr-modal-bg" onclick="krCloseShareModal()"></div>
+    <div class="kr-modal-content">
+        <div class="kr-modal-header">
+            <div class="kr-modal-icon">
+                <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="kr-modal-title">分享</div>
+            <button class="kr-modal-close" onclick="krCloseShareModal()">
+                <i class="fa fa-times-circle"></i>
+            </button>
+        </div>
+        <div class="kr-modal-body">
+            <div class="kr-share-message">分享提示信息</div>
+            <div class="kr-share-qr" id="kr-share-qr"></div>
+            <div class="kr-share-platforms">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script defer src="/js/kr-modal/share.min.js"></script>
+
+
+
+<!-- 额外的追加注入项 -->
+
+
+        <script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+  <script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+
+
+
+  <script defer src="/vendors/viewerjs@1.11.6/dist/viewer.min.js"></script>
+
+
+<script defer src="/js/kr-core.min.js"></script>
+
+
+  <script defer src="/js/kr-pjax.min.js"></script>
+
+
+<!-- 额外的追加注入项 -->
+
+
+    </body>
+</html>
