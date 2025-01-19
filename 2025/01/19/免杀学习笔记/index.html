@@ -26,7 +26,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://qwq0qwq.github.io/images/icon.jpg">
 <meta property="article:published_time" content="2025-01-19T01:15:39.000Z">
-<meta property="article:modified_time" content="2025-01-19T01:19:11.595Z">
+<meta property="article:modified_time" content="2025-01-19T02:06:11.836Z">
 <meta property="article:author" content="QWQ0QWQ">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://qwq0qwq.github.io/images/icon.jpg">
@@ -72,7 +72,7 @@
     
   </style>
   
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
     <body class="custom-background">
@@ -158,7 +158,7 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1737249551595"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1737252371836"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
@@ -167,7 +167,7 @@
             <div itemprop="articleBody"><h1 id="逆向学习笔记"><a href="#逆向学习笔记" class="headerlink" title="逆向学习笔记"></a>逆向学习笔记</h1><h2 id="Windwos架构"><a href="#Windwos架构" class="headerlink" title="Windwos架构"></a>Windwos架构</h2><p>windows操作系统有两种运行模式：用户模式和内核模式</p>
 <p>应用程序运行在用户模式，操作系统运行在内核模式。</p>
 <p>当应用程序想要执行一项任务，但是需要内核才能完成得操作，就会去调用特定的函数，调用函数的流程如下图所示。</p>
-<p><img src="/.io//arch-diagram.png" alt="arch-diagram"></p>
+<p><img src="https://raw.githubusercontent.com/QwQ0QwQ/QwQ0QwQ.github.io/refs/heads/main/images/arch-diagram.png" alt="arch-diagram"></p>
 <ul>
 <li><p>User Processer ：用户程序-由用户执行的程序&#x2F;应用程序</p>
 </li>
@@ -178,19 +178,19 @@
 <li><p>Executive kernel：执行内核（又叫windows内核）-可调用内核模式中可用的驱动程序和模块，Windows内核部分存储在“C:\Windows\System32\ntoskrnl.exe”中。</p>
 </li>
 </ul>
-<p><img src="/.io//image-20241122111226663.png" alt="image-20241122111226663"></p>
-<h4 id="函数调用流程"><a href="#函数调用流程" class="headerlink" title="函数调用流程"></a>函数调用流程</h4><p>以创建文件的引用程序为例，从应用程序调用CreateFileW windowsAPi函数开始，kernel32.dll是一个重要的dll，它为应用程序提供WinAPI，CreateFileW调用其等效的NTAPI函数NTCreateFile函数，该函数通过ntdll.dll提供，然后ntdll.dll执行汇编sysenter（x86）或syscall（x64）指令，该指令将执行转到内核模式，然后使用内核NtCreateFile函数，该函数调用内核驱动程序和模块来执行请求的任务。<img src="/.io//windows-arch-flow.png" alt="windows-arch-flow"></p>
+<p><img src="https://raw.githubusercontent.com/QwQ0QwQ/QwQ0QwQ.github.io/refs/heads/main/images/image-20241122111226663.png" alt="image-20241122111226663"></p>
+<h4 id="函数调用流程"><a href="#函数调用流程" class="headerlink" title="函数调用流程"></a>函数调用流程</h4><p>以创建文件的引用程序为例，从应用程序调用CreateFileW windowsAPi函数开始，kernel32.dll是一个重要的dll，它为应用程序提供WinAPI，CreateFileW调用其等效的NTAPI函数NTCreateFile函数，该函数通过ntdll.dll提供，然后ntdll.dll执行汇编sysenter（x86）或syscall（x64）指令，该指令将执行转到内核模式，然后使用内核NtCreateFile函数，该函数调用内核驱动程序和模块来执行请求的任务。<img src="https://raw.githubusercontent.com/QwQ0QwQ/QwQ0QwQ.github.io/refs/heads/main/images/windows-arch-flow.png" alt="windows-arch-flow"></p>
 <h4 id="函数调用流程示例"><a href="#函数调用流程示例" class="headerlink" title="函数调用流程示例"></a>函数调用流程示例</h4><p>此示例通过调试器演示函数调用流程。可以通过将调试器附加到通过 CreateFileW Windows API 创建文件的二进制文件中来完成此操作。</p>
 <p>用户应用程序调用 CreateFileW WinAPI。</p>
-<p><img src="/.io//createfilew-dbg.png" alt="createfilew-dbg"></p>
+<p><img src="https://raw.githubusercontent.com/QwQ0QwQ/QwQ0QwQ.github.io/refs/heads/main/images/createfilew-dbg.png" alt="createfilew-dbg"></p>
 <p>接下来，CreateFileW 调用其等效的 NTAPI 函数 NtCreateFile。</p>
-<p><img src="/.io//createfilew-dbg-1735623515641-4.png" alt="createfilew-dbg"></p>
+<p><img src="https://raw.githubusercontent.com/QwQ0QwQ/QwQ0QwQ.github.io/refs/heads/main/images/createfilew-dbg-1735623515641-4.png" alt="createfilew-dbg"></p>
 <p>最后，NtCreateFile 函数使用 syscall 汇编指令从用户模式转换到内核模式。然后，内核将负责创建文件。</p>
-<p><img src="/.io//ntcreatefile-dbg.png" alt="ntcreatefile-dbg"></p>
+<p><img src="https://raw.githubusercontent.com/QwQ0QwQ/QwQ0QwQ.github.io/refs/heads/main/images/ntcreatefile-dbg.png" alt="ntcreatefile-dbg"></p>
 <h4 id="直接调用本地-API（NTAPI）"><a href="#直接调用本地-API（NTAPI）" class="headerlink" title="直接调用本地 API（NTAPI）"></a>直接调用本地 API（NTAPI）</h4><p>请注意应用程序可以直接调用系统调用（例如 NTDLL 函数），而无需通过 Windows API。Windows API 只是本地 API 的一个封装。话虽如此，本地 API 更难使用，因为它并未得到 Microsoft 的官方记录。此外，Microsoft 建议不要使用本地 API 函数，因为它们可能会随时更改，且不发出警告。</p>
 <h2 id="Windows内存管理"><a href="#Windows内存管理" class="headerlink" title="Windows内存管理"></a>Windows内存管理</h2><h4 id="虚拟内存和分页"><a href="#虚拟内存和分页" class="headerlink" title="虚拟内存和分页"></a>虚拟内存和分页</h4><p>现实操作系统不会直接映射到物理内存（RAM）中，而是使用虚拟内存进行映射，进程会使用虚拟内存地址，再将这个虚拟的内存地址映射到物理地址中。</p>
 <p>原因如下：</p>
-<p>一是尽可能的节省内存，因为虚拟内存不仅可以映射到内存中，还可以映射到磁盘上。而且多个进程可以使用不同的虚拟地址共用一个物理内存地址，虚拟内存依赖于内存中分页，即将内存分为4kb的块，称为”页“。<img src="/.io//virtual-memory.png" alt="virtual-memory"></p>
+<p>一是尽可能的节省内存，因为虚拟内存不仅可以映射到内存中，还可以映射到磁盘上。而且多个进程可以使用不同的虚拟地址共用一个物理内存地址，虚拟内存依赖于内存中分页，即将内存分为4kb的块，称为”页“。<img src="https://raw.githubusercontent.com/QwQ0QwQ/QwQ0QwQ.github.io/refs/heads/main/images/virtual-memory.png" alt="virtual-memory"></p>
 <p>进程空间中的”页“可以有三种状态，</p>
 <ul>
 <li><p><strong>空闲</strong>--页既未提交也未保留。该页对进程不可访问。它可被保留、提交或同时保留和提交。尝试从空闲页面读取或写入内容会导致访问冲突异常。</p>
@@ -523,7 +523,7 @@
                     
                 </div>
                 <div class="pull-date">
-                    <time datetime="2025-01-19T01:19:11.595Z" itemprop="dateModified">最后编辑：2025-01-19</time>
+                    <time datetime="2025-01-19T02:06:11.836Z" itemprop="dateModified">最后编辑：2025-01-19</time>
                 </div>
             </div>
         </footer>
