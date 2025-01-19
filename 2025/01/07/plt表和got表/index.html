@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <link rel="icon" href="/images/icon.jpg">
   
-  <title>痕迹清理 | QWQ0QWQ&#39;s blog</title>
+  <title>plt表和got表 | QWQ0QWQ&#39;s blog</title>
   
   <meta name="author" content="QWQ0QWQ" />
   <meta http-equiv="Cache-Control" content="no-transform" />
@@ -17,16 +17,16 @@
   
     <meta name="keywords" content="" />
   
-  <meta name="description" content="Linux 入侵痕迹清理技巧在攻击结束后，如何不留痕迹的清除日志和操作记录，以掩盖入侵踪迹，这其实是一个细致的技术活。你所做的每一个操作，都要被抹掉；你所上传的工具，都应该被安全地删掉。 01、清除history历史命令记录 查看历史操作命令： 12查看历史操作命令：historyhistory记录文件：more  ~&#x2F;.bash_history  第一种方式： （1）编辑history记录文件，">
+  <meta name="description" content="前置知识 ELF 文件的 PLT（Procedure Linkage Table，过程链接表）和 GOT（Global Offset Table，全局偏移表）是ELF文件中节视图中.plt节和.got节。这些表格用于解决函数调用时的延迟绑定（Lazy Binding），并且与动态链接库加载和 ASLR（Address Space Layout Randomization）防御机制有密切的关系。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="痕迹清理">
-<meta property="og:url" content="https://qwq0qwq.github.io/2023/10/10/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/index.html">
+<meta property="og:title" content="plt表和got表">
+<meta property="og:url" content="https://qwq0qwq.github.io/2025/01/07/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/index.html">
 <meta property="og:site_name" content="QWQ0QWQ&#39;s blog">
-<meta property="og:description" content="Linux 入侵痕迹清理技巧在攻击结束后，如何不留痕迹的清除日志和操作记录，以掩盖入侵踪迹，这其实是一个细致的技术活。你所做的每一个操作，都要被抹掉；你所上传的工具，都应该被安全地删掉。 01、清除history历史命令记录 查看历史操作命令： 12查看历史操作命令：historyhistory记录文件：more  ~&#x2F;.bash_history  第一种方式： （1）编辑history记录文件，">
+<meta property="og:description" content="前置知识 ELF 文件的 PLT（Procedure Linkage Table，过程链接表）和 GOT（Global Offset Table，全局偏移表）是ELF文件中节视图中.plt节和.got节。这些表格用于解决函数调用时的延迟绑定（Lazy Binding），并且与动态链接库加载和 ASLR（Address Space Layout Randomization）防御机制有密切的关系。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://qwq0qwq.github.io/images/icon.jpg">
-<meta property="article:published_time" content="2023-10-10T10:47:15.000Z">
-<meta property="article:modified_time" content="2023-10-10T10:48:32.777Z">
+<meta property="article:published_time" content="2025-01-07T00:23:06.000Z">
+<meta property="article:modified_time" content="2025-01-08T00:19:23.527Z">
 <meta property="article:author" content="QWQ0QWQ">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://qwq0qwq.github.io/images/icon.jpg">
@@ -129,15 +129,15 @@
 
             <article itemscope itemtype="https://schema.org/Article">
     
-    <link itemprop="mainEntityOfPage" href="https://qwq0qwq.github.io/2023/10/10/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://qwq0qwq.github.io/2025/01/07/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/">
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center" itemprop="name headline">痕迹清理</h1>
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">plt表和got表</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><time datetime="2023-10-10T10:47:15.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-10-10</time></li>
+                <li><time datetime="2025-01-07T00:23:06.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2025-01-07</time></li>
                 <li itemprop="author" itemscope itemtype="https://schema.org/Person">
                     <i class="fa fa-user"></i> 作者 <span itemprop="name">QWQ0QWQ</span>
                 </li>
@@ -146,7 +146,7 @@
                         <i class="fa fa-edit"></i> 
                         
                         
-                            ~3.03K
+                            ~3.79K
                         
                         字
                     </li>
@@ -158,82 +158,70 @@
             
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
                 <div class="icon"><i class="fa fa-warning"></i></div>
-                <div class="text"><p>本文最后编辑于 <time datetime="1696934912777"></time> 前，其中的内容可能需要更新。</p></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1736295563527"></time> 前，其中的内容可能需要更新。</p></div>
             </div>
             
             
             
             <hr />
-            <div itemprop="articleBody"><h1 id="Linux-入侵痕迹清理技巧"><a href="#Linux-入侵痕迹清理技巧" class="headerlink" title="Linux 入侵痕迹清理技巧"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaozi/p/13648156.html">Linux 入侵痕迹清理技巧</a></h1><p>在攻击结束后，如何不留痕迹的清除日志和操作记录，以掩盖入侵踪迹，这其实是一个细致的技术活。你所做的每一个操作，都要被抹掉；你所上传的工具，都应该被安全地删掉。</p>
-<p><strong>01、清除history历史命令记录</strong></p>
-<p>查看历史操作命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看历史操作命令：history</span><br><span class="line">history记录文件：more  ~/.bash_history</span><br></pre></td></tr></table></figure>
+            <div itemprop="articleBody"><h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><p> ELF 文件的 <code>PLT</code>（Procedure Linkage Table，过程链接表）和 <code>GOT</code>（Global Offset Table，全局偏移表）是ELF文件中节视图中.plt节和.got节。这些表格用于解决函数调用时的延迟绑定（Lazy Binding），并且与动态链接库加载和 ASLR（Address Space Layout Randomization）防御机制有密切的关系。</p>
+<p><img src="https://img2020.cnblogs.com/blog/2021287/202101/2021287-20210117144055916-1047316141.png" alt="img"></p>
+<p>（节视图）链接视图是以节（section）为单位，（段视图）执行视图是以段（segment）为单位。链接视图就是在链接时用到的视图，而执行视图则是在执行时用到的视图。下图左侧的视角是从链接来看的，右侧的视角是执行来看的。总个文件可以分为四个部分：</p>
+<blockquote>
+<ul>
+<li>ELF header： 描述整个文件的组织。</li>
+<li>Program Header Table: 描述文件中的各种segments，用来告诉系统如何创建进程映像的。</li>
+<li>sections 或者 segments：segments是从运行的角度来描述elf文件，sections是从链接的角度来描述elf文件，也就是说，在链接阶段，我们可以忽略program header table来处理此文件，在运行阶段可以忽略section header table来处理此程序（所以很多加固手段删除了section header table）。从图中我们也可以看出， segments与sections是包含的关系，一个segment包含若干个section。</li>
+<li>Section Header Table: 包含了文件各个segction的属性信息，我们都将结合例子来解释。</li>
+</ul>
+</blockquote>
+<p><img src="https://images2018.cnblogs.com/blog/811006/201805/811006-20180503113716101-439702289.png" alt="img"></p>
+<p>程序头部表（Program Header Table），如果存在的话，告诉系统如何创建进程映像。<br>节区头部表（Section Header Table）包含了描述文件节区的信息，比如大小、偏移等。</p>
+<p>如下图，可以通过执行命令”readelf -S ”来查看该可执行文件中有哪些section。</p>
+<p><img src="/.io//image-20250107085311067.png" alt="image-20250107085311067"></p>
+<p>其中存在.plt和.got节（有些文章又叫表），是本文重点内容</p>
+<p>通过执行命令readelf –segments ，可以查看该文件的执行视图。</p>
+<p><img src="/.io//image-20250107085806975.png" alt="image-20250107085806975"></p>
+<p>从上面可以看出段和节是包含关系，一个段包含多个节。</p>
+<p>通过执行命令readelf –h ，可以查看该文件的elf头。</p>
+<p><img src="/.io//image-20250107092331572.png" alt="image-20250107092331572"></p>
+<h2 id="ELF-文件的延迟绑定机制"><a href="#ELF-文件的延迟绑定机制" class="headerlink" title="ELF 文件的延迟绑定机制"></a>ELF 文件的延迟绑定机制</h2><p>ELF 文件中，函数的调用通过 <code>PLT</code> 表和 <code>GOT</code> 表进行管理。延迟绑定意味着程序在第一次调用一个函数时，不直接解析其地址，而是通过一套机制将解析过程推迟到运行时。具体来说，ELF 文件利用 <code>PLT</code> 表与 <code>GOT</code> 表实现了这一机制。</p>
+<ul>
+<li><strong>PLT 表</strong>：每次调用动态链接库中的函数时，程序并不会直接跳转到目标函数的地址，而是先跳转到 <code>PLT</code> 表中相应的入口。<code>PLT</code> 表中的代码会跳转到 <code>GOT</code> 表对应项，若这是该函数第一次调用，则会通过动态链接器解析该函数的实际地址。</li>
+<li><strong>GOT 表</strong>：<code>GOT</code> 表中的每一项用于存储函数的实际地址。在函数第一次调用之前，该项保存的是指向 <code>PLT</code> 表的某个偏移量；在函数解析之后，<code>GOT</code> 表中该函数的地址会被替换为实际的目标函数地址，以便后续直接调用。</li>
+</ul>
+<h3 id="延迟绑定流程"><a href="#延迟绑定流程" class="headerlink" title="延迟绑定流程"></a>延迟绑定流程</h3><p>当一个函数第一次被调用时：</p>
+<ol>
+<li><strong>PLT 表跳转</strong>：程序首先跳转到 <code>PLT</code> 表中的函数入口，这个入口中的指令会进一步跳转到 <code>GOT</code> 表中相应的项。</li>
+<li><strong>GOT 表未解析状态</strong>：如果这是第一次调用该函数，<code>GOT</code> 表中的内容仍然是 <code>PLT</code> 表中的某个偏移值（即 <code>func@plt+6</code>），程序会再次跳转到 <code>PLT</code> 中预定义的处理函数地址。</li>
+<li><strong>动态解析</strong>：通过动态链接器（<code>_dl_runtime_resolve</code>），程序会解析出该函数的实际地址，并将其存储在 <code>GOT</code> 表中，后续的函数调用将直接使用该地址。</li>
+</ol>
+<h3 id="实例解析"><a href="#实例解析" class="headerlink" title="实例解析"></a>实例解析</h3><p>以下是一个包含 <code>PLT</code> 表和 <code>GOT</code> 表的例子。我们可以通过调试工具 <code>pwndbg</code> 来查看程序的 <code>PLT</code> 和 <code>GOT</code> 表的内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line">pwndbg&gt; plt</span><br><span class="line">Section .plt 0x670-0x6c0:</span><br><span class="line">0x680: setbuf@plt</span><br><span class="line">0x690: printf@plt</span><br><span class="line">0x6a0: read@plt</span><br><span class="line">0x6b0: memcmp@plt</span><br></pre></td></tr></table></figure>
 
-<p>第一种方式：</p>
-<p>（1）编辑history记录文件，删除部分不想被保存的历史命令。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">vim ~/.bash_history</span><br></pre></td></tr></table></figure>
+<p>通过 <code>x/4i</code> 查看 <code>printf@plt</code> 的汇编指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line">pwndbg&gt; x/4i 0x690</span><br><span class="line">   0x690 &lt;printf@plt&gt;:  jmp    QWORD PTR [rip+0x20092a]        # 0x200fc0 &lt;printf@got.plt&gt;</span><br><span class="line">   0x696 &lt;printf@plt+6&gt;:        push   0x1</span><br><span class="line">   0x69b &lt;printf@plt+11&gt;:       jmp    0x670</span><br></pre></td></tr></table></figure>
 
-<p>（2）清除当前用户的history命令记录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">history -c</span><br></pre></td></tr></table></figure>
+<p>当程序调用 <code>printf@plt</code> 时，首先会跳转到 <code>GOT</code> 表中的 <code>printf@got.plt</code> 项。我们可以进一步查看 <code>GOT</code> 表的内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line">pwndbg&gt; x/a 0x200fc0</span><br><span class="line">0x200fc0 &lt;printf@got.plt&gt;:      0x696 &lt;printf@plt+6&gt;</span><br></pre></td></tr></table></figure>
 
-<p>第二种方式：</p>
-<p>（1）利用vim特性删除历史命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#使用vim打开一个文件</span><br><span class="line">vi test.txt</span><br><span class="line"># 设置vim不记录命令，Vim会将命令历史记录，保存在viminfo文件中。</span><br><span class="line">:set history=0</span><br><span class="line"># 用vim的分屏功能打开命令记录文件.bash_history，编辑文件删除历史操作命令</span><br><span class="line">vsp ~/.bash_history</span><br><span class="line"># 清楚保存.bash_history文件即可。</span><br></pre></td></tr></table></figure>
+<p>这里可以看到，<code>got.plt</code> 中 <code>printf</code> 的初始值是 <code>printf@plt+6</code>，意味着函数的第一次调用会回到 <code>PLT</code> 表。此时，<code>PLT</code> 表会通过 <code>push</code> 和 <code>jmp</code> 指令处理动态解析过程。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line">pwndbg&gt; x/10i 0x690</span><br><span class="line">   0x690 &lt;printf@plt&gt;:  jmp    QWORD PTR [rip+0x20092a]        # 0x200fc0 &lt;printf@got.plt&gt;</span><br><span class="line">   0x696 &lt;printf@plt+6&gt;:        push   0x1</span><br><span class="line">   0x69b &lt;printf@plt+11&gt;:       jmp    0x670</span><br><span class="line">   0x6a0 &lt;read@plt&gt;:    jmp    QWORD PTR [rip+0x200922]        # 0x200fc8 &lt;read@got.plt&gt;</span><br><span class="line">   0x6a6 &lt;read@plt+6&gt;:  push   0x2</span><br><span class="line">   0x6ab &lt;read@plt+11&gt;: jmp    0x670</span><br><span class="line">   0x6b0 &lt;memcmp@plt&gt;:  jmp    QWORD PTR [rip+0x20091a]        # 0x200fd0 &lt;memcmp@got.plt&gt;</span><br><span class="line">   0x6b6 &lt;memcmp@plt+6&gt;:        push   0x3</span><br><span class="line">   0x6bb &lt;memcmp@plt+11&gt;:       jmp    0x670</span><br><span class="line">   0x6c0 &lt;__cxa_finalize@plt&gt;:  jmp    QWORD PTR [rip+0x200932]        # 0x200ff8</span><br></pre></td></tr></table></figure>
 
-<p>（2）在vim中执行自己不想让别人看到的命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">:set history=0</span><br><span class="line">:!command</span><br></pre></td></tr></table></figure>
+<h3 id="进一步分析"><a href="#进一步分析" class="headerlink" title="进一步分析"></a>进一步分析</h3><p>在第一次调用函数时，<code>PLT</code> 会执行一个类似如下的流程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plaintext</span><br><span class="line">func@plt:</span><br><span class="line">    jmp *(func@got.plt)  ; 如果函数已经初始化，跳转到函数地址</span><br><span class="line">    push reloc_index     ; 将函数在 `GOT` 表中的索引压栈</span><br><span class="line">    push link_map_obj    ; 模块的 `link_map` 对象地址</span><br><span class="line">    jmp _dl_runtime_resolve ; 动态链接解析函数</span><br></pre></td></tr></table></figure>
 
-<p>第三种方式：</p>
-<p>通过修改配置文件&#x2F;etc&#x2F;profile，使系统不再保存命令记录。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">HISTSIZE=0</span><br></pre></td></tr></table></figure>
-
-<p>第四种方式：</p>
-<p>登录后执行下面命令,不记录历史命令(.bash_history)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">unset HISTORY HISTFILE HISTSAVE HISTZONE HISTORY HISTLOG; export HISTFILE=/dev/null; export HISTSIZE=0; export HISTFILESIZE=0</span><br></pre></td></tr></table></figure>
-
-<p><strong>02、清除系统日志痕迹</strong></p>
-<p>Linux 系统存在多种日志文件，来记录系统运行过程中产生的日志。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/var/log/btmp   记录所有登录失败信息，使用lastb命令查看</span><br><span class="line">/var/log/lastlog 记录系统中所有用户最后一次登录时间的日志，使用lastlog命令查看</span><br><span class="line">/var/log/wtmp    记录所有用户的登录、注销信息，使用last命令查看</span><br><span class="line">/var/log/utmp    记录当前已经登录的用户信息，使用w,who,users等命令查看</span><br><span class="line">/var/log/secure   记录与安全相关的日志信息</span><br><span class="line">/var/log/message  记录系统启动后的信息和错误日志</span><br></pre></td></tr></table></figure>
-
-<p>第一种方式：清空日志文件<br>清除登录系统失败的记录：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@centos]# echo &gt; /var/log/btmp </span><br><span class="line">[root@centos]# lastb           //查询不到登录失败信息</span><br></pre></td></tr></table></figure>
-
-<p>清除登录系统成功的记录：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@centos]# echo &gt; /var/log/wtmp  </span><br><span class="line">[root@centos]# last              //查询不到登录成功的信息</span><br></pre></td></tr></table></figure>
-
-<p>清除相关日志信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">清除用户最后一次登录时间：echo &gt; /var/log/lastlog          #lastlog命令</span><br><span class="line">清除当前登录用户的信息：echo &gt;   /var/log/utmp             #使用w,who,users等命令</span><br><span class="line">清除安全日志记录：cat /dev/null &gt;  /var/log/secure</span><br><span class="line">清除系统日志记录：cat /dev/null &gt;  /var/log/message</span><br></pre></td></tr></table></figure>
-
-<p>第二种方式：删除&#x2F;替换部分日志</p>
-<p>日志文件全部被清空，太容易被管理员察觉了，如果只是删除或替换部分关键日志信息，那么就可以完美隐藏攻击痕迹。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 删除所有匹配到字符串的行,比如以当天日期或者自己的登录ip</span><br><span class="line">sed  -i &#x27;/自己的ip/&#x27;d  /var/log/messages</span><br><span class="line"># 全局替换登录IP地址：</span><br><span class="line">sed -i &#x27;s/192.168.166.85/192.168.1.1/g&#x27; secure</span><br></pre></td></tr></table></figure>
-
-<p><strong>03、清除web入侵痕迹</strong></p>
-<p>第一种方式： 直接替换日志ip地址</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sed -i &#x27;s/192.168.166.85/192.168.1.1/g&#x27; access.log</span><br></pre></td></tr></table></figure>
-
-<p>第二种方式：清除部分相关日志</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 使用grep -v来把我们的相关信息删除,</span><br><span class="line">cat /var/log/nginx/access.log | grep -v evil.php &gt; tmp.log</span><br><span class="line"># 把修改过的日志覆盖到原日志文件</span><br><span class="line">cat tmp.log &gt; /var/log/nginx/access.log/</span><br></pre></td></tr></table></figure>
-
-<p><strong>04、文件安全删除工具</strong></p>
-<p>（1）shred命令<br>实现安全的从硬盘上擦除数据，默认覆盖3次，通过 -n指定数据覆盖次数。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@centos]# shred -f -u -z -v -n 8 1.txt </span><br><span class="line">shred: 1.txt: pass 1/9 (random)...</span><br><span class="line">shred: 1.txt: pass 2/9 (ffffff)...</span><br><span class="line">shred: 1.txt: pass 3/9 (aaaaaa)...</span><br><span class="line">shred: 1.txt: pass 4/9 (random)...</span><br><span class="line">shred: 1.txt: pass 5/9 (000000)...</span><br><span class="line">shred: 1.txt: pass 6/9 (random)...</span><br><span class="line">shred: 1.txt: pass 7/9 (555555)...</span><br><span class="line">shred: 1.txt: pass 8/9 (random)...</span><br><span class="line">shred: 1.txt: pass 9/9 (000000)...</span><br><span class="line">shred: 1.txt: removing</span><br><span class="line">shred: 1.txt: renamed to 00000</span><br><span class="line">shred: 00000: renamed to 0000</span><br><span class="line">shred: 0000: renamed to 000</span><br><span class="line">shred: 000: renamed to 00</span><br><span class="line">shred: 00: renamed to 0</span><br><span class="line">shred: 1.txt: removed</span><br></pre></td></tr></table></figure>
-
-<p>（2）dd命令<br>可用于安全地清除硬盘或者分区的内容。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dd if=/dev/zero of=要删除的文件 bs=大小 count=写入的次数</span><br></pre></td></tr></table></figure>
-
-<p>（3）wipe<br>Wipe 使用特殊的模式来重复地写文件，从磁性介质中安全擦除文件。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">wipe filename</span><br></pre></td></tr></table></figure>
-
-<p>（4）Secure-Delete<br>Secure-Delete 是一组工具集合，提供srm、smem、sfill、sswap，4个安全删除文件的命令行工具。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">srm filename</span><br><span class="line">sfill filename</span><br><span class="line">sswap /dev/sda1</span><br><span class="line">smem</span><br></pre></td></tr></table></figure>
-
-<p><strong>05、隐藏远程SSH登陆记录</strong></p>
-<p>隐身登录系统，不会被w、who、last等指令检测到。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ssh -T root@192.168.0.1 /bin/bash -i</span><br></pre></td></tr></table></figure>
-
-<p>不记录ssh公钥在本地.ssh目录中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ssh -o UserKnownHostsFile=/dev/null -T user@host /bin/bash –i</span><br></pre></td></tr></table></figure></div>
+<p><code>_dl_runtime_resolve(link_map_obj, reloc_index)</code> 负责解析函数的真实地址，并将其写入 <code>GOT</code> 表。解析完成后，程序跳转到函数的实际地址。该过程仅在第一次调用时执行，后续调用将直接使用 <code>GOT</code> 表中的已解析地址。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>理解 <code>PLT</code> 和 <code>GOT</code> 表的工作机制是理解现代二进制漏洞利用的重要一步。通过掌握延迟绑定流程、动态解析机制以及如何绕过保护机制（如 PIE、NX 和 ASLR），我们可以深入探索漏洞利用的更多技巧。</p>
+<p>由于我还是pwn的初学者，因此以上内容可能存在错误，如有发现，欢迎指正，将不胜感激。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/falling-dusk/p/17856141.html">https://www.cnblogs.com/falling-dusk/p/17856141.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.appknox.com/blog/bypassing-pie-nx-and-aslr">https://www.appknox.com/blog/bypassing-pie-nx-and-aslr</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014377094/article/details/124391914">https://blog.csdn.net/u014377094/article/details/124391914</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/linhaostudy/p/8855238.html">https://www.cnblogs.com/linhaostudy/p/8855238.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://cyrus28214.top/post/f10a2580ce0d/index.html">https://cyrus28214.top/post/f10a2580ce0d/index.html</a></li>
+</ul>
+</div>
         </div>
         
             <div class="kratos-copyright text-center clearfix">
@@ -286,7 +274,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "https://qwq0qwq.github.io/2023/10/10/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/",
+                text: "https://qwq0qwq.github.io/2025/01/07/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -298,11 +286,9 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "https://qwq0qwq.github.io/2023/10/10/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/";
-            const title         = "「痕迹清理」";
-            const excerpt       = `Linux 入侵痕迹清理技巧在攻击结束后，如何不留痕迹的清除日志和操作记录，以掩盖入侵踪迹，这其实是一个细致的技术活。你所做的每一个操作，都要被抹掉；你所上传的工具，都应该被安全地删掉。
-01、清除history历史命令记录
-查看历史...`;
+            const hostUrl       = "https://qwq0qwq.github.io/2025/01/07/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/";
+            const title         = "「plt表和got表」";
+            const excerpt       = `前置知识 ELF 文件的 PLT（Procedure Linkage Table，过程链接表）和 GOT（Global Offset Table，全局偏移表）是ELF文件中节视图中.plt节和.got节。这些表格用于解决函数调用时的延...`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -324,7 +310,7 @@
                     
                 </div>
                 <div class="pull-date">
-                    <time datetime="2023-10-10T10:48:32.777Z" itemprop="dateModified">最后编辑：2023-10-10</time>
+                    <time datetime="2025-01-08T00:19:23.527Z" itemprop="dateModified">最后编辑：2025-01-08</time>
                 </div>
             </div>
         </footer>
@@ -333,12 +319,12 @@
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" 守护进程" href="/2023/10/10/守护进程/">&lt; 上一篇</a>
+                <a title=" 木马隐藏技巧（一）" href="/2024/11/24/木马隐藏技巧（一）/">&lt; 上一篇</a>
             </div>
             
             
             <div class="nav-next clearfix">
-                <a title=" Linux内核" href="/2023/10/11/Linux内核/">下一篇 &gt;</a>
+                <a title=" EscapeTwo" href="/2025/01/19/EscapeTwo/">下一篇 &gt;</a>
             </div>
             
         </nav>

