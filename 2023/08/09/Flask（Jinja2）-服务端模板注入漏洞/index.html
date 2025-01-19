@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/icon.jpg">
+  
+  <title>Flask（Jinja2） 服务端模板注入漏洞 | QWQ0QWQ&#39;s blog</title>
+  
+  <meta name="author" content="QWQ0QWQ" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="web" />
+  
+  <meta name="description" content="这是一篇加密文章，需要密码才能继续阅读。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask（Jinja2） 服务端模板注入漏洞">
+<meta property="og:url" content="https://qwq0qwq.github.io/2023/08/09/Flask%EF%BC%88Jinja2%EF%BC%89-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:site_name" content="QWQ0QWQ&#39;s blog">
+<meta property="og:description" content="这是一篇加密文章，需要密码才能继续阅读。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qwq0qwq.github.io/images/icon.jpg">
+<meta property="article:published_time" content="2023-08-09T12:53:08.000Z">
+<meta property="article:modified_time" content="2025-01-19T04:32:04.522Z">
+<meta property="article:author" content="QWQ0QWQ">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qwq0qwq.github.io/images/icon.jpg">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" media="all"></script>
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" media="(prefers-color-scheme: dark)"></script>
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" media="all"></script>
+  
+  <link rel="stylesheet" id="fontawe-css" href="/vendors/font-awesome@4.7.0/css/font-awesome.min.css" media="all"></script>
+  <link rel="stylesheet" id="nprogress-css" href="/vendors/nprogress@0.2.0/nprogress.css" media="all"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/aplayer@1.10.1/dist/APlayer.min.css"></script>
+  
+  
+    <link rel="stylesheet" href="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"></script>
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="/vendors/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="/vendors/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">QWQ0QWQ&#39;s blog</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>QWQ0QWQ&#39;s blog</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="https://qwq0qwq.github.io/2023/08/09/Flask%EF%BC%88Jinja2%EF%BC%89-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">Flask（Jinja2） 服务端模板注入漏洞</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2023-08-09T12:53:08.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2023-08-09</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">QWQ0QWQ</span>
+                </li>
+                
+                    <li>
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~7.72K
+                        
+                        字
+                    </li>
+                
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1737261124522"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+            
+            
+            <hr />
+            <div itemprop="articleBody"><div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，您输入的密码错误，请检查后重新输入。" data-whm="抱歉, 当前文章不能被校验, 不过您还是可以看看解密后的内容。">
+  <script id="hbeData" type="hbeData" data-hmacdigest="2b15ad5e6228763b1180aa4961ca16df70784ff0acaf005ea28b66deaef1dd2e">e0cef738bdb1c3cedfc6eace5ef1f81c630bb74af35d8a1745da86ce11a251c2758393d65bd78feb5204ade8bbdf460674c86895069a9bdb80871c9413fbeaeb8b771962ebbad8b6e1b722e010f1977c7a485b8ecb6b981bcfb18994684683abb6e34fea30da36fa04e26c6c385a3a69e0f5d8aef04456fbbfbc6e1f31ca4cc9ef8ed8c7b309cfb3ec621b2c4fae01c05ca73585bd4338436f1f93eb5ec37757aa07e1f0216c50870f76b10670c6390df301705db0c9d5986545b07905629329c18c34a2ea74ef76e159c48561ec777d6eb50fec80ee8652cefc171a1bcdbc2144187e1df13d3aa60bdabab7a489fc588417af7396cfefd05f26289aa6949344e0c4824ce08e6bcc10e02baff421ed5f12df6d78d27a2d486e2b8d93b7ab97bd2a17c9d8a81c0521eefdb9c1ff66f37304c84c8290332469b0e2ce05941f4b9fc330fd9f625bfa7fec060040920802acd05a8b578940c20f9b685910c45eec23f1bfc81a6c04f4a9e6709e7535e571acb650d7dd2af10b105e211dd0c35f397f1732b3cf0435439b43c5f19cd1d5b008880e43d504f8f8fdf4cabb8494fc13de40577cfc299f30b7eaafa51785f7bd09fc99dde7c6f5a4195d8a684888aa56f04c762699f0ab9a1dc6bce853afc2b46047ebbab9c91a5450d8b61671f846fdaf30c32dbccf52c30239f941219d6d08d2a6a0b43b72d694513b9d4bf92c720bd963192981e5c2d9cbce1a137d3f49fe9e64a6b8e85d790abef03ccae452ae03cb1d69a42a46659bf6ab7fa30e627a6b9bd2031179e5c7370852f86bb984f4c5c63698d02b4f07d09ed9605b71bf163ba80bf0a910bc9710e21fdd50d3675dbbbbb2195cebc5f9f90f754b78c312b9a2aff2bc4af4f8550ad06b0c608dd73b5e246f79bea456f7c2c4e5a5c4affc760ba7c39dfb08142a0a39179c6c966d49abfb26e4e13cb42986cf0e0eff48f95a2b68140f92139590606060b642608505d994999e3c71b58066d7c13260d3169253f95547e1aa81122e313060296491a8fba3fbbc1eb272d9324a3c59894690e8dff1ea5ac1823309df72a359b404b02a7ab4eee296f20e9ae2da468f646e80165ba9ead8065d8aa4aaf26c9957fe170e40692a8c5122a8a342eba230e23f9e22a4b516bf751bb731453c60e83bae6ee9ace20476b58788e2aeba95b916424768ff34570c3294802afc2c7b054368b4a2dc82af6deb6020985ace1114610a4f87b823db26b2fa56237f9b829ff753b1e4a8e1d1a3aaa63402ecadb842cad56f537989220b6b7ccdc9c1a7759d3d39c1c8e75c438bbd44145354a5fb90dbb1ac1ca2f5032259caa0c54ac5a3b489bd1d32b33d2db5cb5ae1b15fa7e88f44126372b31e33293f28cc5dce9804eb342eed228bd7347f003a4eab1a7b83b65d6ffc5adf6b2e1938399c4b2289a4e5f9ee5e4f4424ea2c967c5249234176840807162571b0f92d87f7266c570a13a954f98b10bc265dd8d6f77e6083b203da1c31b75a96a1fe92f34f9486b9bf1413c960e434b73fe4f818df1e48c54323af3d1a7d8ca4293312bb3bed6e53760e9a5827710c3b9e439ef459e7c3fc8a825854e6c031563a03f22619ac62074654a245a94bc52f7235cd4dc7eca025882a2326bada408328eff0a985881770617c1c2d3476e613fe0b1117a108bb18797f1d63fc614b41a24c110ccb818955e5520d769ce4c974fb740c18713a0b391f32b99dcaea45711d5e0e6abf41400ca0fdf6c77a2972fd7bd6067b15b5358dd30003173fad0cd480049bdb2c0a716bf66b729117d77fc6d424d066430d48531decfbe1e0d88f06b41b99d28734377a2b6ec703902a6c22aa3cbd5162d734f2920605bbdaa37845267fceb3f414e4bf9471abd7d1f72992786105e63207a995e21dc33ed54485010ce8672d89872a48a58ea57dd38ab7cf1243bdc7020665244227574afc05d409bcbf4d036c57544fa3d8800c55be1254c554ea9bf277d50868f0d18120e1ac484723ea4087da77479d407c0917d8d969f4f13178c2706e68f677ae5b7e2b9bb1376ead374941f3f325703e0a93b4c1ffdeb6a0940758bd1f6940239e6b2f486ec99152fd6407bb934890805ecaf305cad27f9e61efbcfffb23022275473cd9fffce3f59fe1ac464bab067a9e719e93fe65e7322fe22609522797dcd651fc0d39fd1bc0940dadecb5b02c3773400b7c4d8cf85d31b660074f21892da76f22b2ec8703f73a88eff6a07841881ed9df003685bcfd6944b3ecdb9f7447dee57cadf1956a05db012bcb35974301a072549dd4c448d9a4ffa94ab82273305ebfb822b3dc445664ebd09c38c729bde51c7a7ac2685fde90b1600cb10a49d5a25c11a848eed168bdac6177a942fcec510c23730644d5a38027af1b39823592f11d9ffaf2429d1f5637bfee3d2f34684579fa4aa29591873bfffbc6e02d0fd7aaddf8c2c5b92bb6c63263215283bdd10b573bfb19819b940551f21bc227f18273fef4a3c10a64d42949c1747654728e93ec71d4e651dad5e24b2498782bae24a27b6ac83f5819b629270a51c5e08d7c8e02ba3ca7f673af504a1b11b25f54cae0916d1bf3b967ea10d669f2fd7d15fe1c37f20ee117760d13f31453076bb64ecf5772114ef47c9da1b145cd7ace6622eaea261bf8865941d8387dd9869c62fb6940bd71b22abf275cdc65f99f67146f3c88c80021a1be11881ce325dcfa029ef76d8ded12d5887d80a70d558a8be8e6e1fc61c0abbaad88072aca30fdd40bbf2cb90bfcae3c95794bd675effd7da9ed01dce8ccc1144391f050a12eb0b811c48f9ed09203eafd293ddf96391d8695b064f224698aaaf284c5486c11fe3a305a5aac9dd1e2f7bb6db95de4f2df6d2a56c3ed1de669377d24ab0c6fdcbd76ec7a1874ed21a4dcb2db2ae7a8e40438f40250f387768e9d4d68f513feaa3104e8289d58e10c928b59b21a61d04d140c4bf34d838b833564ee4beeaaf51904aea326fd7679249ad5947e50b1dded35a1c65cef7ad15c1303c7afed0d208c9f87426fe44becdae1f418985caae19d71249a91da8c75e4f9d271032dd7f515271e5d31f78938764218e86f04bb0fbbb43741b802aa13c159657c69448db9218fa149aac628296c1d95d8ae15d0ed3b019259b8eed0fd75d785e21f99ab1c6e114c2724af8857b5d5c558d3b16f963e5444340a716c419662466b7963d2e5d49dadef1cf8a87a6b0b37dfc62a71b9be78e611faa0e0f1c141c906004c5c30651071905268da9550eaf87b7bfcdd1d139c3314d038fd4524c74d7d806314c4800ac4d8867e80830f10d28509be08e56e0425eb4562a005ce4c168e2c26264370702fe8683674450ce20e96668f258b8ed23e82729515fec611f005fc70ec8aceb078d19bdbd29b3a55d56358d2e3e74773197403642bcaf06f2aa1d58cdfb417238fd1eb474ca859d5dbaadc9a82da64b7bb000b602a9fba55af85dbbdc5c1075e97c928eae4fe2da51f444b053d1fd43883a6e8c2d4acbbba1fb4c961294a075c3b0b61d38778ec16c00a0e1995d091cff0cafc112a912a29e14892f7597152720fde8dabf2851785acef1fed3c5d5d8d44d42f3dd5ea032bfe201fb590cd6ed45e4993cf0546ac7ebe76c4cec0c8c267f188dd65c1d4374fc0a62965e3d530418fb7f6dc8349d1e7c61dd412e9a4c969c742adde78c82d8ff0c2542a0869896edc3954a1f48d2162a6f11d0590252ef78fb2cd47445b8dc0472482047c419e3afdb59e0db443facc1ebb5c00b717761c66428d5041fda20f7b7609e27b1da27b609e59a24330e332a8fb17ffaeca9ad329755413ec5635e2300d36b447678347efd4b398bbc50e4b3e44f5d053dc8d0bfd42a9678428f3b4974c32d722f88598727644b6073b3b789e3830fdb2b1e8308ebbb91e0c146937126cd6a43e29e0fcf959fecb2621affddddfc9c0e47b9bace88f8ba9ece6e6bcc131920f8ca9d5d38b2ce1f89183e6271b856e34c07144da7d2e979ecbb43637661510d21e249c70e84b4e5c218cde1ce1acc38bccce49a7cb60bc0e37a1e38d70195bea004273b6062efa83004b94d9cf82579cf5c229c77f77a7558893603d8bad4add75668f63368adb9ee7cc466cdf4407c3a61962767beea3c15ba17a5e82881898ab62b6b78b3694ea7182424e349157e8db4a2b0b2c762dfe9d2589278faded6d800b7389bbb5f0a46d5af17f286613f6112fdc3cb57eecd52bca35196a74df817a64fd69edc38a39eb676dd384011ce09b43c3c5dd9c238e0c391fa4c24cf19e37e8687b50afa22698c94907c7e0bce52d98b3787ad09f3b2244a71c3fbb3a7e999db0cb8e28bd80c370960ae877252963a3b5961eae63896d6f6a1253e72e330e7e907666e6fd681afca310a34cfc825b88806ae67b483f694d78b9b25746ecdb7bd3fe29ce585ab090d35e56fc04dedf2b7b66d9524dd250506ab1c358d9db2758d474afd0d97b111d12c87c67f717be478eb8a2f28de66b14e0b4547ced2a262f58fc2475a86416f4e8ec23e816acec70b64cb60052593ecab9d55ace105f997a54560e5f221b72a49f39bb148c491bfb0e3010bce58ef399f9438b5f92179fd536f6c54a296d5952b06686b961718179fb9e732208950348c40ca403ffea4762a7e2a23432c89d763ffd9be9df8d4de701a1a2f2724154e198e0d95cb4e942daa52e64539c761963b68ab91b32bafce1f2304a20eedf7be81f1868b2744a7f7ff5ceef98d41b354726341d5fa2053485fcf1ecdf191088ee6b4bbea7010e022c858c80766c0e40c4c748cedcc99b1cacf5d92494b9652a9bb8af5f8731c02f5be51465f13ec0119d24412143e91c33eaa5e267d8f292a016635fee67ec198b90f3f5a22957ee27552ed4137f3d33f0a0796a306252ba2e557f065670b9eba8c17f96ebfa8d5711952bd13b596d0a8bbbf43b7de0358c00273185acfa06bfc9a57b8bb9f66b4705d7e5bd8aa8f61b6a7ff16cb1ffaf3103659e36e9a000ffa483071a1db8022c61e68a3ce539520323660eff73080a3fb4430ddd713bdadbf3cd61cc70fc6a12e0dc366f20ec6851a963656da80774b87107a915cc16f4c84eead5a126a7abd8ca18e454317553f66480ea5a778e503a202938f6f6f486c16e7babef4063d6167b8fb9efaa6c8d3a4daccc180c7fb43d88ffbecc9987b845f6ab71411616cb508f2c0433b9cbb6cc57aecfa0434d35d68df485d0f0d0c0e3ee6ce1d95135381b3bbb34681d262adbdc0f556b0ac7b007dcfc4a72392fab9c1062ac000dfe008731b613d59b640f3cc0f8e790b27817a4d62d422be5582f23a7dfe8cc1fbb44f9189051c9b8c265c7a51a9e2cf0064d63b3ffd67a7f747214e8e28374c33033a75f4c9f242c</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">当前文章暂不对外可见，请输入密码后查看！</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css"></div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://qwq0qwq.github.io/2023/08/09/Flask%EF%BC%88Jinja2%EF%BC%89-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://qwq0qwq.github.io/2023/08/09/Flask%EF%BC%88Jinja2%EF%BC%89-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/";
+            const title         = "「Flask（Jinja2） 服务端模板注入漏洞」";
+            const excerpt       = `这是一篇加密文章，需要密码才能继续阅读。`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/web/" rel="tag">web</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2025-01-19T04:32:04.522Z" itemprop="dateModified">最后编辑：2025-01-19</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" 计算机网络" href="/2023/08/09/计算机网络/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Tomcat启动过程" href="/2023/08/11/Tomcat启动过程/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/icon.jpg" loading="lazy" decoding="auto" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                20
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                0
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                9
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/HTB/" style="font-size: 0.6em;">HTB</a> <a href="/tags/android/" style="font-size: 0.6em;">android</a> <a href="/tags/linux/" style="font-size: 0.6em;">linux</a> <a href="/tags/pwn/" style="font-size: 0.6em;">pwn</a> <a href="/tags/web/" style="font-size: 0.8em;">web</a> <a href="/tags/%E5%85%8D%E6%9D%80/" style="font-size: 0.7em;">免杀</a> <a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 0.7em;">内网</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 0.6em;">基础知识</a> <a href="/tags/%E8%B5%84%E6%BA%90/" style="font-size: 0.6em;">资源</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2025/01/19/%E5%85%8D%E6%9D%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa  fa-book"></i> 免杀学习笔记</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2025/01/19/EscapeTwo/"><i class="fa  fa-book"></i> EscapeTwo</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2025/01/07/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/"><i class="fa  fa-book"></i> plt表和got表</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2024/11/24/%E6%9C%A8%E9%A9%AC%E9%9A%90%E8%97%8F%E6%8A%80%E5%B7%A7%EF%BC%88%E4%B8%80%EF%BC%89/"><i class="fa  fa-book"></i> 木马隐藏技巧（一）</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2024/11/23/%E5%AE%89%E5%8D%93%E6%8A%93%E5%8C%85/"><i class="fa  fa-book"></i> 安卓抓包</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        <!-- Keep for compatibility -->
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- New links -->
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2025 QWQ0QWQ's blog 版权所有.</li>
+                            <li>本站已运行1亿年<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by QWQ0QWQ.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="/vendors/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="/vendors/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="/vendors/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="/vendors/meting@2.0.1/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="3204190542"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="/vendors/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
